@@ -30,7 +30,8 @@ git clone https://github.com/Harkeynn/projetmathador.git
 
 ## Technologies
 
-
+ * Windows Form
+ 
 
 ## Équipe
 
