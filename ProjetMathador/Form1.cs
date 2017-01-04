@@ -10,22 +10,30 @@ using System.Windows.Forms;
 
 namespace ProjetMathador
 {
+    public class Saved
+    {
+        public string[] generatedNumbers = new string[5];
+        public String[] results;
+        public int numberOfOperations;
+
+        public void addNumber(string nb, int pos)
+        {
+            this.generatedNumbers[pos] = nb;
+        }
+    }
+
+
     public partial class Form1 : Form
     {
-        public class Serial
-        {
-            public String[] genratedNumbers { get; set; }
-            public String[] results { get; set; }
-            public int numberOfOperations { get; set; }
-        }
-        private int operationCase;
-        Serial serial = new Serial();
         private Random rand = new Random();
         public String RandString(int from, int to)
         {
             String value = Convert.ToString(rand.Next(from, to));
             return value;
         }
+        
+        private int operationCase;
+        Saved saved = new Saved();
 
         public void FillOperationN(String num)
         {
@@ -39,7 +47,7 @@ namespace ProjetMathador
             }
         }
 
-        public void FillOperationO(String o)
+        public void FillOperationO(String o /*, POSITON DUBOUTON A SUPPRIMER*/)     //TODO : Voir plus bas.
         {
             if (this.operationO.Text.Length == 0)
             {
@@ -84,23 +92,30 @@ namespace ProjetMathador
         private void generate_Click(object sender, EventArgs e)
         {
             this.target.Text = RandString(1, 101);
+
+
             this.n1.Text = RandString(1, 13);
+            saved.addNumber(this.n1.Text, 0);
+
             this.n2.Text = RandString(1, 13);
+            saved.addNumber(this.n2.Text, 1);
+
             this.n3.Text = RandString(1, 13);
+            saved.addNumber(this.n3.Text, 2);
+
             this.n4.Text = RandString(1, 21);
+            saved.addNumber(this.n4.Text, 3);
+
             this.n5.Text = RandString(1, 21);
+            saved.addNumber(this.n5.Text, 4);
+
             this.operationN1.Text = "";
             this.operationN2.Text = "";
             this.operationO.Text = "";
             this.result.Text = "";
             this.mainPanel.Visible = true;
         }
-
-        private void target_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void n1_Click(object sender, EventArgs e)
         {
             FillOperationN(this.n1.Text);
@@ -113,7 +128,7 @@ namespace ProjetMathador
 
         private void n3_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n3.Text);
+            FillOperationN(this.n3.Text /*, 3*/);       //TODO : METTRE UN DEUXIEME CHAMP INDIQUANT LA POSITION, POUR POUVOIR DESACTIVER LE BOUTON CLIQUE
         }
 
         private void n4_Click(object sender, EventArgs e)
@@ -150,44 +165,14 @@ namespace ProjetMathador
             operationCase = 4;
         }
 
-        private void result_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void equal_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void operationN2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void operationO_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void operationN1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void next_Click(object sender, EventArgs e)
         {
-            //recup taille generatedNumbers et switch case pour cacher les boutons
+
+
+            this.operationN1.Text = "";
+            this.operationN2.Text = "";
+            this.operationO.Text = "";
+            this.result.Text = "";
         }
 
         private void Jouer_Click(object sender, EventArgs e)

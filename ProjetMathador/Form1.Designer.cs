@@ -67,7 +67,6 @@
             this.target.Name = "target";
             this.target.Size = new System.Drawing.Size(99, 20);
             this.target.TabIndex = 0;
-            this.target.TextChanged += new System.EventHandler(this.target_TextChanged);
             // 
             // label1
             // 
@@ -147,7 +146,6 @@
             this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "Opérateurs";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // btnPlus
             // 
@@ -197,7 +195,6 @@
             this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 14;
             this.label4.Text = "Opération";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // operationN1
             // 
@@ -206,7 +203,6 @@
             this.operationN1.Name = "operationN1";
             this.operationN1.Size = new System.Drawing.Size(26, 20);
             this.operationN1.TabIndex = 15;
-            this.operationN1.TextChanged += new System.EventHandler(this.operationN1_TextChanged);
             // 
             // operationO
             // 
@@ -215,7 +211,6 @@
             this.operationO.Name = "operationO";
             this.operationO.Size = new System.Drawing.Size(26, 20);
             this.operationO.TabIndex = 16;
-            this.operationO.TextChanged += new System.EventHandler(this.operationO_TextChanged);
             // 
             // operationN2
             // 
@@ -224,17 +219,15 @@
             this.operationN2.Name = "operationN2";
             this.operationN2.Size = new System.Drawing.Size(26, 20);
             this.operationN2.TabIndex = 17;
-            this.operationN2.TextChanged += new System.EventHandler(this.operationN2_TextChanged);
             // 
             // equal
             // 
             this.equal.AutoSize = true;
-            this.equal.Location = new System.Drawing.Point(112, 201);
+            this.equal.Location = new System.Drawing.Point(112, 198);
             this.equal.Name = "equal";
             this.equal.Size = new System.Drawing.Size(13, 13);
             this.equal.TabIndex = 18;
             this.equal.Text = "=";
-            this.equal.Click += new System.EventHandler(this.equal_Click);
             // 
             // result
             // 
@@ -243,7 +236,6 @@
             this.result.Name = "result";
             this.result.Size = new System.Drawing.Size(46, 20);
             this.result.TabIndex = 19;
-            this.result.TextChanged += new System.EventHandler(this.result_TextChanged);
             // 
             // generate
             // 
@@ -329,7 +321,7 @@
             // 
             this.welcomePanel.BackColor = System.Drawing.SystemColors.Control;
             this.welcomePanel.Controls.Add(this.Jouer);
-            this.welcomePanel.Location = new System.Drawing.Point(10, 12);
+            this.welcomePanel.Location = new System.Drawing.Point(314, 12);
             this.welcomePanel.Name = "welcomePanel";
             this.welcomePanel.Size = new System.Drawing.Size(274, 338);
             this.welcomePanel.TabIndex = 24;
@@ -348,7 +340,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(295, 358);
+            this.ClientSize = new System.Drawing.Size(686, 358);
             this.Controls.Add(this.welcomePanel);
             this.Controls.Add(this.Game);
             this.Name = "Form1";
