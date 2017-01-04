@@ -190,6 +190,7 @@ namespace ProjetMathador
 
         private void next_Click(object sender, EventArgs e)
         {
+            Console.WriteLine(generatedNumbers);
             //recup taille generatedNumbers et switch case pour cacher les boutons
         }
     }
