@@ -13,6 +13,7 @@ namespace ProjetMathador
     public partial class Form1 : Form
     {
         private int operationCase;
+        Serial serial = new Serial();
         private Random rand = new Random();
         public String RandString(int from, int to)
         {
