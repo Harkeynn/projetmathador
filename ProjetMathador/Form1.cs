@@ -12,13 +12,12 @@ namespace ProjetMathador
 {
     public partial class Form1 : Form
     {
-        List<string> generatedNumbers = new List<string>();
         private int operationCase;
+        Serial serial = new Serial();
         private Random rand = new Random();
         public String RandString(int from, int to)
         {
             String value = Convert.ToString(rand.Next(from, to));
-            generatedNumbers.Add(value);
             return value;
         }
 
@@ -31,13 +30,6 @@ namespace ProjetMathador
             else if (this.operationN2.Text.Length == 0)
             {
                 this.operationN2.Text = num;
-            }
-            foreach(var number in generatedNumbers)
-            {
-                if(number == num)
-                {
-                    generatedNumbers.Remove(number);
-                }
             }
         }
 
@@ -81,7 +73,6 @@ namespace ProjetMathador
                     this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) / Convert.ToInt32(this.operationN2.Text));
                     break;
             }
-            generatedNumbers.Add(this.result.Text);
         }
 
         private void generate_Click(object sender, EventArgs e)
@@ -190,7 +181,6 @@ namespace ProjetMathador
 
         private void next_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(generatedNumbers);
             //recup taille generatedNumbers et switch case pour cacher les boutons
         }
     }
