@@ -31,7 +31,8 @@ git clone https://github.com/Harkeynn/projetmathador.git
 ## Technologies
 
  * Windows Form
- 
+ * BDD : SQLite
+ * Serialisation : JSON (JSON.Net)
 
 ## Équipe
 
