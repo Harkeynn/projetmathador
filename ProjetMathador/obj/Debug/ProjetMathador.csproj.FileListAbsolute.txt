@@ -16,3 +16,5 @@ D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.
 D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.Form1.resources
 D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.Properties.Resources.resources
 D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.csproj.GenerateResource.Cache
+c:\users\harkey\Ingesup\B3\dotNet\ProjetMathador\ProjetMathador\bin\Debug\Newtonsoft.Json.dll
+c:\users\harkey\Ingesup\B3\dotNet\ProjetMathador\ProjetMathador\bin\Debug\Newtonsoft.Json.xml
