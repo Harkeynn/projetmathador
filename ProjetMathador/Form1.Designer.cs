@@ -49,9 +49,15 @@
             this.result = new System.Windows.Forms.TextBox();
             this.generate = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.submit = new System.Windows.Forms.Button();
             this.next = new System.Windows.Forms.Button();
+            this.submit = new System.Windows.Forms.Button();
+            this.Game = new System.Windows.Forms.Panel();
+            this.BackMenu = new System.Windows.Forms.Button();
+            this.welcomePanel = new System.Windows.Forms.Panel();
+            this.Jouer = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
+            this.Game.SuspendLayout();
+            this.welcomePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // target
@@ -241,7 +247,7 @@
             // 
             // generate
             // 
-            this.generate.Location = new System.Drawing.Point(12, 20);
+            this.generate.Location = new System.Drawing.Point(3, 33);
             this.generate.Name = "generate";
             this.generate.Size = new System.Drawing.Size(260, 36);
             this.generate.TabIndex = 21;
@@ -272,21 +278,11 @@
             this.mainPanel.Controls.Add(this.label2);
             this.mainPanel.Controls.Add(this.label1);
             this.mainPanel.Controls.Add(this.target);
-            this.mainPanel.Location = new System.Drawing.Point(10, 74);
+            this.mainPanel.Location = new System.Drawing.Point(2, 87);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(262, 245);
             this.mainPanel.TabIndex = 22;
             this.mainPanel.Visible = false;
-            // 
-            // submit
-            // 
-            this.submit.Location = new System.Drawing.Point(182, 192);
-            this.submit.Name = "submit";
-            this.submit.Size = new System.Drawing.Size(75, 23);
-            this.submit.TabIndex = 20;
-            this.submit.Text = "Calculer";
-            this.submit.UseVisualStyleBackColor = true;
-            this.submit.Click += new System.EventHandler(this.submit_Click);
             // 
             // next
             // 
@@ -298,17 +294,69 @@
             this.next.UseVisualStyleBackColor = true;
             this.next.Click += new System.EventHandler(this.next_Click);
             // 
+            // submit
+            // 
+            this.submit.Location = new System.Drawing.Point(182, 192);
+            this.submit.Name = "submit";
+            this.submit.Size = new System.Drawing.Size(75, 23);
+            this.submit.TabIndex = 20;
+            this.submit.Text = "Calculer";
+            this.submit.UseVisualStyleBackColor = true;
+            this.submit.Click += new System.EventHandler(this.submit_Click);
+            // 
+            // Game
+            // 
+            this.Game.Controls.Add(this.BackMenu);
+            this.Game.Controls.Add(this.generate);
+            this.Game.Controls.Add(this.mainPanel);
+            this.Game.Location = new System.Drawing.Point(12, 12);
+            this.Game.Name = "Game";
+            this.Game.Size = new System.Drawing.Size(267, 334);
+            this.Game.TabIndex = 23;
+            this.Game.Visible = false;
+            // 
+            // BackMenu
+            // 
+            this.BackMenu.Location = new System.Drawing.Point(77, 4);
+            this.BackMenu.Name = "BackMenu";
+            this.BackMenu.Size = new System.Drawing.Size(114, 23);
+            this.BackMenu.TabIndex = 23;
+            this.BackMenu.Text = "Retour au Menu";
+            this.BackMenu.UseVisualStyleBackColor = true;
+            this.BackMenu.Click += new System.EventHandler(this.backMenu_Click);
+            // 
+            // welcomePanel
+            // 
+            this.welcomePanel.BackColor = System.Drawing.SystemColors.Control;
+            this.welcomePanel.Controls.Add(this.Jouer);
+            this.welcomePanel.Location = new System.Drawing.Point(10, 12);
+            this.welcomePanel.Name = "welcomePanel";
+            this.welcomePanel.Size = new System.Drawing.Size(274, 338);
+            this.welcomePanel.TabIndex = 24;
+            // 
+            // Jouer
+            // 
+            this.Jouer.Location = new System.Drawing.Point(62, 137);
+            this.Jouer.Name = "Jouer";
+            this.Jouer.Size = new System.Drawing.Size(146, 62);
+            this.Jouer.TabIndex = 0;
+            this.Jouer.Text = "Jouons !";
+            this.Jouer.UseVisualStyleBackColor = true;
+            this.Jouer.Click += new System.EventHandler(this.Jouer_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(286, 331);
-            this.Controls.Add(this.mainPanel);
-            this.Controls.Add(this.generate);
+            this.ClientSize = new System.Drawing.Size(295, 358);
+            this.Controls.Add(this.welcomePanel);
+            this.Controls.Add(this.Game);
             this.Name = "Form1";
             this.Text = "Mathador";
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
+            this.Game.ResumeLayout(false);
+            this.welcomePanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -338,6 +386,10 @@
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Button submit;
         private System.Windows.Forms.Button next;
+        private System.Windows.Forms.Panel Game;
+        private System.Windows.Forms.Panel welcomePanel;
+        private System.Windows.Forms.Button Jouer;
+        private System.Windows.Forms.Button BackMenu;
     }
 }
 

@@ -7,3 +7,12 @@ c:\users\harkey\Ingesup\B3\dotNet\ProjetMathador\ProjetMathador\bin\Debug\Projet
 c:\users\harkey\Ingesup\B3\dotNet\ProjetMathador\ProjetMathador\bin\Debug\ProjetMathador.pdb
 c:\users\harkey\Ingesup\B3\dotNet\ProjetMathador\ProjetMathador\obj\Debug\ProjetMathador.exe
 c:\users\harkey\Ingesup\B3\dotNet\ProjetMathador\ProjetMathador\obj\Debug\ProjetMathador.pdb
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\ProjetMathador.exe.config
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.exe
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.pdb
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\ProjetMathador.exe
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\ProjetMathador.pdb
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.csprojResolveAssemblyReference.cache
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.Form1.resources
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.Properties.Resources.resources
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.csproj.GenerateResource.Cache
