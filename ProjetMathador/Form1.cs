@@ -12,9 +12,15 @@ namespace ProjetMathador
 {
     public partial class Form1 : Form
     {
+        public class Serial
+        {
+            public String[] genratedNumbers { get; set; }
+            public String[] results { get; set; }
+            public int numberOfOperations { get; set; }
+        }
         private int operationCase;
         Serial serial = new Serial();
-        private Random rand = new Random(); 
+        private Random rand = new Random();
         public String RandString(int from, int to)
         {
             String value = Convert.ToString(rand.Next(from, to));
