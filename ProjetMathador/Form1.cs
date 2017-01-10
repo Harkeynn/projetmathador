@@ -10,49 +10,38 @@ using System.Windows.Forms;
 
 namespace ProjetMathador
 {
-    public class Saved
-    {
-        public string[] generatedNumbers = new string[5];
-        public String[] results;
-        public int numberOfOperations;
-
-        public void addNumber(string nb, int pos)
-        {
-            this.generatedNumbers[pos] = nb;
-        }
-    }
-
-
     public partial class Form1 : Form
     {
         private Random rand = new Random();
+        private List<Button> numberPos = new List<Button>();
+        private int operationCase;
+        private int tryCount = 0;
+        Saved saved = new Saved();
+
         public String RandString(int from, int to)
         {
             String value = Convert.ToString(rand.Next(from, to));
             return value;
         }
-        
-        private int operationCase;
-        Saved saved = new Saved();
 
-        public void FillOperationN(String num)
+
+        public void FillOperationN(String num, Button button)
         {
             if (this.operationN1.Text.Length == 0)
             {
+                this.numberPos.Add(button);
                 this.operationN1.Text = num;
             }
             else if (this.operationN2.Text.Length == 0)
             {
+                this.numberPos.Add(button);
                 this.operationN2.Text = num;
             }
         }
 
-        public void FillOperationO(String o /*, POSITON DUBOUTON A SUPPRIMER*/)     //TODO : Voir plus bas.
+        public void FillOperator(String o)
         {
-            if (this.operationO.Text.Length == 0)
-            {
                 this.operationO.Text = o;
-            }
         }
 
         public Form1()
@@ -60,32 +49,37 @@ namespace ProjetMathador
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void submit_Click(object sender, EventArgs e)
         {
-            switch (operationCase)
+            if(this.operationN1.Text != "" && this.operationN2.Text != "" && this.operationO.Text != "")
             {
-                case 1:
-                    this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) + Convert.ToInt32(this.operationN2.Text));
-                    break;
-                case 2:
-                    this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text));
-                    break;
-                case 3:
-                    this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) * Convert.ToInt32(this.operationN2.Text));
-                    break;
-                case 4:
-                    this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) / Convert.ToInt32(this.operationN2.Text));
-                    break;
+                switch (operationCase)
+                {
+                    case 1:
+                        this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) + Convert.ToInt32(this.operationN2.Text));
+                        break;
+                    case 2:
+                        this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text));
+                        break;
+                    case 3:
+                        this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) * Convert.ToInt32(this.operationN2.Text));
+                        break;
+                    case 4:
+                        if((Convert.ToInt32(this.operationN1.Text) % Convert.ToInt32(this.operationN2.Text)) == 0)
+                        {
+                            this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) / Convert.ToInt32(this.operationN2.Text));
+                        }else
+                        {
+                            MessageBox.Show("Merci de ne faire que des divisons ayant pour résultat un entier.",
+                                "Attention !",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("ERROR IN THE CALCULATION");
+                        break;
+                }
             }
         }
 
@@ -118,62 +112,81 @@ namespace ProjetMathador
         
         private void n1_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n1.Text);
+            FillOperationN(this.n1.Text, this.n1);
         }
 
         private void n2_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n2.Text);
+            FillOperationN(this.n2.Text, this.n2);
         }
 
         private void n3_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n3.Text /*, 3*/);       //TODO : METTRE UN DEUXIEME CHAMP INDIQUANT LA POSITION, POUR POUVOIR DESACTIVER LE BOUTON CLIQUE
+            FillOperationN(this.n3.Text, this.n3);
         }
 
         private void n4_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n4.Text);
+            FillOperationN(this.n4.Text, this.n4);
         }
 
         private void n5_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n5.Text);
+            FillOperationN(this.n5.Text, this.n5);
         }
 
         private void btnPlus_Click(object sender, EventArgs e)
         {
-            FillOperationO(this.btnPlus.Text);
+            FillOperator(this.btnPlus.Text);
             operationCase = 1;
         }
 
         private void btnMoins_Click(object sender, EventArgs e)
         {
-            FillOperationO(this.btnMoins.Text);
+            FillOperator(this.btnMoins.Text);
             operationCase = 2;
         }
 
         private void btnMult_Click(object sender, EventArgs e)
         {
-            FillOperationO(this.btnMult.Text);
+            FillOperator(this.btnMult.Text);
             operationCase = 3;
         }
 
         private void btnDiv_Click(object sender, EventArgs e)
         {
-            FillOperationO(this.btnDiv.Text);
+            FillOperator(this.btnDiv.Text);
             operationCase = 4;
         }
 
         private void next_Click(object sender, EventArgs e)
         {
+            if (result.Text != "")
+            {
+                this.numberPos[0].Text = "";
+                this.numberPos[1].Text = this.result.Text;
 
+                this.operationN1.Text = "";
+                this.operationN2.Text = "";
+                this.operationO.Text = "";
+                this.operationCase = 0;
+                this.numberPos.Clear();
 
-            this.operationN1.Text = "";
-            this.operationN2.Text = "";
-            this.operationO.Text = "";
-            this.result.Text = "";
+                tryCount += 1;
+
+                if(this.result.Text == this.target.Text)
+                {
+                    MessageBox.Show("VICTOIRE TUTUTUTUTUTUT",
+                                "Magnifique !",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                }
+
+                this.result.Text = "";
+            }
         }
+
+
 
         private void Jouer_Click(object sender, EventArgs e)
         {
@@ -185,6 +198,30 @@ namespace ProjetMathador
         {
             this.Game.Visible = false;
             this.welcomePanel.Visible = true;
+        }
+
+        private void clear_Click(object sender, EventArgs e)
+        {
+            this.operationN1.Text = "";
+            this.operationN2.Text = "";
+            this.operationO.Text = "";
+            this.operationCase = 0;
+            this.result.Text = "";
+            this.numberPos.Clear();
+        }
+    }
+
+
+
+    public class Saved
+    {
+        public string[] generatedNumbers = new string[5];
+        public String[] results;
+        public int numberOfOperations;
+
+        public void addNumber(string nb, int pos)
+        {
+            this.generatedNumbers[pos] = nb;
         }
     }
 }

@@ -49,6 +49,7 @@
             this.result = new System.Windows.Forms.TextBox();
             this.generate = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.clear = new System.Windows.Forms.Button();
             this.next = new System.Windows.Forms.Button();
             this.submit = new System.Windows.Forms.Button();
             this.Game = new System.Windows.Forms.Panel();
@@ -76,7 +77,6 @@
             this.label1.Size = new System.Drawing.Size(69, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Nombre cible";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -86,13 +86,12 @@
             this.label2.Size = new System.Drawing.Size(90, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Nombres à utiliser";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // n1
             // 
             this.n1.Location = new System.Drawing.Point(3, 70);
             this.n1.Name = "n1";
-            this.n1.Size = new System.Drawing.Size(30, 23);
+            this.n1.Size = new System.Drawing.Size(39, 23);
             this.n1.TabIndex = 3;
             this.n1.Text = "n1";
             this.n1.UseVisualStyleBackColor = true;
@@ -100,9 +99,9 @@
             // 
             // n2
             // 
-            this.n2.Location = new System.Drawing.Point(39, 70);
+            this.n2.Location = new System.Drawing.Point(48, 70);
             this.n2.Name = "n2";
-            this.n2.Size = new System.Drawing.Size(30, 23);
+            this.n2.Size = new System.Drawing.Size(39, 23);
             this.n2.TabIndex = 4;
             this.n2.Text = "n2";
             this.n2.UseVisualStyleBackColor = true;
@@ -110,9 +109,9 @@
             // 
             // n3
             // 
-            this.n3.Location = new System.Drawing.Point(75, 70);
+            this.n3.Location = new System.Drawing.Point(93, 70);
             this.n3.Name = "n3";
-            this.n3.Size = new System.Drawing.Size(30, 23);
+            this.n3.Size = new System.Drawing.Size(39, 23);
             this.n3.TabIndex = 5;
             this.n3.Text = "n3";
             this.n3.UseVisualStyleBackColor = true;
@@ -120,9 +119,9 @@
             // 
             // n4
             // 
-            this.n4.Location = new System.Drawing.Point(111, 70);
+            this.n4.Location = new System.Drawing.Point(138, 70);
             this.n4.Name = "n4";
-            this.n4.Size = new System.Drawing.Size(30, 23);
+            this.n4.Size = new System.Drawing.Size(39, 23);
             this.n4.TabIndex = 6;
             this.n4.Text = "n4";
             this.n4.UseVisualStyleBackColor = true;
@@ -130,9 +129,9 @@
             // 
             // n5
             // 
-            this.n5.Location = new System.Drawing.Point(147, 70);
+            this.n5.Location = new System.Drawing.Point(183, 70);
             this.n5.Name = "n5";
-            this.n5.Size = new System.Drawing.Size(30, 23);
+            this.n5.Size = new System.Drawing.Size(39, 23);
             this.n5.TabIndex = 7;
             this.n5.Text = "n5";
             this.n5.UseVisualStyleBackColor = true;
@@ -249,6 +248,7 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.clear);
             this.mainPanel.Controls.Add(this.next);
             this.mainPanel.Controls.Add(this.submit);
             this.mainPanel.Controls.Add(this.result);
@@ -276,9 +276,19 @@
             this.mainPanel.TabIndex = 22;
             this.mainPanel.Visible = false;
             // 
+            // clear
+            // 
+            this.clear.Location = new System.Drawing.Point(182, 220);
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(75, 23);
+            this.clear.TabIndex = 22;
+            this.clear.Text = "Clear";
+            this.clear.UseVisualStyleBackColor = true;
+            this.clear.Click += new System.EventHandler(this.clear_Click);
+            // 
             // next
             // 
-            this.next.Location = new System.Drawing.Point(182, 219);
+            this.next.Location = new System.Drawing.Point(50, 219);
             this.next.Name = "next";
             this.next.Size = new System.Drawing.Size(75, 23);
             this.next.TabIndex = 21;
@@ -288,9 +298,9 @@
             // 
             // submit
             // 
-            this.submit.Location = new System.Drawing.Point(182, 192);
+            this.submit.Location = new System.Drawing.Point(182, 193);
             this.submit.Name = "submit";
-            this.submit.Size = new System.Drawing.Size(75, 23);
+            this.submit.Size = new System.Drawing.Size(75, 25);
             this.submit.TabIndex = 20;
             this.submit.Text = "Calculer";
             this.submit.UseVisualStyleBackColor = true;
@@ -382,6 +392,7 @@
         private System.Windows.Forms.Panel welcomePanel;
         private System.Windows.Forms.Button Jouer;
         private System.Windows.Forms.Button BackMenu;
+        private System.Windows.Forms.Button clear;
     }
 }
 
