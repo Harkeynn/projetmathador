@@ -14,6 +14,7 @@ namespace ProjetMathador
     {
         private Random rand = new Random();
         private List<Button> numberPos = new List<Button>();
+        private Stack<Log> logs = new Stack<Log>();
         private int operationCase;
         private int tryCount = 0;
         Saved saved = new Saved();
@@ -59,7 +60,17 @@ namespace ProjetMathador
                         this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) + Convert.ToInt32(this.operationN2.Text));
                         break;
                     case 2:
-                        this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text));
+                        if ((Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text)) < 0)
+                        {
+                            MessageBox.Show("Merci de ne faire que des soustractions ayant pour résultat un nombre positif.",
+                                "Attention !",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                        }
+                        else
+                        {
+                            this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text));
+                        }
                         break;
                     case 3:
                         this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) * Convert.ToInt32(this.operationN2.Text));
@@ -107,6 +118,9 @@ namespace ProjetMathador
             this.operationN2.Text = "";
             this.operationO.Text = "";
             this.result.Text = "";
+            this.tryCount = 0;
+            this.numberPos.Clear();
+            this.logs.Clear();
             this.mainPanel.Visible = true;
         }
         
@@ -172,14 +186,18 @@ namespace ProjetMathador
                 this.operationCase = 0;
                 this.numberPos.Clear();
 
-                tryCount += 1;
+                this.tryCount += 1;
 
-                if(this.result.Text == this.target.Text)
+                if(this.result.Text == this.target.Text || tryCount == 4)
                 {
-                    MessageBox.Show("VICTOIRE TUTUTUTUTUTUT",
+                    if(this.result.Text == this.target.Text)
+                    {
+                        MessageBox.Show("VICTOIRE TUTUTUTUTUTUT",
                                 "Magnifique !",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
+                    }
+                    
                 }
 
                 this.result.Text = "";
@@ -222,6 +240,32 @@ namespace ProjetMathador
         public void addNumber(string nb, int pos)
         {
             this.generatedNumbers[pos] = nb;
+        }
+    }
+
+    public class Calcul
+    {
+        public int number1, number2, result, oper;
+
+        public Calcul(int n1, int n2, int res, int oper)
+        {
+            this.number1 = n1;
+            this.number2 = n2;
+            this.result = res;
+            this.oper = oper;
+        }
+    }
+
+    public class Log
+    {
+        public Calcul calcul;
+        public List<Button> numberPos = new List<Button>();
+
+        public Log(Calcul calcul, Button button1, Button button2)
+        {
+            this.calcul = calcul;
+            this.numberPos.Add(button1);
+            this.numberPos.Add(button2);
         }
     }
 }
