@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.target = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,12 +51,20 @@
             this.result = new System.Windows.Forms.TextBox();
             this.generate = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.minutes = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.next = new System.Windows.Forms.Button();
             this.submit = new System.Windows.Forms.Button();
             this.Game = new System.Windows.Forms.Panel();
             this.BackMenu = new System.Windows.Forms.Button();
             this.welcomePanel = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.Jouer = new System.Windows.Forms.Button();
+            this.second = new System.Windows.Forms.Timer(this.components);
+            this.seconds = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.Game.SuspendLayout();
             this.welcomePanel.SuspendLayout();
@@ -62,10 +72,12 @@
             // 
             // target
             // 
+            this.target.BackColor = System.Drawing.SystemColors.Control;
+            this.target.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.target.Enabled = false;
             this.target.Location = new System.Drawing.Point(3, 18);
             this.target.Name = "target";
-            this.target.Size = new System.Drawing.Size(99, 20);
+            this.target.Size = new System.Drawing.Size(99, 13);
             this.target.TabIndex = 0;
             this.target.TextChanged += new System.EventHandler(this.target_TextChanged);
             // 
@@ -201,35 +213,41 @@
             // 
             // operationN1
             // 
+            this.operationN1.BackColor = System.Drawing.SystemColors.Control;
+            this.operationN1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.operationN1.Enabled = false;
             this.operationN1.Location = new System.Drawing.Point(7, 195);
             this.operationN1.Name = "operationN1";
-            this.operationN1.Size = new System.Drawing.Size(26, 20);
+            this.operationN1.Size = new System.Drawing.Size(26, 13);
             this.operationN1.TabIndex = 15;
             this.operationN1.TextChanged += new System.EventHandler(this.operationN1_TextChanged);
             // 
             // operationO
             // 
+            this.operationO.BackColor = System.Drawing.SystemColors.Control;
+            this.operationO.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.operationO.Enabled = false;
-            this.operationO.Location = new System.Drawing.Point(43, 195);
+            this.operationO.Location = new System.Drawing.Point(33, 195);
             this.operationO.Name = "operationO";
-            this.operationO.Size = new System.Drawing.Size(26, 20);
+            this.operationO.Size = new System.Drawing.Size(26, 13);
             this.operationO.TabIndex = 16;
             this.operationO.TextChanged += new System.EventHandler(this.operationO_TextChanged);
             // 
             // operationN2
             // 
+            this.operationN2.BackColor = System.Drawing.SystemColors.Control;
+            this.operationN2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.operationN2.Enabled = false;
-            this.operationN2.Location = new System.Drawing.Point(79, 195);
+            this.operationN2.Location = new System.Drawing.Point(59, 195);
             this.operationN2.Name = "operationN2";
-            this.operationN2.Size = new System.Drawing.Size(26, 20);
+            this.operationN2.Size = new System.Drawing.Size(26, 13);
             this.operationN2.TabIndex = 17;
             this.operationN2.TextChanged += new System.EventHandler(this.operationN2_TextChanged);
             // 
             // equal
             // 
             this.equal.AutoSize = true;
-            this.equal.Location = new System.Drawing.Point(112, 201);
+            this.equal.Location = new System.Drawing.Point(88, 195);
             this.equal.Name = "equal";
             this.equal.Size = new System.Drawing.Size(13, 13);
             this.equal.TabIndex = 18;
@@ -238,10 +256,12 @@
             // 
             // result
             // 
+            this.result.BackColor = System.Drawing.SystemColors.Control;
+            this.result.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.result.Enabled = false;
-            this.result.Location = new System.Drawing.Point(131, 195);
+            this.result.Location = new System.Drawing.Point(106, 195);
             this.result.Name = "result";
-            this.result.Size = new System.Drawing.Size(46, 20);
+            this.result.Size = new System.Drawing.Size(46, 13);
             this.result.TabIndex = 19;
             this.result.TextChanged += new System.EventHandler(this.result_TextChanged);
             // 
@@ -257,6 +277,10 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.seconds);
+            this.mainPanel.Controls.Add(this.minutes);
+            this.mainPanel.Controls.Add(this.label7);
+            this.mainPanel.Controls.Add(this.label6);
             this.mainPanel.Controls.Add(this.next);
             this.mainPanel.Controls.Add(this.submit);
             this.mainPanel.Controls.Add(this.result);
@@ -284,6 +308,33 @@
             this.mainPanel.TabIndex = 22;
             this.mainPanel.Visible = false;
             // 
+            // minutes
+            // 
+            this.minutes.AutoSize = true;
+            this.minutes.Location = new System.Drawing.Point(205, 18);
+            this.minutes.Name = "minutes";
+            this.minutes.Size = new System.Drawing.Size(13, 13);
+            this.minutes.TabIndex = 24;
+            this.minutes.Text = "3";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(214, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(10, 13);
+            this.label7.TabIndex = 23;
+            this.label7.Text = ":";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(185, 2);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(74, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Temps restant";
+            // 
             // next
             // 
             this.next.Location = new System.Drawing.Point(182, 219);
@@ -306,6 +357,7 @@
             // 
             // Game
             // 
+            this.Game.BackColor = System.Drawing.Color.Transparent;
             this.Game.Controls.Add(this.BackMenu);
             this.Game.Controls.Add(this.generate);
             this.Game.Controls.Add(this.mainPanel);
@@ -327,36 +379,106 @@
             // 
             // welcomePanel
             // 
-            this.welcomePanel.BackColor = System.Drawing.SystemColors.Control;
+            this.welcomePanel.BackColor = System.Drawing.Color.Transparent;
+            this.welcomePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.welcomePanel.Controls.Add(this.button2);
+            this.welcomePanel.Controls.Add(this.label5);
+            this.welcomePanel.Controls.Add(this.button1);
             this.welcomePanel.Controls.Add(this.Jouer);
-            this.welcomePanel.Location = new System.Drawing.Point(10, 12);
+            this.welcomePanel.Location = new System.Drawing.Point(317, 12);
             this.welcomePanel.Name = "welcomePanel";
             this.welcomePanel.Size = new System.Drawing.Size(274, 338);
             this.welcomePanel.TabIndex = 24;
             // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::ProjetMathador.Properties.Resources.buttonbackground;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(62, 300);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(146, 29);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Quitter";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Papyrus", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(63, 4);
+            this.label5.Name = "label5";
+            this.label5.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label5.Size = new System.Drawing.Size(145, 42);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Mathador";
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::ProjetMathador.Properties.Resources.buttonbackground;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(62, 129);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(146, 41);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Aide";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Jouer
             // 
-            this.Jouer.Location = new System.Drawing.Point(62, 137);
+            this.Jouer.BackgroundImage = global::ProjetMathador.Properties.Resources.buttonbackground;
+            this.Jouer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Jouer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Jouer.FlatAppearance.BorderSize = 0;
+            this.Jouer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Jouer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Jouer.Location = new System.Drawing.Point(62, 84);
             this.Jouer.Name = "Jouer";
-            this.Jouer.Size = new System.Drawing.Size(146, 62);
+            this.Jouer.Size = new System.Drawing.Size(146, 41);
             this.Jouer.TabIndex = 0;
-            this.Jouer.Text = "Jouons !";
+            this.Jouer.Text = "Nouvelle Partie";
             this.Jouer.UseVisualStyleBackColor = true;
             this.Jouer.Click += new System.EventHandler(this.Jouer_Click);
+            // 
+            // second
+            // 
+            this.second.Interval = 1000;
+            this.second.Tick += new System.EventHandler(this.second_Tick);
+            // 
+            // seconds
+            // 
+            this.seconds.AutoSize = true;
+            this.seconds.Location = new System.Drawing.Point(219, 18);
+            this.seconds.Name = "seconds";
+            this.seconds.Size = new System.Drawing.Size(19, 13);
+            this.seconds.TabIndex = 25;
+            this.seconds.Text = "00";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(295, 358);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(603, 358);
             this.Controls.Add(this.welcomePanel);
             this.Controls.Add(this.Game);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Mathador";
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
             this.Game.ResumeLayout(false);
             this.welcomePanel.ResumeLayout(false);
+            this.welcomePanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -390,6 +512,14 @@
         private System.Windows.Forms.Panel welcomePanel;
         private System.Windows.Forms.Button Jouer;
         private System.Windows.Forms.Button BackMenu;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label minutes;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Timer second;
+        private System.Windows.Forms.Label seconds;
     }
 }
 

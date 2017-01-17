@@ -14,13 +14,15 @@ namespace ProjetMathador
     {
         public class Serial
         {
-            public String[] genratedNumbers { get; set; }
+            public String[] generatedNumbers { get; set; }
             public String[] results { get; set; }
             public int numberOfOperations { get; set; }
         }
         private int operationCase;
         Serial serial = new Serial();
         private Random rand = new Random();
+        public int timerSeconds = 0;
+        public int timerMinutes = 3;
         public String RandString(int from, int to)
         {
             String value = Convert.ToString(rand.Next(from, to));
@@ -94,6 +96,8 @@ namespace ProjetMathador
             this.operationO.Text = "";
             this.result.Text = "";
             this.mainPanel.Visible = true;
+            second.Enabled = true;
+            second.Start();
         }
 
         private void target_TextChanged(object sender, EventArgs e)
@@ -200,6 +204,53 @@ namespace ProjetMathador
         {
             this.Game.Visible = false;
             this.welcomePanel.Visible = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void second_Tick(object sender, EventArgs e)
+        {
+            timerSeconds--;
+            if (timerSeconds<0)
+            {
+                timerSeconds = 59;
+                timerMinutes--;
+                this.minutes.Text = Convert.ToString(timerMinutes);
+            }
+
+            if (timerSeconds < 10)
+            {
+                this.seconds.Text = "0" + Convert.ToString(timerSeconds);
+            }
+            else
+            {
+                this.seconds.Text = Convert.ToString(timerSeconds);
+            }
+
+            if(timerSeconds == 0 && timerMinutes == 0)
+            {
+                second.Stop();
+                second.Enabled = false;
+                DialogResult timesUp;
+                timesUp = MessageBox.Show("Fin du temps !",
+                    "Perdu",
+                    MessageBoxButtons.RetryCancel,
+                    MessageBoxIcon.Information);
+                if (timesUp == System.Windows.Forms.DialogResult.Retry)
+                {
+                    generate_Click(sender, e);
+                    timerMinutes = 3;
+                    timerSeconds = 0;
+                }
+                else
+                {
+                    this.mainPanel.Visible = false;
+                }
+                
+            }
         }
     }
 }
