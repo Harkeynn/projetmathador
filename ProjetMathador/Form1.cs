@@ -27,23 +27,31 @@ namespace ProjetMathador
             return value;
         }
 
-        public void FillOperationN(String num)
+        public void FillOperationN(String num, Button button)
         {
-            if (this.operationN1.Text.Length == 0)
+            if(this.operationN1.Text == "" || this.operationN2.Text == "")
             {
-                this.operationN1.Text = num;
+                button.BackColor = Color.Aqua;
+                if (this.operationN1.Text.Length == 0)
+                {
+                    this.numberPos.Add(button);
+                    this.operationN1.Text = num;
+                }
+                else if (this.operationN2.Text.Length == 0)
+                {
+                    this.numberPos.Add(button);
+                    this.operationN2.Text = num;
+                }
             }
-            else if (this.operationN2.Text.Length == 0)
-            {
-                this.operationN2.Text = num;
-            }
+           
         }
 
-        public void FillOperationO(String o)
+        public void FillOperationO(String o, Button button)
         {
             if (this.operationO.Text.Length == 0)
             {
                 this.operationO.Text = o;
+                button.BackColor = Color.Aqua;
             }
         }
 
@@ -64,10 +72,15 @@ namespace ProjetMathador
                     case 2:
                         if ((Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text)) < 0)
                         {
-                            MessageBox.Show("Merci de ne faire que des soustractions ayant pour résultat un nombre positif.",
+                            DialogResult onlyPositive;
+                            onlyPositive = MessageBox.Show("Merci de ne faire que des soustractions ayant pour résultat un nombre positif.",
                                 "Attention !",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
+                            if(onlyPositive == DialogResult.OK)
+                            {
+                                clear_Click(sender, e);
+                            }
                         }
                         else
                         {
@@ -84,10 +97,15 @@ namespace ProjetMathador
                         }
                         else
                         {
-                            MessageBox.Show("Merci de ne faire que des divisons ayant pour résultat un entier.",
+                            DialogResult onlyInt;
+                            onlyInt = MessageBox.Show("Merci de ne faire que des divisons ayant pour résultat un entier.",
                                 "Attention !",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
+                            if(onlyInt == DialogResult.OK)
+                            {
+                                clear_Click(sender, e);
+                            }
                         }
                         break;
                     default:
@@ -126,61 +144,69 @@ namespace ProjetMathador
             this.numberPos.Clear();
             this.logs.Clear();
             this.mainPanel.Visible = true;
+            timerMinutes = 3;
+            timerSeconds = 0;
             second.Enabled = true;
             second.Start();
+            this.graphicTimer.Value = 0;
         }
-
+        
         private void n1_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n1.Text);
+            FillOperationN(this.n1.Text, this.n1);
         }
 
         private void n2_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n2.Text);
+            FillOperationN(this.n2.Text, this.n2);
         }
 
         private void n3_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n3.Text);
+            FillOperationN(this.n3.Text, this.n3);
         }
 
         private void n4_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n4.Text);
+            FillOperationN(this.n4.Text, this.n4);
         }
 
         private void n5_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n5.Text);
+            FillOperationN(this.n5.Text, this.n5);
         }
 
         private void btnPlus_Click(object sender, EventArgs e)
         {
-            FillOperationO(this.btnPlus.Text);
+            FillOperationO(this.btnPlus.Text, this.btnPlus);
             operationCase = 1;
         }
 
         private void btnMoins_Click(object sender, EventArgs e)
         {
-            FillOperationO(this.btnMoins.Text);
+            FillOperationO(this.btnMoins.Text, this.btnMoins);
             operationCase = 2;
         }
 
         private void btnMult_Click(object sender, EventArgs e)
         {
-            FillOperationO(this.btnMult.Text);
+            FillOperationO(this.btnMult.Text, this.btnMult);
             operationCase = 3;
         }
 
         private void btnDiv_Click(object sender, EventArgs e)
         {
-            FillOperationO(this.btnDiv.Text);
+            FillOperationO(this.btnDiv.Text, this.btnDiv);
             operationCase = 4;
         }
 
         private void next_Click(object sender, EventArgs e)
         {
+            foreach(Button btn in numberPos)
+            {
+                btn.BackColor = Color.Transparent;
+            }
+
             if (result.Text != "")
             {
                 this.numberPos[0].Text = "";
@@ -198,10 +224,17 @@ namespace ProjetMathador
                 {
                     if (this.result.Text == this.target.Text)
                     {
-                        MessageBox.Show("VICTOIRE TUTUTUTUTUTUT",
+                        DialogResult victory;
+                        victory = MessageBox.Show("VICTOIRE TUTUTUTUTUTUT",
                                 "Magnifique !",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
+                        second.Stop();
+                        second.Enabled = false;
+                        if (victory == DialogResult.OK)
+                        {
+                            backMenu_Click(sender, e);
+                        }
                     }
 
                 }
@@ -219,6 +252,7 @@ namespace ProjetMathador
         private void backMenu_Click(object sender, EventArgs e)
         {
             this.Game.Visible = false;
+            this.mainPanel.Visible = false;
             this.welcomePanel.Visible = true;
             timerSeconds = 0;
             timerMinutes = 3;
@@ -233,6 +267,7 @@ namespace ProjetMathador
 
         private void second_Tick(object sender, EventArgs e)
         {
+            this.graphicTimer.Value++;
             timerSeconds--;
             if (timerSeconds<0)
             {
@@ -259,17 +294,32 @@ namespace ProjetMathador
                     "Perdu",
                     MessageBoxButtons.RetryCancel,
                     MessageBoxIcon.Information);
-                if (timesUp == System.Windows.Forms.DialogResult.Retry)
+                if (timesUp == DialogResult.Retry)
                 {
                     generate_Click(sender, e);
                     timerMinutes = 3;
                     timerSeconds = 0;
+                    this.graphicTimer.Value = 0;
                 }
                 else
                 {
                     this.mainPanel.Visible = false;
                 }
                 
+            }
+        }
+
+        private void clear_Click(object sender, EventArgs e)
+        {
+            this.operationN1.Text = "";
+            this.operationN2.Text = "";
+            this.operationO.Text = "";
+            this.operationCase = 0;
+            this.result.Text = "";
+            this.numberPos.Clear();
+            foreach(Button btn in numberPos)
+            {
+                btn.BackColor = Color.Transparent;
             }
         }
     }

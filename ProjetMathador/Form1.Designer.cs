@@ -51,6 +51,8 @@
             this.result = new System.Windows.Forms.TextBox();
             this.generate = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.clear = new System.Windows.Forms.Button();
+            this.seconds = new System.Windows.Forms.Label();
             this.minutes = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -64,7 +66,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.Jouer = new System.Windows.Forms.Button();
             this.second = new System.Windows.Forms.Timer(this.components);
-            this.seconds = new System.Windows.Forms.Label();
+            this.graphicTimer = new System.Windows.Forms.ProgressBar();
             this.mainPanel.SuspendLayout();
             this.Game.SuspendLayout();
             this.welcomePanel.SuspendLayout();
@@ -209,31 +211,28 @@
             // operationN1
             // 
             this.operationN1.BackColor = System.Drawing.SystemColors.Control;
-            this.operationN1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.operationN1.Enabled = false;
             this.operationN1.Location = new System.Drawing.Point(7, 195);
             this.operationN1.Name = "operationN1";
-            this.operationN1.Size = new System.Drawing.Size(26, 13);
+            this.operationN1.Size = new System.Drawing.Size(26, 20);
             this.operationN1.TabIndex = 15;
             // 
             // operationO
             // 
             this.operationO.BackColor = System.Drawing.SystemColors.Control;
-            this.operationO.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.operationO.Enabled = false;
             this.operationO.Location = new System.Drawing.Point(33, 195);
             this.operationO.Name = "operationO";
-            this.operationO.Size = new System.Drawing.Size(26, 13);
+            this.operationO.Size = new System.Drawing.Size(26, 20);
             this.operationO.TabIndex = 16;
             // 
             // operationN2
             // 
             this.operationN2.BackColor = System.Drawing.SystemColors.Control;
-            this.operationN2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.operationN2.Enabled = false;
             this.operationN2.Location = new System.Drawing.Point(59, 195);
             this.operationN2.Name = "operationN2";
-            this.operationN2.Size = new System.Drawing.Size(26, 13);
+            this.operationN2.Size = new System.Drawing.Size(26, 20);
             this.operationN2.TabIndex = 17;
             // 
             // equal
@@ -248,11 +247,10 @@
             // result
             // 
             this.result.BackColor = System.Drawing.SystemColors.Control;
-            this.result.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.result.Enabled = false;
             this.result.Location = new System.Drawing.Point(106, 195);
             this.result.Name = "result";
-            this.result.Size = new System.Drawing.Size(46, 13);
+            this.result.Size = new System.Drawing.Size(46, 20);
             this.result.TabIndex = 19;
             // 
             // generate
@@ -267,6 +265,7 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.clear);
             this.mainPanel.Controls.Add(this.seconds);
             this.mainPanel.Controls.Add(this.minutes);
             this.mainPanel.Controls.Add(this.label7);
@@ -294,9 +293,28 @@
             this.mainPanel.Controls.Add(this.target);
             this.mainPanel.Location = new System.Drawing.Point(2, 87);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(262, 245);
+            this.mainPanel.Size = new System.Drawing.Size(262, 266);
             this.mainPanel.TabIndex = 22;
             this.mainPanel.Visible = false;
+            // 
+            // clear
+            // 
+            this.clear.Location = new System.Drawing.Point(8, 218);
+            this.clear.Name = "clear";
+            this.clear.Size = new System.Drawing.Size(75, 23);
+            this.clear.TabIndex = 26;
+            this.clear.Text = "Annuler";
+            this.clear.UseVisualStyleBackColor = true;
+            this.clear.Click += new System.EventHandler(this.clear_Click);
+            // 
+            // seconds
+            // 
+            this.seconds.AutoSize = true;
+            this.seconds.Location = new System.Drawing.Point(219, 18);
+            this.seconds.Name = "seconds";
+            this.seconds.Size = new System.Drawing.Size(19, 13);
+            this.seconds.TabIndex = 25;
+            this.seconds.Text = "00";
             // 
             // minutes
             // 
@@ -443,14 +461,13 @@
             this.second.Interval = 1000;
             this.second.Tick += new System.EventHandler(this.second_Tick);
             // 
-            // seconds
+            // graphicTimer
             // 
-            this.seconds.AutoSize = true;
-            this.seconds.Location = new System.Drawing.Point(219, 18);
-            this.seconds.Name = "seconds";
-            this.seconds.Size = new System.Drawing.Size(19, 13);
-            this.seconds.TabIndex = 25;
-            this.seconds.Text = "00";
+            this.graphicTimer.Location = new System.Drawing.Point(17, 378);
+            this.graphicTimer.Maximum = 180;
+            this.graphicTimer.Name = "graphicTimer";
+            this.graphicTimer.Size = new System.Drawing.Size(574, 23);
+            this.graphicTimer.TabIndex = 27;
             // 
             // Form1
             // 
@@ -458,7 +475,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(603, 358);
+            this.ClientSize = new System.Drawing.Size(603, 413);
+            this.Controls.Add(this.graphicTimer);
             this.Controls.Add(this.welcomePanel);
             this.Controls.Add(this.Game);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -510,6 +528,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Timer second;
         private System.Windows.Forms.Label seconds;
+        private System.Windows.Forms.Button clear;
+        private System.Windows.Forms.ProgressBar graphicTimer;
     }
 }
 
