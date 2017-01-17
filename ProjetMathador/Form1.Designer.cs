@@ -79,7 +79,6 @@
             this.target.Name = "target";
             this.target.Size = new System.Drawing.Size(99, 13);
             this.target.TabIndex = 0;
-            this.target.TextChanged += new System.EventHandler(this.target_TextChanged);
             // 
             // label1
             // 
@@ -89,7 +88,6 @@
             this.label1.Size = new System.Drawing.Size(69, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Nombre cible";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -99,7 +97,6 @@
             this.label2.Size = new System.Drawing.Size(90, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Nombres à utiliser";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // n1
             // 
@@ -159,7 +156,6 @@
             this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "Opérateurs";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // btnPlus
             // 
@@ -209,7 +205,6 @@
             this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 14;
             this.label4.Text = "Opération";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // operationN1
             // 
@@ -220,7 +215,6 @@
             this.operationN1.Name = "operationN1";
             this.operationN1.Size = new System.Drawing.Size(26, 13);
             this.operationN1.TabIndex = 15;
-            this.operationN1.TextChanged += new System.EventHandler(this.operationN1_TextChanged);
             // 
             // operationO
             // 
@@ -231,7 +225,6 @@
             this.operationO.Name = "operationO";
             this.operationO.Size = new System.Drawing.Size(26, 13);
             this.operationO.TabIndex = 16;
-            this.operationO.TextChanged += new System.EventHandler(this.operationO_TextChanged);
             // 
             // operationN2
             // 
@@ -242,7 +235,6 @@
             this.operationN2.Name = "operationN2";
             this.operationN2.Size = new System.Drawing.Size(26, 13);
             this.operationN2.TabIndex = 17;
-            this.operationN2.TextChanged += new System.EventHandler(this.operationN2_TextChanged);
             // 
             // equal
             // 
@@ -252,7 +244,6 @@
             this.equal.Size = new System.Drawing.Size(13, 13);
             this.equal.TabIndex = 18;
             this.equal.Text = "=";
-            this.equal.Click += new System.EventHandler(this.equal_Click);
             // 
             // result
             // 
@@ -263,7 +254,6 @@
             this.result.Name = "result";
             this.result.Size = new System.Drawing.Size(46, 13);
             this.result.TabIndex = 19;
-            this.result.TextChanged += new System.EventHandler(this.result_TextChanged);
             // 
             // generate
             // 

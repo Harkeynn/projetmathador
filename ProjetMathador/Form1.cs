@@ -12,17 +12,15 @@ namespace ProjetMathador
 {
     public partial class Form1 : Form
     {
-        public class Serial
-        {
-            public String[] generatedNumbers { get; set; }
-            public String[] results { get; set; }
-            public int numberOfOperations { get; set; }
-        }
         private int operationCase;
-        Serial serial = new Serial();
         private Random rand = new Random();
         public int timerSeconds = 0;
         public int timerMinutes = 3;
+        private List<Button> numberPos = new List<Button>();
+        private Stack<Log> logs = new Stack<Log>();
+        private int tryCount = 0;
+        Saved saved = new Saved();
+
         public String RandString(int from, int to)
         {
             String value = Convert.ToString(rand.Next(from, to));
@@ -54,55 +52,82 @@ namespace ProjetMathador
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void submit_Click(object sender, EventArgs e)
         {
-            switch (operationCase)
+            if(this.operationN1.Text != "" && this.operationN2.Text != "" && this.operationO.Text != "")
             {
-                case 1:
-                    this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) + Convert.ToInt32(this.operationN2.Text));
-                    break;
-                case 2:
-                    this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text));
-                    break;
-                case 3:
-                    this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) * Convert.ToInt32(this.operationN2.Text));
-                    break;
-                case 4:
-                    this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) / Convert.ToInt32(this.operationN2.Text));
-                    break;
+                switch (operationCase)
+                {
+                    case 1:
+                        this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) + Convert.ToInt32(this.operationN2.Text));
+                        break;
+                    case 2:
+                        if ((Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text)) < 0)
+                        {
+                            MessageBox.Show("Merci de ne faire que des soustractions ayant pour résultat un nombre positif.",
+                                "Attention !",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                        }
+                        else
+                        {
+                            this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text));
+                        }
+                        break;
+                    case 3:
+                        this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) * Convert.ToInt32(this.operationN2.Text));
+                        break;
+                    case 4:
+                        if ((Convert.ToInt32(this.operationN1.Text) % Convert.ToInt32(this.operationN2.Text)) == 0)
+                        {
+                            this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) / Convert.ToInt32(this.operationN2.Text));
+                        }
+                        else
+                        {
+                            MessageBox.Show("Merci de ne faire que des divisons ayant pour résultat un entier.",
+                                "Attention !",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("ERROR IN THE CALCULATION");
+                        break;
+                }
             }
+            
         }
 
         private void generate_Click(object sender, EventArgs e)
         {
             this.target.Text = RandString(1, 101);
+
+
             this.n1.Text = RandString(1, 13);
+            saved.addNumber(this.n1.Text, 0);
+
             this.n2.Text = RandString(1, 13);
+            saved.addNumber(this.n2.Text, 1);
+
             this.n3.Text = RandString(1, 13);
+            saved.addNumber(this.n3.Text, 2);
+
             this.n4.Text = RandString(1, 21);
+            saved.addNumber(this.n4.Text, 3);
+
             this.n5.Text = RandString(1, 21);
+            saved.addNumber(this.n5.Text, 4);
+
             this.operationN1.Text = "";
             this.operationN2.Text = "";
             this.operationO.Text = "";
             this.result.Text = "";
+            this.tryCount = 0;
+            this.numberPos.Clear();
+            this.logs.Clear();
             this.mainPanel.Visible = true;
             second.Enabled = true;
             second.Start();
-        }
-
-        private void target_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void n1_Click(object sender, EventArgs e)
@@ -154,44 +179,35 @@ namespace ProjetMathador
             operationCase = 4;
         }
 
-        private void result_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void equal_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void operationN2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void operationO_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void operationN1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void next_Click(object sender, EventArgs e)
         {
-            //recup taille generatedNumbers et switch case pour cacher les boutons
+            if (result.Text != "")
+            {
+                this.numberPos[0].Text = "";
+                this.numberPos[1].Text = this.result.Text;
+
+                this.operationN1.Text = "";
+                this.operationN2.Text = "";
+                this.operationO.Text = "";
+                this.operationCase = 0;
+                this.numberPos.Clear();
+
+                this.tryCount += 1;
+
+                if (this.result.Text == this.target.Text || tryCount == 4)
+                {
+                    if (this.result.Text == this.target.Text)
+                    {
+                        MessageBox.Show("VICTOIRE TUTUTUTUTUTUT",
+                                "Magnifique !",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                    }
+
+                }
+
+                this.result.Text = "";
+            }
         }
 
         private void Jouer_Click(object sender, EventArgs e)
@@ -204,6 +220,10 @@ namespace ProjetMathador
         {
             this.Game.Visible = false;
             this.welcomePanel.Visible = true;
+            timerSeconds = 0;
+            timerMinutes = 3;
+            second.Stop();
+            second.Enabled = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -251,6 +271,44 @@ namespace ProjetMathador
                 }
                 
             }
+        }
+    }
+
+    public class Saved
+    {
+        public string[] generatedNumbers = new string[5];
+        public String[] results;
+        public int numberOfOperations;
+
+        public void addNumber(string nb, int pos)
+        {
+            this.generatedNumbers[pos] = nb;
+        }
+    }
+
+    public class Calcul
+    {
+        public int number1, number2, result, oper;
+
+        public Calcul(int n1, int n2, int res, int oper)
+        {
+            this.number1 = n1;
+            this.number2 = n2;
+            this.result = res;
+            this.oper = oper;
+        }
+    }
+
+    public class Log
+    {
+        public Calcul calcul;
+        public List<Button> numberPos = new List<Button>();
+
+        public Log(Calcul calcul, Button button1, Button button2)
+        {
+            this.calcul = calcul;
+            this.numberPos.Add(button1);
+            this.numberPos.Add(button2);
         }
     }
 }
