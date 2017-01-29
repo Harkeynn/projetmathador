@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,7 @@ namespace ProjetMathador
         private Random rand = new Random();
         private List<Button> numberPos = new List<Button>();
         private Stack<Log> logs = new Stack<Log>();
+        private Stack<int> score = new Stack<int>();
         private int operationCase;
         private int tryCount = 0;
         Saved saved = new Saved();
@@ -59,6 +61,7 @@ namespace ProjetMathador
                     case 1:
                         this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) + Convert.ToInt32(this.operationN2.Text));
                         break;
+
                     case 2:
                         if ((Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text)) < 0)
                         {
@@ -72,9 +75,11 @@ namespace ProjetMathador
                             this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text));
                         }
                         break;
+
                     case 3:
                         this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) * Convert.ToInt32(this.operationN2.Text));
                         break;
+
                     case 4:
                         if((Convert.ToInt32(this.operationN1.Text) % Convert.ToInt32(this.operationN2.Text)) == 0)
                         {
@@ -88,7 +93,7 @@ namespace ProjetMathador
                         }
                         break;
                     default:
-                        Console.WriteLine("ERROR IN THE CALCULATION");
+                        Console.WriteLine("Error in the calculation");
                         break;
                 }
             }
@@ -177,8 +182,28 @@ namespace ProjetMathador
         {
             if (result.Text != "")
             {
+
+                Calcul calcul = new Calcul(Convert.ToInt32(this.operationN1.Text), Convert.ToInt32(this.operationN2.Text), Convert.ToInt32(this.result.Text), this.operationCase);
+                Log log = new Log(calcul, this.numberPos[0], this.numberPos[1]);
+
+                this.logs.Push(log);
+
+                string json = JsonConvert.SerializeObject(calcul);
+
+                this.calcul1.Text = "8";
+
+                Console.WriteLine(json);
+
                 this.numberPos[0].Text = "";
                 this.numberPos[1].Text = this.result.Text;
+
+                /*switch (operationCase)
+                {
+                    case 1:
+                        score.Push(1);
+                        break;
+                    case 2:
+                }*/
 
                 this.operationN1.Text = "";
                 this.operationN2.Text = "";
@@ -226,6 +251,19 @@ namespace ProjetMathador
             this.operationCase = 0;
             this.result.Text = "";
             this.numberPos.Clear();
+        }
+
+        private void undo_Click(object sender, EventArgs e)
+        {
+            Log backLog = logs.Pop();
+
+            this.operationCase = backLog.calcul.oper;
+            this.numberPos.Add(backLog.numberPos[0]);
+            this.numberPos.Add(backLog.numberPos[1]);
+            this.numberPos[0].Text = Convert.ToString(backLog.calcul.number1);
+            this.numberPos[1].Text = Convert.ToString(backLog.calcul.number2);
+            this.numberPos.Clear();
+            this.tryCount -= 1;
         }
     }
 

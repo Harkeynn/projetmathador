@@ -49,6 +49,7 @@
             this.result = new System.Windows.Forms.TextBox();
             this.generate = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.undo = new System.Windows.Forms.Button();
             this.clear = new System.Windows.Forms.Button();
             this.next = new System.Windows.Forms.Button();
             this.submit = new System.Windows.Forms.Button();
@@ -56,6 +57,10 @@
             this.BackMenu = new System.Windows.Forms.Button();
             this.welcomePanel = new System.Windows.Forms.Panel();
             this.Jouer = new System.Windows.Forms.Button();
+            this.calcul1 = new System.Windows.Forms.Label();
+            this.calcul2 = new System.Windows.Forms.Label();
+            this.calcul3 = new System.Windows.Forms.Label();
+            this.calcul4 = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.Game.SuspendLayout();
             this.welcomePanel.SuspendLayout();
@@ -248,6 +253,7 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.undo);
             this.mainPanel.Controls.Add(this.clear);
             this.mainPanel.Controls.Add(this.next);
             this.mainPanel.Controls.Add(this.submit);
@@ -275,6 +281,16 @@
             this.mainPanel.Size = new System.Drawing.Size(262, 245);
             this.mainPanel.TabIndex = 22;
             this.mainPanel.Visible = false;
+            // 
+            // undo
+            // 
+            this.undo.Location = new System.Drawing.Point(182, 159);
+            this.undo.Name = "undo";
+            this.undo.Size = new System.Drawing.Size(75, 23);
+            this.undo.TabIndex = 23;
+            this.undo.Text = "Undo";
+            this.undo.UseVisualStyleBackColor = true;
+            this.undo.Click += new System.EventHandler(this.undo_Click);
             // 
             // clear
             // 
@@ -331,7 +347,7 @@
             // 
             this.welcomePanel.BackColor = System.Drawing.SystemColors.Control;
             this.welcomePanel.Controls.Add(this.Jouer);
-            this.welcomePanel.Location = new System.Drawing.Point(314, 12);
+            this.welcomePanel.Location = new System.Drawing.Point(5, 12);
             this.welcomePanel.Name = "welcomePanel";
             this.welcomePanel.Size = new System.Drawing.Size(274, 338);
             this.welcomePanel.TabIndex = 24;
@@ -346,11 +362,51 @@
             this.Jouer.UseVisualStyleBackColor = true;
             this.Jouer.Click += new System.EventHandler(this.Jouer_Click);
             // 
+            // calcul1
+            // 
+            this.calcul1.AutoSize = true;
+            this.calcul1.Location = new System.Drawing.Point(354, 12);
+            this.calcul1.Name = "calcul1";
+            this.calcul1.Size = new System.Drawing.Size(35, 13);
+            this.calcul1.TabIndex = 25;
+            this.calcul1.Text = "label5";
+            // 
+            // calcul2
+            // 
+            this.calcul2.AutoSize = true;
+            this.calcul2.Location = new System.Drawing.Point(354, 45);
+            this.calcul2.Name = "calcul2";
+            this.calcul2.Size = new System.Drawing.Size(35, 13);
+            this.calcul2.TabIndex = 26;
+            this.calcul2.Text = "label5";
+            // 
+            // calcul3
+            // 
+            this.calcul3.AutoSize = true;
+            this.calcul3.Location = new System.Drawing.Point(354, 78);
+            this.calcul3.Name = "calcul3";
+            this.calcul3.Size = new System.Drawing.Size(35, 13);
+            this.calcul3.TabIndex = 27;
+            this.calcul3.Text = "label6";
+            // 
+            // calcul4
+            // 
+            this.calcul4.AutoSize = true;
+            this.calcul4.Location = new System.Drawing.Point(354, 110);
+            this.calcul4.Name = "calcul4";
+            this.calcul4.Size = new System.Drawing.Size(35, 13);
+            this.calcul4.TabIndex = 28;
+            this.calcul4.Text = "label7";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 358);
+            this.Controls.Add(this.calcul4);
+            this.Controls.Add(this.calcul3);
+            this.Controls.Add(this.calcul2);
+            this.Controls.Add(this.calcul1);
             this.Controls.Add(this.welcomePanel);
             this.Controls.Add(this.Game);
             this.Name = "Form1";
@@ -360,6 +416,7 @@
             this.Game.ResumeLayout(false);
             this.welcomePanel.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -393,6 +450,11 @@
         private System.Windows.Forms.Button Jouer;
         private System.Windows.Forms.Button BackMenu;
         private System.Windows.Forms.Button clear;
+        private System.Windows.Forms.Button undo;
+        private System.Windows.Forms.Label calcul1;
+        private System.Windows.Forms.Label calcul2;
+        private System.Windows.Forms.Label calcul3;
+        private System.Windows.Forms.Label calcul4;
     }
 }
 
