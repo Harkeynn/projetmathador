@@ -40,7 +40,7 @@
             this.n5 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.btnPlus = new System.Windows.Forms.Button();
-            this.btnMoins = new System.Windows.Forms.Button();
+            this.btnMinus = new System.Windows.Forms.Button();
             this.btnMult = new System.Windows.Forms.Button();
             this.btnDiv = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -67,9 +67,11 @@
             this.Jouer = new System.Windows.Forms.Button();
             this.second = new System.Windows.Forms.Timer(this.components);
             this.graphicTimer = new System.Windows.Forms.ProgressBar();
+            this.operatorsPanel = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
             this.Game.SuspendLayout();
             this.welcomePanel.SuspendLayout();
+            this.operatorsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // target
@@ -153,7 +155,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 112);
+            this.label3.Location = new System.Drawing.Point(26, 188);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 8;
@@ -161,7 +163,7 @@
             // 
             // btnPlus
             // 
-            this.btnPlus.Location = new System.Drawing.Point(3, 128);
+            this.btnPlus.Location = new System.Drawing.Point(8, 5);
             this.btnPlus.Name = "btnPlus";
             this.btnPlus.Size = new System.Drawing.Size(30, 23);
             this.btnPlus.TabIndex = 9;
@@ -169,19 +171,19 @@
             this.btnPlus.UseVisualStyleBackColor = true;
             this.btnPlus.Click += new System.EventHandler(this.btnPlus_Click);
             // 
-            // btnMoins
+            // btnMinus
             // 
-            this.btnMoins.Location = new System.Drawing.Point(39, 128);
-            this.btnMoins.Name = "btnMoins";
-            this.btnMoins.Size = new System.Drawing.Size(30, 23);
-            this.btnMoins.TabIndex = 10;
-            this.btnMoins.Text = "-";
-            this.btnMoins.UseVisualStyleBackColor = true;
-            this.btnMoins.Click += new System.EventHandler(this.btnMoins_Click);
+            this.btnMinus.Location = new System.Drawing.Point(44, 5);
+            this.btnMinus.Name = "btnMinus";
+            this.btnMinus.Size = new System.Drawing.Size(30, 23);
+            this.btnMinus.TabIndex = 10;
+            this.btnMinus.Text = "-";
+            this.btnMinus.UseVisualStyleBackColor = true;
+            this.btnMinus.Click += new System.EventHandler(this.btnMoins_Click);
             // 
             // btnMult
             // 
-            this.btnMult.Location = new System.Drawing.Point(75, 128);
+            this.btnMult.Location = new System.Drawing.Point(8, 34);
             this.btnMult.Name = "btnMult";
             this.btnMult.Size = new System.Drawing.Size(30, 23);
             this.btnMult.TabIndex = 11;
@@ -191,7 +193,7 @@
             // 
             // btnDiv
             // 
-            this.btnDiv.Location = new System.Drawing.Point(111, 128);
+            this.btnDiv.Location = new System.Drawing.Point(44, 34);
             this.btnDiv.Name = "btnDiv";
             this.btnDiv.Size = new System.Drawing.Size(30, 23);
             this.btnDiv.TabIndex = 12;
@@ -202,7 +204,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 169);
+            this.label4.Location = new System.Drawing.Point(5, 112);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 14;
@@ -212,16 +214,16 @@
             // 
             this.operationN1.BackColor = System.Drawing.SystemColors.Control;
             this.operationN1.Enabled = false;
-            this.operationN1.Location = new System.Drawing.Point(7, 195);
+            this.operationN1.Location = new System.Drawing.Point(27, 172);
             this.operationN1.Name = "operationN1";
-            this.operationN1.Size = new System.Drawing.Size(26, 20);
+            this.operationN1.Size = new System.Drawing.Size(51, 20);
             this.operationN1.TabIndex = 15;
             // 
             // operationO
             // 
             this.operationO.BackColor = System.Drawing.SystemColors.Control;
             this.operationO.Enabled = false;
-            this.operationO.Location = new System.Drawing.Point(33, 195);
+            this.operationO.Location = new System.Drawing.Point(170, 115);
             this.operationO.Name = "operationO";
             this.operationO.Size = new System.Drawing.Size(26, 20);
             this.operationO.TabIndex = 16;
@@ -230,15 +232,15 @@
             // 
             this.operationN2.BackColor = System.Drawing.SystemColors.Control;
             this.operationN2.Enabled = false;
-            this.operationN2.Location = new System.Drawing.Point(59, 195);
+            this.operationN2.Location = new System.Drawing.Point(180, 172);
             this.operationN2.Name = "operationN2";
-            this.operationN2.Size = new System.Drawing.Size(26, 20);
+            this.operationN2.Size = new System.Drawing.Size(51, 20);
             this.operationN2.TabIndex = 17;
             // 
             // equal
             // 
             this.equal.AutoSize = true;
-            this.equal.Location = new System.Drawing.Point(88, 195);
+            this.equal.Location = new System.Drawing.Point(95, 247);
             this.equal.Name = "equal";
             this.equal.Size = new System.Drawing.Size(13, 13);
             this.equal.TabIndex = 18;
@@ -248,7 +250,7 @@
             // 
             this.result.BackColor = System.Drawing.SystemColors.Control;
             this.result.Enabled = false;
-            this.result.Location = new System.Drawing.Point(106, 195);
+            this.result.Location = new System.Drawing.Point(208, 115);
             this.result.Name = "result";
             this.result.Size = new System.Drawing.Size(46, 20);
             this.result.TabIndex = 19;
@@ -265,24 +267,17 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.operatorsPanel);
             this.mainPanel.Controls.Add(this.clear);
             this.mainPanel.Controls.Add(this.seconds);
             this.mainPanel.Controls.Add(this.minutes);
             this.mainPanel.Controls.Add(this.label7);
-            this.mainPanel.Controls.Add(this.label6);
-            this.mainPanel.Controls.Add(this.next);
-            this.mainPanel.Controls.Add(this.submit);
             this.mainPanel.Controls.Add(this.result);
-            this.mainPanel.Controls.Add(this.equal);
-            this.mainPanel.Controls.Add(this.operationN2);
             this.mainPanel.Controls.Add(this.operationO);
+            this.mainPanel.Controls.Add(this.label6);
+            this.mainPanel.Controls.Add(this.operationN2);
             this.mainPanel.Controls.Add(this.operationN1);
             this.mainPanel.Controls.Add(this.label4);
-            this.mainPanel.Controls.Add(this.btnDiv);
-            this.mainPanel.Controls.Add(this.btnMult);
-            this.mainPanel.Controls.Add(this.btnMoins);
-            this.mainPanel.Controls.Add(this.btnPlus);
-            this.mainPanel.Controls.Add(this.label3);
             this.mainPanel.Controls.Add(this.n5);
             this.mainPanel.Controls.Add(this.n4);
             this.mainPanel.Controls.Add(this.n3);
@@ -299,9 +294,9 @@
             // 
             // clear
             // 
-            this.clear.Location = new System.Drawing.Point(8, 218);
+            this.clear.Location = new System.Drawing.Point(96, 216);
             this.clear.Name = "clear";
-            this.clear.Size = new System.Drawing.Size(75, 23);
+            this.clear.Size = new System.Drawing.Size(66, 23);
             this.clear.TabIndex = 26;
             this.clear.Text = "Annuler";
             this.clear.UseVisualStyleBackColor = true;
@@ -345,7 +340,7 @@
             // 
             // next
             // 
-            this.next.Location = new System.Drawing.Point(182, 219);
+            this.next.Location = new System.Drawing.Point(161, 226);
             this.next.Name = "next";
             this.next.Size = new System.Drawing.Size(75, 23);
             this.next.TabIndex = 21;
@@ -355,13 +350,12 @@
             // 
             // submit
             // 
-            this.submit.Location = new System.Drawing.Point(182, 192);
+            this.submit.Location = new System.Drawing.Point(161, 199);
             this.submit.Name = "submit";
             this.submit.Size = new System.Drawing.Size(75, 23);
             this.submit.TabIndex = 20;
             this.submit.Text = "Calculer";
             this.submit.UseVisualStyleBackColor = true;
-            this.submit.Click += new System.EventHandler(this.submit_Click);
             // 
             // Game
             // 
@@ -393,6 +387,10 @@
             this.welcomePanel.Controls.Add(this.label5);
             this.welcomePanel.Controls.Add(this.button1);
             this.welcomePanel.Controls.Add(this.Jouer);
+            this.welcomePanel.Controls.Add(this.equal);
+            this.welcomePanel.Controls.Add(this.next);
+            this.welcomePanel.Controls.Add(this.submit);
+            this.welcomePanel.Controls.Add(this.label3);
             this.welcomePanel.Location = new System.Drawing.Point(317, 12);
             this.welcomePanel.Name = "welcomePanel";
             this.welcomePanel.Size = new System.Drawing.Size(274, 338);
@@ -469,6 +467,18 @@
             this.graphicTimer.Size = new System.Drawing.Size(574, 23);
             this.graphicTimer.TabIndex = 27;
             // 
+            // operatorsPanel
+            // 
+            this.operatorsPanel.Controls.Add(this.btnDiv);
+            this.operatorsPanel.Controls.Add(this.btnMult);
+            this.operatorsPanel.Controls.Add(this.btnMinus);
+            this.operatorsPanel.Controls.Add(this.btnPlus);
+            this.operatorsPanel.Enabled = false;
+            this.operatorsPanel.Location = new System.Drawing.Point(88, 152);
+            this.operatorsPanel.Name = "operatorsPanel";
+            this.operatorsPanel.Size = new System.Drawing.Size(82, 64);
+            this.operatorsPanel.TabIndex = 27;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -487,6 +497,7 @@
             this.Game.ResumeLayout(false);
             this.welcomePanel.ResumeLayout(false);
             this.welcomePanel.PerformLayout();
+            this.operatorsPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -503,7 +514,7 @@
         private System.Windows.Forms.Button n5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnPlus;
-        private System.Windows.Forms.Button btnMoins;
+        private System.Windows.Forms.Button btnMinus;
         private System.Windows.Forms.Button btnMult;
         private System.Windows.Forms.Button btnDiv;
         private System.Windows.Forms.Label label4;
@@ -530,6 +541,7 @@
         private System.Windows.Forms.Label seconds;
         private System.Windows.Forms.Button clear;
         private System.Windows.Forms.ProgressBar graphicTimer;
+        private System.Windows.Forms.Panel operatorsPanel;
     }
 }
 

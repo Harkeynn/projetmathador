@@ -31,7 +31,10 @@ namespace ProjetMathador
         {
             if(this.operationN1.Text == "" || this.operationN2.Text == "")
             {
-                button.BackColor = Color.Aqua;
+                if(button.Text.Length != 0)
+                {
+                    button.BackColor = Color.Aqua;
+                }
                 if (this.operationN1.Text.Length == 0)
                 {
                     this.numberPos.Add(button);
@@ -55,65 +58,41 @@ namespace ProjetMathador
             }
         }
 
+        public void ClearOperation()
+        {
+            foreach (Button btn in numberPos)
+            {
+                btn.BackColor = Color.Transparent;
+            }
+            this.operationN1.Text = "";
+            this.operationN2.Text = "";
+            this.operationO.Text = "";
+            this.result.Text = "";
+            this.numberPos.Clear();
+            switch (operationCase)
+            {
+                case 1:
+                    this.btnPlus.BackColor = Color.Transparent;
+                    break;
+                case 2:
+                    this.btnMinus.BackColor = Color.Transparent;
+                    break;
+                case 3:
+                    this.btnMult.BackColor = Color.Transparent;
+                    break;
+                case 4:
+                    this.btnDiv.BackColor = Color.Transparent;
+                    break;
+                default:
+                    Console.WriteLine("ERROR - IMPOSSIBLE TO CLEAR THE OPERATION");
+                    break;
+            }
+            this.operationCase = 0;
+        }
+
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void submit_Click(object sender, EventArgs e)
-        {
-            if(this.operationN1.Text != "" && this.operationN2.Text != "" && this.operationO.Text != "")
-            {
-                switch (operationCase)
-                {
-                    case 1:
-                        this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) + Convert.ToInt32(this.operationN2.Text));
-                        break;
-                    case 2:
-                        if ((Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text)) < 0)
-                        {
-                            DialogResult onlyPositive;
-                            onlyPositive = MessageBox.Show("Merci de ne faire que des soustractions ayant pour résultat un nombre positif.",
-                                "Attention !",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
-                            if(onlyPositive == DialogResult.OK)
-                            {
-                                clear_Click(sender, e);
-                            }
-                        }
-                        else
-                        {
-                            this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text));
-                        }
-                        break;
-                    case 3:
-                        this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) * Convert.ToInt32(this.operationN2.Text));
-                        break;
-                    case 4:
-                        if ((Convert.ToInt32(this.operationN1.Text) % Convert.ToInt32(this.operationN2.Text)) == 0)
-                        {
-                            this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) / Convert.ToInt32(this.operationN2.Text));
-                        }
-                        else
-                        {
-                            DialogResult onlyInt;
-                            onlyInt = MessageBox.Show("Merci de ne faire que des divisons ayant pour résultat un entier.",
-                                "Attention !",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
-                            if(onlyInt == DialogResult.OK)
-                            {
-                                clear_Click(sender, e);
-                            }
-                        }
-                        break;
-                    default:
-                        Console.WriteLine("ERROR IN THE CALCULATION");
-                        break;
-                }
-            }
-            
         }
 
         private void generate_Click(object sender, EventArgs e)
@@ -136,12 +115,7 @@ namespace ProjetMathador
             this.n5.Text = RandString(1, 21);
             saved.addNumber(this.n5.Text, 4);
 
-            this.operationN1.Text = "";
-            this.operationN2.Text = "";
-            this.operationO.Text = "";
-            this.result.Text = "";
-            this.tryCount = 0;
-            this.numberPos.Clear();
+            ClearOperation();
             this.logs.Clear();
             this.mainPanel.Visible = true;
             timerMinutes = 3;
@@ -178,45 +152,69 @@ namespace ProjetMathador
 
         private void btnPlus_Click(object sender, EventArgs e)
         {
-            FillOperationO(this.btnPlus.Text, this.btnPlus);
             operationCase = 1;
+            FillOperationO(this.btnPlus.Text, this.btnPlus);
+            this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) + Convert.ToInt32(this.operationN2.Text));
         }
 
         private void btnMoins_Click(object sender, EventArgs e)
         {
-            FillOperationO(this.btnMoins.Text, this.btnMoins);
+            FillOperationO(this.btnMinus.Text, this.btnMinus);
             operationCase = 2;
+            if ((Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text)) < 0)
+            {
+                DialogResult onlyPositive;
+                onlyPositive = MessageBox.Show("Merci de ne faire que des soustractions ayant pour résultat un nombre positif.",
+                    "Attention !",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                if (onlyPositive == DialogResult.OK)
+                {
+                    ClearOperation();
+                }
+            }
+            else
+            {
+                this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text));
+            }
         }
 
         private void btnMult_Click(object sender, EventArgs e)
         {
             FillOperationO(this.btnMult.Text, this.btnMult);
             operationCase = 3;
+            this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) * Convert.ToInt32(this.operationN2.Text));
         }
 
         private void btnDiv_Click(object sender, EventArgs e)
         {
             FillOperationO(this.btnDiv.Text, this.btnDiv);
             operationCase = 4;
+            if ((Convert.ToInt32(this.operationN1.Text) % Convert.ToInt32(this.operationN2.Text)) == 0)
+            {
+                this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) / Convert.ToInt32(this.operationN2.Text));
+            }
+            else
+            {
+                DialogResult onlyInt;
+                onlyInt = MessageBox.Show("Merci de ne faire que des divisons ayant pour résultat un entier.",
+                    "Attention !",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                if (onlyInt == DialogResult.OK)
+                {
+                    ClearOperation();
+                }
+            }
         }
 
         private void next_Click(object sender, EventArgs e)
         {
-            foreach(Button btn in numberPos)
-            {
-                btn.BackColor = Color.Transparent;
-            }
-
             if (result.Text != "")
             {
                 this.numberPos[0].Text = "";
                 this.numberPos[1].Text = this.result.Text;
-
-                this.operationN1.Text = "";
-                this.operationN2.Text = "";
-                this.operationO.Text = "";
-                this.operationCase = 0;
-                this.numberPos.Clear();
+                ClearOperation();
 
                 this.tryCount += 1;
 
@@ -224,13 +222,13 @@ namespace ProjetMathador
                 {
                     if (this.result.Text == this.target.Text)
                     {
+                        second.Stop();
+                        second.Enabled = false;
                         DialogResult victory;
                         victory = MessageBox.Show("VICTOIRE TUTUTUTUTUTUT",
                                 "Magnifique !",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
-                        second.Stop();
-                        second.Enabled = false;
                         if (victory == DialogResult.OK)
                         {
                             backMenu_Click(sender, e);
@@ -251,9 +249,11 @@ namespace ProjetMathador
 
         private void backMenu_Click(object sender, EventArgs e)
         {
+            ClearOperation();
             this.Game.Visible = false;
             this.mainPanel.Visible = false;
             this.welcomePanel.Visible = true;
+            this.graphicTimer.Value = 0;
             timerSeconds = 0;
             timerMinutes = 3;
             second.Stop();
@@ -303,6 +303,7 @@ namespace ProjetMathador
                 }
                 else
                 {
+                    ClearOperation();
                     this.mainPanel.Visible = false;
                 }
                 
@@ -311,16 +312,7 @@ namespace ProjetMathador
 
         private void clear_Click(object sender, EventArgs e)
         {
-            this.operationN1.Text = "";
-            this.operationN2.Text = "";
-            this.operationO.Text = "";
-            this.operationCase = 0;
-            this.result.Text = "";
-            this.numberPos.Clear();
-            foreach(Button btn in numberPos)
-            {
-                btn.BackColor = Color.Transparent;
-            }
+            ClearOperation();
         }
     }
 
