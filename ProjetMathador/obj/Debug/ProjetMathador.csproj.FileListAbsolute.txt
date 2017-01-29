@@ -29,3 +29,5 @@ D:\Work\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.csprojResolveA
 D:\Work\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.Form1.resources
 D:\Work\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.Properties.Resources.resources
 D:\Work\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.csproj.GenerateResource.Cache
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\Newtonsoft.Json.dll
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\Newtonsoft.Json.xml
