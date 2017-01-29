@@ -12,39 +12,242 @@ namespace ProjetMathador
 {
     public partial class Form1 : Form
     {
-        public class Serial
-        {
-            public String[] genratedNumbers { get; set; }
-            public String[] results { get; set; }
-            public int numberOfOperations { get; set; }
-        }
-        private int operationCase;
-        Serial serial = new Serial();
+        private bool started = false;
+        private int result = -1;
+        private int operationCase = 0;
+        private bool operatorFirst = false;
         private Random rand = new Random();
+        public int timerSeconds = 0;
+        public int timerMinutes = 3;
+        private List<Button> numberPos = new List<Button>();
+        private Stack<Log> logs = new Stack<Log>();
+        private int tryCount = 0;
+        Saved saved = new Saved();
+
         public String RandString(int from, int to)
         {
             String value = Convert.ToString(rand.Next(from, to));
             return value;
         }
 
-        public void FillOperationN(String num)
+        public void Operation()
         {
-            if (this.operationN1.Text.Length == 0)
+            switch (operationCase)
             {
-                this.operationN1.Text = num;
+                case 1:
+                    result = Convert.ToInt32(this.operationN1.Text) + Convert.ToInt32(this.operationN2.Text);
+                    break;
+                case 2:
+                    if ((Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text)) < 0)
+                    {
+                        DialogResult onlyPositive;
+                        onlyPositive = MessageBox.Show("Merci de ne faire que des soustractions ayant pour résultat un nombre positif.",
+                            "Attention !",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                        if (onlyPositive == DialogResult.OK)
+                        {
+                            ClearOperation();
+                        }
+                    }
+                    else
+                    {
+                        result = Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text);
+                    }
+                    break;
+                case 3:
+                    result = Convert.ToInt32(this.operationN1.Text) * Convert.ToInt32(this.operationN2.Text);
+                    break;
+                case 4:
+                    if ((Convert.ToInt32(this.operationN1.Text) % Convert.ToInt32(this.operationN2.Text)) == 0)
+                    {
+                        result = Convert.ToInt32(this.operationN1.Text) / Convert.ToInt32(this.operationN2.Text);
+                    }
+                    else
+                    {
+                        DialogResult onlyInt;
+                        onlyInt = MessageBox.Show("Merci de ne faire que des divisons ayant pour résultat un entier.",
+                            "Attention !",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                        if (onlyInt == DialogResult.OK)
+                        {
+                            ClearOperation();
+                        }
+                    }
+                    break;
+                default:
+                    Console.WriteLine("ERROR - INVALID OPERATION");
+                    ClearOperation();
+                    break;
             }
-            else if (this.operationN2.Text.Length == 0)
+            this.numberPos[0].Text = "";
+            this.numberPos[1].Text = Convert.ToString(result);
+
+            this.tryCount += 1;
+
+            if (result == Convert.ToInt32(this.target.Text) || tryCount == 4)
             {
-                this.operationN2.Text = num;
+                if (result == Convert.ToInt32(this.target.Text))
+                {
+                    second.Stop();
+                    DialogResult victory;
+                    victory = MessageBox.Show("Bravo !",
+                            "Nombre trouvé !",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    if (victory == DialogResult.OK)
+                    {
+                        this.target.Text = RandString(1, 101);
+
+                        this.n1.Text = RandString(1, 13);
+                        saved.addNumber(this.n1.Text, 0);
+
+                        this.n2.Text = RandString(1, 13);
+                        saved.addNumber(this.n2.Text, 1);
+
+                        this.n3.Text = RandString(1, 13);
+                        saved.addNumber(this.n3.Text, 2);
+
+                        this.n4.Text = RandString(1, 21);
+                        saved.addNumber(this.n4.Text, 3);
+
+                        this.n5.Text = RandString(1, 21);
+                        saved.addNumber(this.n5.Text, 4);
+
+                        this.logs.Clear();
+                        ClearOperation();
+                        second.Start();
+                    }
+                }
+                if (tryCount == 4)
+                {
+                    second.Stop();
+                    DialogResult loose;
+                    loose = MessageBox.Show("Vous n'avez pas réussi à trouver le bon nombre",
+                            "Échec",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    if (loose == DialogResult.OK)
+                    {
+                        this.target.Text = RandString(1, 101);
+
+                        this.n1.Text = RandString(1, 13);
+                        saved.addNumber(this.n1.Text, 0);
+
+                        this.n2.Text = RandString(1, 13);
+                        saved.addNumber(this.n2.Text, 1);
+
+                        this.n3.Text = RandString(1, 13);
+                        saved.addNumber(this.n3.Text, 2);
+
+                        this.n4.Text = RandString(1, 21);
+                        saved.addNumber(this.n4.Text, 3);
+
+                        this.n5.Text = RandString(1, 21);
+                        saved.addNumber(this.n5.Text, 4);
+
+                        this.logs.Clear();
+                        ClearOperation();
+                        second.Start();
+                    }
+                }
+            }
+            ClearOperation();
+        }
+        
+        public void FillOperationN(String num, Button button)
+        {
+            if (this.operationN1.Text == "" || this.operationN2.Text == "")
+            {
+                if (button.Text.Length != 0)
+                {
+                    button.BackColor = Color.Aqua;
+                }
+                if (this.operationN1.Text.Length == 0)
+                {
+                    this.numberPos.Add(button);
+                    this.operationN1.Text = num;
+                }
+                else if (this.operationN2.Text.Length == 0)
+                {
+                    this.numberPos.Add(button);
+                    this.operationN2.Text = num;
+                }
+                if (this.operationN2.Text != "" && operatorFirst == true)
+                {
+                    Operation();
+                }
+            }
+
+        }
+
+        public void FillOperationO()
+        {
+            if (this.operationN2.Text.Length != 0)
+            {
+                Operation();
+            }
+            else
+            {
+                operatorFirst = true;
+                switch (operationCase)
+                {
+                    case 1:
+                        this.btnPlus.BackColor = Color.Aqua;
+                        break;
+                    case 2:
+                        this.btnMinus.BackColor = Color.Aqua;
+                        break;
+                    case 3:
+                        this.btnMult.BackColor = Color.Aqua;
+                        break;
+                    case 4:
+                        this.btnDiv.BackColor = Color.Aqua;
+                        break;
+                    default:
+                        Console.WriteLine("ERROR - IMPOSSIBLE TO CLEAR THE OPERATION");
+                        break;
+                }
             }
         }
 
-        public void FillOperationO(String o)
+        public void ClearOperator()
         {
-            if (this.operationO.Text.Length == 0)
+            switch (operationCase)
             {
-                this.operationO.Text = o;
+                case 1:
+                    this.btnPlus.BackColor = Color.Transparent;
+                    break;
+                case 2:
+                    this.btnMinus.BackColor = Color.Transparent;
+                    break;
+                case 3:
+                    this.btnMult.BackColor = Color.Transparent;
+                    break;
+                case 4:
+                    this.btnDiv.BackColor = Color.Transparent;
+                    break;
+                default:
+                    Console.WriteLine("ERROR - IMPOSSIBLE TO CLEAR THE OPERATION");
+                    break;
             }
+        }
+
+        public void ClearOperation()
+        {
+            foreach (Button btn in numberPos)
+            {
+                btn.BackColor = Color.Transparent;
+            }
+            this.operationN1.Text = "";
+            this.operationN2.Text = "";
+            this.operationO.Text = "";
+            result = -1;
+            this.numberPos.Clear();
+            ClearOperator();
+            operatorFirst = false;
+            this.operationCase = 0;
         }
 
         public Form1()
@@ -52,142 +255,96 @@ namespace ProjetMathador
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void submit_Click(object sender, EventArgs e)
-        {
-            switch (operationCase)
-            {
-                case 1:
-                    this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) + Convert.ToInt32(this.operationN2.Text));
-                    break;
-                case 2:
-                    this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text));
-                    break;
-                case 3:
-                    this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) * Convert.ToInt32(this.operationN2.Text));
-                    break;
-                case 4:
-                    this.result.Text = Convert.ToString(Convert.ToInt32(this.operationN1.Text) / Convert.ToInt32(this.operationN2.Text));
-                    break;
-            }
-        }
-
         private void generate_Click(object sender, EventArgs e)
         {
             this.target.Text = RandString(1, 101);
+            
             this.n1.Text = RandString(1, 13);
+            saved.addNumber(this.n1.Text, 0);
+
             this.n2.Text = RandString(1, 13);
+            saved.addNumber(this.n2.Text, 1);
+
             this.n3.Text = RandString(1, 13);
+            saved.addNumber(this.n3.Text, 2);
+
             this.n4.Text = RandString(1, 21);
+            saved.addNumber(this.n4.Text, 3);
+
             this.n5.Text = RandString(1, 21);
-            this.operationN1.Text = "";
-            this.operationN2.Text = "";
-            this.operationO.Text = "";
-            this.result.Text = "";
-            this.mainPanel.Visible = true;
+            saved.addNumber(this.n5.Text, 4);
+
+            ClearOperation();
+            this.logs.Clear();
+
+            if(started == false)
+            {
+                started = true;
+                this.mainPanel.Visible = true;
+                timerMinutes = 3;
+                timerSeconds = 0;
+                second.Enabled = true;
+                second.Start();
+                this.graphicTimer.Value = 0;
+            }
         }
-
-        private void target_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void n1_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n1.Text);
+            FillOperationN(this.n1.Text, this.n1);
         }
 
         private void n2_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n2.Text);
+            FillOperationN(this.n2.Text, this.n2);
         }
 
         private void n3_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n3.Text);
+            FillOperationN(this.n3.Text, this.n3);
         }
 
         private void n4_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n4.Text);
+            FillOperationN(this.n4.Text, this.n4);
         }
 
         private void n5_Click(object sender, EventArgs e)
         {
-            FillOperationN(this.n5.Text);
+            FillOperationN(this.n5.Text, this.n5);
         }
 
         private void btnPlus_Click(object sender, EventArgs e)
         {
-            FillOperationO(this.btnPlus.Text);
+            ClearOperator();
             operationCase = 1;
+            FillOperationO();
         }
 
         private void btnMoins_Click(object sender, EventArgs e)
         {
-            FillOperationO(this.btnMoins.Text);
+            ClearOperator();
             operationCase = 2;
+            FillOperationO();
         }
 
         private void btnMult_Click(object sender, EventArgs e)
         {
-            FillOperationO(this.btnMult.Text);
+            ClearOperator();
             operationCase = 3;
+            FillOperationO();
         }
 
         private void btnDiv_Click(object sender, EventArgs e)
         {
-            FillOperationO(this.btnDiv.Text);
+            ClearOperator();
             operationCase = 4;
+            FillOperationO();
         }
 
-        private void result_TextChanged(object sender, EventArgs e)
+        private void Next(object sender, EventArgs e)
         {
-
-        }
-
-        private void equal_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void operationN2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void operationO_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void operationN1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void next_Click(object sender, EventArgs e)
-        {
-            //recup taille generatedNumbers et switch case pour cacher les boutons
+            
         }
 
         private void Jouer_Click(object sender, EventArgs e)
@@ -198,8 +355,113 @@ namespace ProjetMathador
 
         private void backMenu_Click(object sender, EventArgs e)
         {
+            ClearOperation();
             this.Game.Visible = false;
+            this.mainPanel.Visible = false;
             this.welcomePanel.Visible = true;
+            this.graphicTimer.Value = 0;
+            timerSeconds = 0;
+            this.seconds.Text = "00";
+            timerMinutes = 3;
+            this.minutes.Text = "3";
+            second.Stop();
+            second.Enabled = false;
+            started = false;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void second_Tick(object sender, EventArgs e)
+        {
+            this.graphicTimer.Value++;
+            timerSeconds--;
+            if (timerSeconds<0)
+            {
+                timerSeconds = 59;
+                timerMinutes--;
+                this.minutes.Text = Convert.ToString(timerMinutes);
+            }
+
+            if (timerSeconds < 10)
+            {
+                this.seconds.Text = "0" + Convert.ToString(timerSeconds);
+            }
+            else
+            {
+                this.seconds.Text = Convert.ToString(timerSeconds);
+            }
+
+            if(timerSeconds == 0 && timerMinutes == 0)
+            {
+                second.Stop();
+                second.Enabled = false;
+                DialogResult timesUp;
+                timesUp = MessageBox.Show("Fin du temps !",
+                    "Perdu",
+                    MessageBoxButtons.RetryCancel,
+                    MessageBoxIcon.Information);
+                if (timesUp == DialogResult.Retry)
+                {
+                    started = false;
+                    generate_Click(sender, e);
+                    timerMinutes = 3;
+                    timerSeconds = 0;
+                    this.graphicTimer.Value = 0;
+                }
+                else
+                {
+                    started = false;
+                    ClearOperation();
+                    this.mainPanel.Visible = false;
+                }
+                
+            }
+        }
+
+        private void clear_Click(object sender, EventArgs e)
+        {
+            ClearOperation();
+        }
+    }
+
+    public class Saved
+    {
+        public string[] generatedNumbers = new string[5];
+        public String[] results;
+        public int numberOfOperations;
+
+        public void addNumber(string nb, int pos)
+        {
+            this.generatedNumbers[pos] = nb;
+        }
+    }
+
+    public class Calcul
+    {
+        public int number1, number2, result, oper;
+
+        public Calcul(int n1, int n2, int res, int oper)
+        {
+            this.number1 = n1;
+            this.number2 = n2;
+            this.result = res;
+            this.oper = oper;
+        }
+    }
+
+    public class Log
+    {
+        public Calcul calcul;
+        public List<Button> numberPos = new List<Button>();
+
+        public Log(Calcul calcul, Button button1, Button button2)
+        {
+            this.calcul = calcul;
+            this.numberPos.Add(button1);
+            this.numberPos.Add(button2);
         }
     }
 
