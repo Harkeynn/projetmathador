@@ -24,6 +24,11 @@ namespace ProjetMathador
         private int tryCount = 0;
         Saved saved = new Saved();
 
+        public void EnableGenerate(object sender, EventArgs e)
+        {
+            this.generate.Enabled = true;
+        }
+
         public String RandString(int from, int to)
         {
             String value = Convert.ToString(rand.Next(from, to));
@@ -36,10 +41,14 @@ namespace ProjetMathador
             {
                 case 1:
                     result = Convert.ToInt32(this.operationN1.Text) + Convert.ToInt32(this.operationN2.Text);
+                    this.numberPos[0].Text = "";
+                    this.numberPos[1].Text = Convert.ToString(result);
+                    this.tryCount += 1;
                     break;
                 case 2:
                     if ((Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text)) < 0)
                     {
+                        second.Stop();
                         DialogResult onlyPositive;
                         onlyPositive = MessageBox.Show("Merci de ne faire que des soustractions ayant pour résultat un nombre positif.",
                             "Attention !",
@@ -48,23 +57,34 @@ namespace ProjetMathador
                         if (onlyPositive == DialogResult.OK)
                         {
                             ClearOperation();
+                            second.Start();
                         }
                     }
                     else
                     {
                         result = Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text);
+                        this.numberPos[0].Text = "";
+                        this.numberPos[1].Text = Convert.ToString(result);
+                        this.tryCount += 1;
                     }
                     break;
                 case 3:
                     result = Convert.ToInt32(this.operationN1.Text) * Convert.ToInt32(this.operationN2.Text);
+                    this.numberPos[0].Text = "";
+                    this.numberPos[1].Text = Convert.ToString(result);
+                    this.tryCount += 1;
                     break;
                 case 4:
                     if ((Convert.ToInt32(this.operationN1.Text) % Convert.ToInt32(this.operationN2.Text)) == 0)
                     {
                         result = Convert.ToInt32(this.operationN1.Text) / Convert.ToInt32(this.operationN2.Text);
+                        this.numberPos[0].Text = "";
+                        this.numberPos[1].Text = Convert.ToString(result);
+                        this.tryCount += 1;
                     }
                     else
                     {
+                        second.Stop();
                         DialogResult onlyInt;
                         onlyInt = MessageBox.Show("Merci de ne faire que des divisons ayant pour résultat un entier.",
                             "Attention !",
@@ -73,6 +93,7 @@ namespace ProjetMathador
                         if (onlyInt == DialogResult.OK)
                         {
                             ClearOperation();
+                            second.Start();
                         }
                     }
                     break;
@@ -81,10 +102,6 @@ namespace ProjetMathador
                     ClearOperation();
                     break;
             }
-            this.numberPos[0].Text = "";
-            this.numberPos[1].Text = Convert.ToString(result);
-
-            this.tryCount += 1;
 
             if (result == Convert.ToInt32(this.target.Text) || tryCount == 4)
             {
@@ -116,6 +133,7 @@ namespace ProjetMathador
                         saved.addNumber(this.n5.Text, 4);
 
                         this.logs.Clear();
+                        tryCount = 0;
                         ClearOperation();
                         second.Start();
                     }
@@ -148,6 +166,7 @@ namespace ProjetMathador
                         saved.addNumber(this.n5.Text, 4);
 
                         this.logs.Clear();
+                        tryCount = 0;
                         ClearOperation();
                         second.Start();
                     }
@@ -242,7 +261,6 @@ namespace ProjetMathador
             }
             this.operationN1.Text = "";
             this.operationN2.Text = "";
-            this.operationO.Text = "";
             result = -1;
             this.numberPos.Clear();
             ClearOperator();
@@ -253,6 +271,14 @@ namespace ProjetMathador
         public Form1()
         {
             InitializeComponent();
+        }
+
+        public void pseudo_LostFocus(object sender, EventArgs e)
+        {
+            if(this.pseudo.Text.Length != 0)
+            {
+                this.generate.Enabled = true;
+            }
         }
 
         private void generate_Click(object sender, EventArgs e)
@@ -274,11 +300,13 @@ namespace ProjetMathador
             this.n5.Text = RandString(1, 21);
             saved.addNumber(this.n5.Text, 4);
 
-            ClearOperation();
             this.logs.Clear();
+            tryCount = 0;
+            ClearOperation();
 
-            if(started == false)
+            if (started == false)
             {
+                this.pseudo.Enabled = false;
                 started = true;
                 this.mainPanel.Visible = true;
                 timerMinutes = 3;
@@ -342,11 +370,6 @@ namespace ProjetMathador
             FillOperationO();
         }
 
-        private void Next(object sender, EventArgs e)
-        {
-            
-        }
-
         private void Jouer_Click(object sender, EventArgs e)
         {
             this.welcomePanel.Visible = false;
@@ -355,6 +378,7 @@ namespace ProjetMathador
 
         private void backMenu_Click(object sender, EventArgs e)
         {
+            this.pseudo.Enabled = true;
             ClearOperation();
             this.Game.Visible = false;
             this.mainPanel.Visible = false;
