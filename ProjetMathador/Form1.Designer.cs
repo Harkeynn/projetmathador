@@ -48,9 +48,10 @@
             this.operationO = new System.Windows.Forms.TextBox();
             this.operationN2 = new System.Windows.Forms.TextBox();
             this.equal = new System.Windows.Forms.Label();
-            this.result = new System.Windows.Forms.TextBox();
             this.generate = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.operatorsPanel = new System.Windows.Forms.Panel();
+            this.numbersPanel = new System.Windows.Forms.Panel();
             this.clear = new System.Windows.Forms.Button();
             this.seconds = new System.Windows.Forms.Label();
             this.minutes = new System.Windows.Forms.Label();
@@ -61,17 +62,16 @@
             this.Game = new System.Windows.Forms.Panel();
             this.BackMenu = new System.Windows.Forms.Button();
             this.welcomePanel = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.exit = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.Jouer = new System.Windows.Forms.Button();
             this.second = new System.Windows.Forms.Timer(this.components);
             this.graphicTimer = new System.Windows.Forms.ProgressBar();
-            this.operatorsPanel = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
+            this.operatorsPanel.SuspendLayout();
             this.Game.SuspendLayout();
             this.welcomePanel.SuspendLayout();
-            this.operatorsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // target
@@ -246,15 +246,6 @@
             this.equal.TabIndex = 18;
             this.equal.Text = "=";
             // 
-            // result
-            // 
-            this.result.BackColor = System.Drawing.SystemColors.Control;
-            this.result.Enabled = false;
-            this.result.Location = new System.Drawing.Point(208, 115);
-            this.result.Name = "result";
-            this.result.Size = new System.Drawing.Size(46, 20);
-            this.result.TabIndex = 19;
-            // 
             // generate
             // 
             this.generate.Location = new System.Drawing.Point(3, 33);
@@ -269,12 +260,7 @@
             // 
             this.mainPanel.Controls.Add(this.operatorsPanel);
             this.mainPanel.Controls.Add(this.clear);
-            this.mainPanel.Controls.Add(this.seconds);
-            this.mainPanel.Controls.Add(this.minutes);
-            this.mainPanel.Controls.Add(this.label7);
-            this.mainPanel.Controls.Add(this.result);
             this.mainPanel.Controls.Add(this.operationO);
-            this.mainPanel.Controls.Add(this.label6);
             this.mainPanel.Controls.Add(this.operationN2);
             this.mainPanel.Controls.Add(this.operationN1);
             this.mainPanel.Controls.Add(this.label4);
@@ -292,6 +278,25 @@
             this.mainPanel.TabIndex = 22;
             this.mainPanel.Visible = false;
             // 
+            // operatorsPanel
+            // 
+            this.operatorsPanel.Controls.Add(this.numbersPanel);
+            this.operatorsPanel.Controls.Add(this.btnDiv);
+            this.operatorsPanel.Controls.Add(this.btnMult);
+            this.operatorsPanel.Controls.Add(this.btnMinus);
+            this.operatorsPanel.Controls.Add(this.btnPlus);
+            this.operatorsPanel.Location = new System.Drawing.Point(88, 152);
+            this.operatorsPanel.Name = "operatorsPanel";
+            this.operatorsPanel.Size = new System.Drawing.Size(82, 64);
+            this.operatorsPanel.TabIndex = 27;
+            // 
+            // numbersPanel
+            // 
+            this.numbersPanel.Location = new System.Drawing.Point(-82, -82);
+            this.numbersPanel.Name = "numbersPanel";
+            this.numbersPanel.Size = new System.Drawing.Size(172, 23);
+            this.numbersPanel.TabIndex = 28;
+            // 
             // clear
             // 
             this.clear.Location = new System.Drawing.Point(96, 216);
@@ -305,7 +310,7 @@
             // seconds
             // 
             this.seconds.AutoSize = true;
-            this.seconds.Location = new System.Drawing.Point(219, 18);
+            this.seconds.Location = new System.Drawing.Point(319, 364);
             this.seconds.Name = "seconds";
             this.seconds.Size = new System.Drawing.Size(19, 13);
             this.seconds.TabIndex = 25;
@@ -314,7 +319,7 @@
             // minutes
             // 
             this.minutes.AutoSize = true;
-            this.minutes.Location = new System.Drawing.Point(205, 18);
+            this.minutes.Location = new System.Drawing.Point(305, 364);
             this.minutes.Name = "minutes";
             this.minutes.Size = new System.Drawing.Size(13, 13);
             this.minutes.TabIndex = 24;
@@ -323,7 +328,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(214, 18);
+            this.label7.Location = new System.Drawing.Point(314, 364);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(10, 13);
             this.label7.TabIndex = 23;
@@ -332,7 +337,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(185, 2);
+            this.label6.Location = new System.Drawing.Point(17, 362);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(74, 13);
             this.label6.TabIndex = 22;
@@ -346,7 +351,6 @@
             this.next.TabIndex = 21;
             this.next.Text = "Suivant";
             this.next.UseVisualStyleBackColor = true;
-            this.next.Click += new System.EventHandler(this.next_Click);
             // 
             // submit
             // 
@@ -383,7 +387,7 @@
             // 
             this.welcomePanel.BackColor = System.Drawing.Color.Transparent;
             this.welcomePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.welcomePanel.Controls.Add(this.button2);
+            this.welcomePanel.Controls.Add(this.exit);
             this.welcomePanel.Controls.Add(this.label5);
             this.welcomePanel.Controls.Add(this.button1);
             this.welcomePanel.Controls.Add(this.Jouer);
@@ -396,30 +400,30 @@
             this.welcomePanel.Size = new System.Drawing.Size(274, 338);
             this.welcomePanel.TabIndex = 24;
             // 
-            // button2
+            // exit
             // 
-            this.button2.BackgroundImage = global::ProjetMathador.Properties.Resources.buttonbackground;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(62, 300);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(146, 29);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Quitter";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.exit.BackgroundImage = global::ProjetMathador.Properties.Resources.buttonbackground;
+            this.exit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.exit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.exit.FlatAppearance.BorderSize = 0;
+            this.exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exit.Location = new System.Drawing.Point(62, 300);
+            this.exit.Name = "exit";
+            this.exit.Size = new System.Drawing.Size(146, 29);
+            this.exit.TabIndex = 3;
+            this.exit.Text = "Quitter";
+            this.exit.UseVisualStyleBackColor = true;
+            this.exit.Click += new System.EventHandler(this.button2_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Papyrus", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(63, 4);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label5.Size = new System.Drawing.Size(145, 42);
+            this.label5.Size = new System.Drawing.Size(136, 31);
             this.label5.TabIndex = 2;
             this.label5.Text = "Mathador";
             // 
@@ -467,18 +471,6 @@
             this.graphicTimer.Size = new System.Drawing.Size(574, 23);
             this.graphicTimer.TabIndex = 27;
             // 
-            // operatorsPanel
-            // 
-            this.operatorsPanel.Controls.Add(this.btnDiv);
-            this.operatorsPanel.Controls.Add(this.btnMult);
-            this.operatorsPanel.Controls.Add(this.btnMinus);
-            this.operatorsPanel.Controls.Add(this.btnPlus);
-            this.operatorsPanel.Enabled = false;
-            this.operatorsPanel.Location = new System.Drawing.Point(88, 152);
-            this.operatorsPanel.Name = "operatorsPanel";
-            this.operatorsPanel.Size = new System.Drawing.Size(82, 64);
-            this.operatorsPanel.TabIndex = 27;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -488,17 +480,22 @@
             this.ClientSize = new System.Drawing.Size(603, 413);
             this.Controls.Add(this.graphicTimer);
             this.Controls.Add(this.welcomePanel);
+            this.Controls.Add(this.seconds);
             this.Controls.Add(this.Game);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.minutes);
+            this.Controls.Add(this.label7);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Mathador";
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
+            this.operatorsPanel.ResumeLayout(false);
             this.Game.ResumeLayout(false);
             this.welcomePanel.ResumeLayout(false);
             this.welcomePanel.PerformLayout();
-            this.operatorsPanel.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -522,7 +519,6 @@
         private System.Windows.Forms.TextBox operationO;
         private System.Windows.Forms.TextBox operationN2;
         private System.Windows.Forms.Label equal;
-        private System.Windows.Forms.TextBox result;
         private System.Windows.Forms.Button generate;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Button submit;
@@ -531,7 +527,7 @@
         private System.Windows.Forms.Panel welcomePanel;
         private System.Windows.Forms.Button Jouer;
         private System.Windows.Forms.Button BackMenu;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button exit;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label6;
@@ -542,6 +538,7 @@
         private System.Windows.Forms.Button clear;
         private System.Windows.Forms.ProgressBar graphicTimer;
         private System.Windows.Forms.Panel operatorsPanel;
+        private System.Windows.Forms.Panel numbersPanel;
     }
 }
 

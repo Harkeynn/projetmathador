@@ -18,3 +18,14 @@ D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.
 D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.csproj.GenerateResource.Cache
 c:\users\harkey\Ingesup\B3\dotNet\ProjetMathador\ProjetMathador\bin\Debug\Newtonsoft.Json.dll
 c:\users\harkey\Ingesup\B3\dotNet\ProjetMathador\ProjetMathador\bin\Debug\Newtonsoft.Json.xml
+D:\Work\C#\projetmathador\ProjetMathador\bin\Debug\ProjetMathador.exe.config
+D:\Work\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.exe
+D:\Work\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.pdb
+D:\Work\C#\projetmathador\ProjetMathador\bin\Debug\ProjetMathador.exe
+D:\Work\C#\projetmathador\ProjetMathador\bin\Debug\ProjetMathador.pdb
+D:\Work\C#\projetmathador\ProjetMathador\bin\Debug\Newtonsoft.Json.dll
+D:\Work\C#\projetmathador\ProjetMathador\bin\Debug\Newtonsoft.Json.xml
+D:\Work\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.csprojResolveAssemblyReference.cache
+D:\Work\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.Form1.resources
+D:\Work\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.Properties.Resources.resources
+D:\Work\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.csproj.GenerateResource.Cache
