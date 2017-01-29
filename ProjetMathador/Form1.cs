@@ -102,7 +102,6 @@ namespace ProjetMathador
                     ClearOperation();
                     break;
             }
-<<<<<<< HEAD
 
             Calcul calcul = new Calcul(Convert.ToInt32(this.operationN1.Text), Convert.ToInt32(this.operationN2.Text), result, this.operationCase);
             Log log = new Log(calcul, this.numberPos[0], this.numberPos[1]);
@@ -113,8 +112,6 @@ namespace ProjetMathador
             this.numberPos[1].Text = Convert.ToString(result);
 
             this.tryCount += 1;
-=======
->>>>>>> aaf01c36babcf050b2f2838a8f02f00a491856a9
 
             if (result == Convert.ToInt32(this.target.Text) || tryCount == 4)
             {

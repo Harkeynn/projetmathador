@@ -514,12 +514,9 @@
         private System.Windows.Forms.ProgressBar graphicTimer;
         private System.Windows.Forms.Panel operatorsPanel;
         private System.Windows.Forms.Panel numbersPanel;
-<<<<<<< HEAD
         private System.Windows.Forms.Button undo;
-=======
         private System.Windows.Forms.Label pseudolbl;
         private System.Windows.Forms.TextBox pseudo;
->>>>>>> aaf01c36babcf050b2f2838a8f02f00a491856a9
     }
 }
 
