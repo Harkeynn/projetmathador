@@ -65,6 +65,7 @@
             this.Jouer = new System.Windows.Forms.Button();
             this.second = new System.Windows.Forms.Timer(this.components);
             this.graphicTimer = new System.Windows.Forms.ProgressBar();
+            this.undo = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.operatorsPanel.SuspendLayout();
             this.Game.SuspendLayout();
@@ -229,6 +230,7 @@
             // 
             // mainPanel
             // 
+            this.mainPanel.Controls.Add(this.undo);
             this.mainPanel.Controls.Add(this.operatorsPanel);
             this.mainPanel.Controls.Add(this.clear);
             this.mainPanel.Controls.Add(this.operationN2);
@@ -438,6 +440,16 @@
             this.graphicTimer.Size = new System.Drawing.Size(574, 23);
             this.graphicTimer.TabIndex = 27;
             // 
+            // undo
+            // 
+            this.undo.Location = new System.Drawing.Point(170, 219);
+            this.undo.Name = "undo";
+            this.undo.Size = new System.Drawing.Size(75, 23);
+            this.undo.TabIndex = 28;
+            this.undo.Text = "Undo";
+            this.undo.UseVisualStyleBackColor = true;
+            this.undo.Click += new System.EventHandler(this.undo_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -502,6 +514,7 @@
         private System.Windows.Forms.ProgressBar graphicTimer;
         private System.Windows.Forms.Panel operatorsPanel;
         private System.Windows.Forms.Panel numbersPanel;
+        private System.Windows.Forms.Button undo;
         private System.Windows.Forms.Label pseudolbl;
         private System.Windows.Forms.TextBox pseudo;
     }

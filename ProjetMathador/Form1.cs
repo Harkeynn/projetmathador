@@ -103,6 +103,16 @@ namespace ProjetMathador
                     break;
             }
 
+            Calcul calcul = new Calcul(Convert.ToInt32(this.operationN1.Text), Convert.ToInt32(this.operationN2.Text), result, this.operationCase);
+            Log log = new Log(calcul, this.numberPos[0], this.numberPos[1]);
+
+            this.logs.Push(log);
+
+            this.numberPos[0].Text = "";
+            this.numberPos[1].Text = Convert.ToString(result);
+
+            this.tryCount += 1;
+
             if (result == Convert.ToInt32(this.target.Text) || tryCount == 4)
             {
                 if (result == Convert.ToInt32(this.target.Text))
@@ -448,6 +458,19 @@ namespace ProjetMathador
         private void clear_Click(object sender, EventArgs e)
         {
             ClearOperation();
+        }
+
+        private void undo_Click(object sender, EventArgs e)
+        {
+            Log backLog = logs.Pop();
+
+            this.operationCase = backLog.calcul.oper;
+            this.numberPos.Add(backLog.numberPos[0]);
+            this.numberPos.Add(backLog.numberPos[1]);
+            this.numberPos[0].Text = Convert.ToString(backLog.calcul.number1);
+            this.numberPos[1].Text = Convert.ToString(backLog.calcul.number2);
+            this.numberPos.Clear();
+            this.tryCount -= 1;
         }
     }
 
