@@ -38,16 +38,13 @@
             this.n3 = new System.Windows.Forms.Button();
             this.n4 = new System.Windows.Forms.Button();
             this.n5 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.btnPlus = new System.Windows.Forms.Button();
             this.btnMinus = new System.Windows.Forms.Button();
             this.btnMult = new System.Windows.Forms.Button();
             this.btnDiv = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.operationN1 = new System.Windows.Forms.TextBox();
-            this.operationO = new System.Windows.Forms.TextBox();
             this.operationN2 = new System.Windows.Forms.TextBox();
-            this.equal = new System.Windows.Forms.Label();
             this.generate = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.operatorsPanel = new System.Windows.Forms.Panel();
@@ -57,9 +54,9 @@
             this.minutes = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.next = new System.Windows.Forms.Button();
-            this.submit = new System.Windows.Forms.Button();
             this.Game = new System.Windows.Forms.Panel();
+            this.pseudo = new System.Windows.Forms.TextBox();
+            this.pseudolbl = new System.Windows.Forms.Label();
             this.BackMenu = new System.Windows.Forms.Button();
             this.welcomePanel = new System.Windows.Forms.Panel();
             this.exit = new System.Windows.Forms.Button();
@@ -107,7 +104,7 @@
             // 
             this.n1.Location = new System.Drawing.Point(3, 70);
             this.n1.Name = "n1";
-            this.n1.Size = new System.Drawing.Size(30, 23);
+            this.n1.Size = new System.Drawing.Size(40, 23);
             this.n1.TabIndex = 3;
             this.n1.Text = "n1";
             this.n1.UseVisualStyleBackColor = true;
@@ -115,9 +112,9 @@
             // 
             // n2
             // 
-            this.n2.Location = new System.Drawing.Point(39, 70);
+            this.n2.Location = new System.Drawing.Point(49, 70);
             this.n2.Name = "n2";
-            this.n2.Size = new System.Drawing.Size(30, 23);
+            this.n2.Size = new System.Drawing.Size(40, 23);
             this.n2.TabIndex = 4;
             this.n2.Text = "n2";
             this.n2.UseVisualStyleBackColor = true;
@@ -125,9 +122,9 @@
             // 
             // n3
             // 
-            this.n3.Location = new System.Drawing.Point(75, 70);
+            this.n3.Location = new System.Drawing.Point(95, 70);
             this.n3.Name = "n3";
-            this.n3.Size = new System.Drawing.Size(30, 23);
+            this.n3.Size = new System.Drawing.Size(40, 23);
             this.n3.TabIndex = 5;
             this.n3.Text = "n3";
             this.n3.UseVisualStyleBackColor = true;
@@ -135,9 +132,9 @@
             // 
             // n4
             // 
-            this.n4.Location = new System.Drawing.Point(111, 70);
+            this.n4.Location = new System.Drawing.Point(140, 70);
             this.n4.Name = "n4";
-            this.n4.Size = new System.Drawing.Size(30, 23);
+            this.n4.Size = new System.Drawing.Size(40, 23);
             this.n4.TabIndex = 6;
             this.n4.Text = "n4";
             this.n4.UseVisualStyleBackColor = true;
@@ -145,22 +142,13 @@
             // 
             // n5
             // 
-            this.n5.Location = new System.Drawing.Point(147, 70);
+            this.n5.Location = new System.Drawing.Point(187, 70);
             this.n5.Name = "n5";
-            this.n5.Size = new System.Drawing.Size(30, 23);
+            this.n5.Size = new System.Drawing.Size(40, 23);
             this.n5.TabIndex = 7;
             this.n5.Text = "n5";
             this.n5.UseVisualStyleBackColor = true;
             this.n5.Click += new System.EventHandler(this.n5_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 188);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Opérateurs";
             // 
             // btnPlus
             // 
@@ -220,15 +208,6 @@
             this.operationN1.Size = new System.Drawing.Size(51, 20);
             this.operationN1.TabIndex = 15;
             // 
-            // operationO
-            // 
-            this.operationO.BackColor = System.Drawing.SystemColors.Control;
-            this.operationO.Enabled = false;
-            this.operationO.Location = new System.Drawing.Point(170, 115);
-            this.operationO.Name = "operationO";
-            this.operationO.Size = new System.Drawing.Size(26, 20);
-            this.operationO.TabIndex = 16;
-            // 
             // operationN2
             // 
             this.operationN2.BackColor = System.Drawing.SystemColors.Control;
@@ -238,18 +217,10 @@
             this.operationN2.Size = new System.Drawing.Size(51, 20);
             this.operationN2.TabIndex = 17;
             // 
-            // equal
-            // 
-            this.equal.AutoSize = true;
-            this.equal.Location = new System.Drawing.Point(95, 247);
-            this.equal.Name = "equal";
-            this.equal.Size = new System.Drawing.Size(13, 13);
-            this.equal.TabIndex = 18;
-            this.equal.Text = "=";
-            // 
             // generate
             // 
-            this.generate.Location = new System.Drawing.Point(3, 33);
+            this.generate.Enabled = false;
+            this.generate.Location = new System.Drawing.Point(3, 50);
             this.generate.Name = "generate";
             this.generate.Size = new System.Drawing.Size(260, 36);
             this.generate.TabIndex = 21;
@@ -262,7 +233,6 @@
             this.mainPanel.Controls.Add(this.undo);
             this.mainPanel.Controls.Add(this.operatorsPanel);
             this.mainPanel.Controls.Add(this.clear);
-            this.mainPanel.Controls.Add(this.operationO);
             this.mainPanel.Controls.Add(this.operationN2);
             this.mainPanel.Controls.Add(this.operationN1);
             this.mainPanel.Controls.Add(this.label4);
@@ -345,27 +315,11 @@
             this.label6.TabIndex = 22;
             this.label6.Text = "Temps restant";
             // 
-            // next
-            // 
-            this.next.Location = new System.Drawing.Point(161, 226);
-            this.next.Name = "next";
-            this.next.Size = new System.Drawing.Size(75, 23);
-            this.next.TabIndex = 21;
-            this.next.Text = "Suivant";
-            this.next.UseVisualStyleBackColor = true;
-            // 
-            // submit
-            // 
-            this.submit.Location = new System.Drawing.Point(161, 199);
-            this.submit.Name = "submit";
-            this.submit.Size = new System.Drawing.Size(75, 23);
-            this.submit.TabIndex = 20;
-            this.submit.Text = "Calculer";
-            this.submit.UseVisualStyleBackColor = true;
-            // 
             // Game
             // 
             this.Game.BackColor = System.Drawing.Color.Transparent;
+            this.Game.Controls.Add(this.pseudo);
+            this.Game.Controls.Add(this.pseudolbl);
             this.Game.Controls.Add(this.BackMenu);
             this.Game.Controls.Add(this.generate);
             this.Game.Controls.Add(this.mainPanel);
@@ -375,9 +329,26 @@
             this.Game.TabIndex = 23;
             this.Game.Visible = false;
             // 
+            // pseudo
+            // 
+            this.pseudo.Location = new System.Drawing.Point(53, 28);
+            this.pseudo.Name = "pseudo";
+            this.pseudo.Size = new System.Drawing.Size(210, 20);
+            this.pseudo.TabIndex = 25;
+            this.pseudo.TextChanged += new System.EventHandler(this.EnableGenerate);
+            // 
+            // pseudolbl
+            // 
+            this.pseudolbl.AutoSize = true;
+            this.pseudolbl.Location = new System.Drawing.Point(5, 31);
+            this.pseudolbl.Name = "pseudolbl";
+            this.pseudolbl.Size = new System.Drawing.Size(49, 13);
+            this.pseudolbl.TabIndex = 24;
+            this.pseudolbl.Text = "Pseudo :";
+            // 
             // BackMenu
             // 
-            this.BackMenu.Location = new System.Drawing.Point(77, 4);
+            this.BackMenu.Location = new System.Drawing.Point(77, 1);
             this.BackMenu.Name = "BackMenu";
             this.BackMenu.Size = new System.Drawing.Size(114, 23);
             this.BackMenu.TabIndex = 23;
@@ -393,10 +364,6 @@
             this.welcomePanel.Controls.Add(this.label5);
             this.welcomePanel.Controls.Add(this.button1);
             this.welcomePanel.Controls.Add(this.Jouer);
-            this.welcomePanel.Controls.Add(this.equal);
-            this.welcomePanel.Controls.Add(this.next);
-            this.welcomePanel.Controls.Add(this.submit);
-            this.welcomePanel.Controls.Add(this.label3);
             this.welcomePanel.Location = new System.Drawing.Point(317, 12);
             this.welcomePanel.Name = "welcomePanel";
             this.welcomePanel.Size = new System.Drawing.Size(274, 338);
@@ -504,6 +471,7 @@
             this.mainPanel.PerformLayout();
             this.operatorsPanel.ResumeLayout(false);
             this.Game.ResumeLayout(false);
+            this.Game.PerformLayout();
             this.welcomePanel.ResumeLayout(false);
             this.welcomePanel.PerformLayout();
             this.ResumeLayout(false);
@@ -521,20 +489,15 @@
         private System.Windows.Forms.Button n3;
         private System.Windows.Forms.Button n4;
         private System.Windows.Forms.Button n5;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnPlus;
         private System.Windows.Forms.Button btnMinus;
         private System.Windows.Forms.Button btnMult;
         private System.Windows.Forms.Button btnDiv;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox operationN1;
-        private System.Windows.Forms.TextBox operationO;
         private System.Windows.Forms.TextBox operationN2;
-        private System.Windows.Forms.Label equal;
         private System.Windows.Forms.Button generate;
         private System.Windows.Forms.Panel mainPanel;
-        private System.Windows.Forms.Button submit;
-        private System.Windows.Forms.Button next;
         private System.Windows.Forms.Panel Game;
         private System.Windows.Forms.Panel welcomePanel;
         private System.Windows.Forms.Button Jouer;
@@ -551,7 +514,12 @@
         private System.Windows.Forms.ProgressBar graphicTimer;
         private System.Windows.Forms.Panel operatorsPanel;
         private System.Windows.Forms.Panel numbersPanel;
+<<<<<<< HEAD
         private System.Windows.Forms.Button undo;
+=======
+        private System.Windows.Forms.Label pseudolbl;
+        private System.Windows.Forms.TextBox pseudo;
+>>>>>>> aaf01c36babcf050b2f2838a8f02f00a491856a9
     }
 }
 
