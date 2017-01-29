@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,7 @@ namespace ProjetMathador
         private bool started = false;
         private int result = -1;
         private int operationCase = 0;
+        private String operatorStr = null;
         private bool operatorFirst = false;
         private Random rand = new Random();
         public int timerSeconds = 0;
@@ -22,8 +24,10 @@ namespace ProjetMathador
         private List<Button> numberPos = new List<Button>();
         private Stack<Log> logs = new Stack<Log>();
         private int tryCount = 0;
+        private Numbers numbers = new Numbers(-1, -1, -1, -1, -1, -1);
+        numbers.n1 = 1;
         Saved saved = new Saved();
-
+        
         public void EnableGenerate(object sender, EventArgs e)
         {
             this.generate.Enabled = true;
@@ -44,6 +48,7 @@ namespace ProjetMathador
                     this.numberPos[0].Text = "";
                     this.numberPos[1].Text = Convert.ToString(result);
                     this.tryCount += 1;
+                    operatorStr = "+";
                     break;
                 case 2:
                     if ((Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text)) < 0)
@@ -66,6 +71,7 @@ namespace ProjetMathador
                         this.numberPos[0].Text = "";
                         this.numberPos[1].Text = Convert.ToString(result);
                         this.tryCount += 1;
+                        operatorStr = "-";
                     }
                     break;
                 case 3:
@@ -73,6 +79,7 @@ namespace ProjetMathador
                     this.numberPos[0].Text = "";
                     this.numberPos[1].Text = Convert.ToString(result);
                     this.tryCount += 1;
+                    operatorStr = "x";
                     break;
                 case 4:
                     if ((Convert.ToInt32(this.operationN1.Text) % Convert.ToInt32(this.operationN2.Text)) == 0)
@@ -81,6 +88,7 @@ namespace ProjetMathador
                         this.numberPos[0].Text = "";
                         this.numberPos[1].Text = Convert.ToString(result);
                         this.tryCount += 1;
+                        operatorStr = "÷";
                     }
                     else
                     {
@@ -103,82 +111,86 @@ namespace ProjetMathador
                     break;
             }
 
-            Calcul calcul = new Calcul(Convert.ToInt32(this.operationN1.Text), Convert.ToInt32(this.operationN2.Text), result, this.operationCase);
-            Log log = new Log(calcul, this.numberPos[0], this.numberPos[1]);
-
-            this.logs.Push(log);
-
-            this.numberPos[0].Text = "";
-            this.numberPos[1].Text = Convert.ToString(result);
-
-            this.tryCount += 1;
-
-            if (result == Convert.ToInt32(this.target.Text) || tryCount == 4)
+            if (result != -1)
             {
-                if (result == Convert.ToInt32(this.target.Text))
+                Calcul calcul = new Calcul(Convert.ToInt32(this.operationN1.Text), Convert.ToInt32(this.operationN2.Text), result, this.operationCase);
+                Log log = new Log(calcul, this.numberPos[0], this.numberPos[1]);
+
+                this.logs.Push(log);
+
+
+
+                string json = JsonConvert.SerializeObject(calcul.number1 + " " + operatorStr + " " + calcul.number2 + " = " + calcul.result);
+
+                Console.WriteLine(json);
+
+                if (result == Convert.ToInt32(this.target.Text) || tryCount == 4)
                 {
-                    second.Stop();
-                    DialogResult victory;
-                    victory = MessageBox.Show("Bravo !",
-                            "Nombre trouvé !",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
-                    if (victory == DialogResult.OK)
+                    if (result == Convert.ToInt32(this.target.Text))
                     {
-                        this.target.Text = RandString(1, 101);
+                        second.Stop();
+                        DialogResult victory;
+                        victory = MessageBox.Show("Bravo !",
+                                "Nombre trouvé !",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                        if (victory == DialogResult.OK)
+                        {
+                            this.target.Text = RandString(1, 101);
 
-                        this.n1.Text = RandString(1, 13);
-                        saved.addNumber(this.n1.Text, 0);
+                            this.n1.Text = RandString(1, 13);
+                            saved.addNumber(this.n1.Text, 0);
 
-                        this.n2.Text = RandString(1, 13);
-                        saved.addNumber(this.n2.Text, 1);
+                            this.n2.Text = RandString(1, 13);
+                            saved.addNumber(this.n2.Text, 1);
 
-                        this.n3.Text = RandString(1, 13);
-                        saved.addNumber(this.n3.Text, 2);
+                            this.n3.Text = RandString(1, 13);
+                            saved.addNumber(this.n3.Text, 2);
 
-                        this.n4.Text = RandString(1, 21);
-                        saved.addNumber(this.n4.Text, 3);
+                            this.n4.Text = RandString(1, 21);
+                            saved.addNumber(this.n4.Text, 3);
 
-                        this.n5.Text = RandString(1, 21);
-                        saved.addNumber(this.n5.Text, 4);
+                            this.n5.Text = RandString(1, 21);
+                            saved.addNumber(this.n5.Text, 4);
 
-                        this.logs.Clear();
-                        tryCount = 0;
-                        ClearOperation();
-                        second.Start();
+                            this.logs.Clear();
+                            tryCount = 0;
+                            ClearOperation();
+                            second.Start();
+                        }
                     }
-                }
-                if (tryCount == 4)
-                {
-                    second.Stop();
-                    DialogResult loose;
-                    loose = MessageBox.Show("Vous n'avez pas réussi à trouver le bon nombre",
-                            "Échec",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
-                    if (loose == DialogResult.OK)
+                    if (tryCount == 4)
                     {
-                        this.target.Text = RandString(1, 101);
+                        second.Stop();
+                        DialogResult loose;
+                        loose = MessageBox.Show("Vous n'avez pas réussi à trouver le bon nombre",
+                                "Échec",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                        if (loose == DialogResult.OK)
+                        {
+                            this.target.Text = RandString(1, 101);
 
-                        this.n1.Text = RandString(1, 13);
-                        saved.addNumber(this.n1.Text, 0);
+                            this.n1.Text = RandString(1, 13);
+                            saved.addNumber(this.n1.Text, 0);
 
-                        this.n2.Text = RandString(1, 13);
-                        saved.addNumber(this.n2.Text, 1);
+                            this.n2.Text = RandString(1, 13);
+                            saved.addNumber(this.n2.Text, 1);
 
-                        this.n3.Text = RandString(1, 13);
-                        saved.addNumber(this.n3.Text, 2);
+                            this.n3.Text = RandString(1, 13);
+                            saved.addNumber(this.n3.Text, 2);
 
-                        this.n4.Text = RandString(1, 21);
-                        saved.addNumber(this.n4.Text, 3);
+                            this.n4.Text = RandString(1, 21);
+                            saved.addNumber(this.n4.Text, 3);
 
-                        this.n5.Text = RandString(1, 21);
-                        saved.addNumber(this.n5.Text, 4);
+                            this.n5.Text = RandString(1, 21);
+                            saved.addNumber(this.n5.Text, 4);
 
-                        this.logs.Clear();
-                        tryCount = 0;
-                        ClearOperation();
-                        second.Start();
+                            this.logs.Clear();
+                            tryCount = 0;
+                            ClearOperation();
+                            second.Start();
+                        }
                     }
                 }
             }
@@ -471,6 +483,20 @@ namespace ProjetMathador
             this.numberPos[1].Text = Convert.ToString(backLog.calcul.number2);
             this.numberPos.Clear();
             this.tryCount -= 1;
+        }
+    }
+
+    public class Numbers
+    {
+        public int n1, n2, n3, n4, n5, target;
+        public Numbers(int n1, int n2, int n3, int n4, int n5, int target)
+        {
+            this.n1 = n1;
+            this.n2 = n2;
+            this.n3 = n3;
+            this.n4 = n4;
+            this.n5 = n5;
+            this.target = target;
         }
     }
 

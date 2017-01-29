@@ -50,6 +50,7 @@
             this.operatorsPanel = new System.Windows.Forms.Panel();
             this.numbersPanel = new System.Windows.Forms.Panel();
             this.clear = new System.Windows.Forms.Button();
+            this.undo = new System.Windows.Forms.Button();
             this.seconds = new System.Windows.Forms.Label();
             this.minutes = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -65,7 +66,6 @@
             this.Jouer = new System.Windows.Forms.Button();
             this.second = new System.Windows.Forms.Timer(this.components);
             this.graphicTimer = new System.Windows.Forms.ProgressBar();
-            this.undo = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.operatorsPanel.SuspendLayout();
             this.Game.SuspendLayout();
@@ -203,7 +203,7 @@
             // 
             this.operationN1.BackColor = System.Drawing.SystemColors.Control;
             this.operationN1.Enabled = false;
-            this.operationN1.Location = new System.Drawing.Point(27, 172);
+            this.operationN1.Location = new System.Drawing.Point(27, 149);
             this.operationN1.Name = "operationN1";
             this.operationN1.Size = new System.Drawing.Size(51, 20);
             this.operationN1.TabIndex = 15;
@@ -212,7 +212,7 @@
             // 
             this.operationN2.BackColor = System.Drawing.SystemColors.Control;
             this.operationN2.Enabled = false;
-            this.operationN2.Location = new System.Drawing.Point(180, 172);
+            this.operationN2.Location = new System.Drawing.Point(180, 149);
             this.operationN2.Name = "operationN2";
             this.operationN2.Size = new System.Drawing.Size(51, 20);
             this.operationN2.TabIndex = 17;
@@ -230,7 +230,6 @@
             // 
             // mainPanel
             // 
-            this.mainPanel.Controls.Add(this.undo);
             this.mainPanel.Controls.Add(this.operatorsPanel);
             this.mainPanel.Controls.Add(this.clear);
             this.mainPanel.Controls.Add(this.operationN2);
@@ -244,6 +243,7 @@
             this.mainPanel.Controls.Add(this.label2);
             this.mainPanel.Controls.Add(this.label1);
             this.mainPanel.Controls.Add(this.target);
+            this.mainPanel.Controls.Add(this.undo);
             this.mainPanel.Location = new System.Drawing.Point(2, 87);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(262, 266);
@@ -257,7 +257,7 @@
             this.operatorsPanel.Controls.Add(this.btnMult);
             this.operatorsPanel.Controls.Add(this.btnMinus);
             this.operatorsPanel.Controls.Add(this.btnPlus);
-            this.operatorsPanel.Location = new System.Drawing.Point(88, 152);
+            this.operatorsPanel.Location = new System.Drawing.Point(88, 129);
             this.operatorsPanel.Name = "operatorsPanel";
             this.operatorsPanel.Size = new System.Drawing.Size(82, 64);
             this.operatorsPanel.TabIndex = 27;
@@ -271,7 +271,7 @@
             // 
             // clear
             // 
-            this.clear.Location = new System.Drawing.Point(96, 216);
+            this.clear.Location = new System.Drawing.Point(96, 193);
             this.clear.Name = "clear";
             this.clear.Size = new System.Drawing.Size(66, 23);
             this.clear.TabIndex = 26;
@@ -279,10 +279,20 @@
             this.clear.UseVisualStyleBackColor = true;
             this.clear.Click += new System.EventHandler(this.clear_Click);
             // 
+            // undo
+            // 
+            this.undo.Location = new System.Drawing.Point(86, 316);
+            this.undo.Name = "undo";
+            this.undo.Size = new System.Drawing.Size(114, 23);
+            this.undo.TabIndex = 28;
+            this.undo.Text = "Rejouer dernier coup";
+            this.undo.UseVisualStyleBackColor = true;
+            this.undo.Click += new System.EventHandler(this.undo_Click);
+            // 
             // seconds
             // 
             this.seconds.AutoSize = true;
-            this.seconds.Location = new System.Drawing.Point(319, 364);
+            this.seconds.Location = new System.Drawing.Point(304, 364);
             this.seconds.Name = "seconds";
             this.seconds.Size = new System.Drawing.Size(19, 13);
             this.seconds.TabIndex = 25;
@@ -291,7 +301,7 @@
             // minutes
             // 
             this.minutes.AutoSize = true;
-            this.minutes.Location = new System.Drawing.Point(305, 364);
+            this.minutes.Location = new System.Drawing.Point(290, 364);
             this.minutes.Name = "minutes";
             this.minutes.Size = new System.Drawing.Size(13, 13);
             this.minutes.TabIndex = 24;
@@ -300,7 +310,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(314, 364);
+            this.label7.Location = new System.Drawing.Point(299, 364);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(10, 13);
             this.label7.TabIndex = 23;
@@ -325,7 +335,7 @@
             this.Game.Controls.Add(this.mainPanel);
             this.Game.Location = new System.Drawing.Point(12, 12);
             this.Game.Name = "Game";
-            this.Game.Size = new System.Drawing.Size(267, 334);
+            this.Game.Size = new System.Drawing.Size(267, 347);
             this.Game.TabIndex = 23;
             this.Game.Visible = false;
             // 
@@ -439,16 +449,6 @@
             this.graphicTimer.Name = "graphicTimer";
             this.graphicTimer.Size = new System.Drawing.Size(574, 23);
             this.graphicTimer.TabIndex = 27;
-            // 
-            // undo
-            // 
-            this.undo.Location = new System.Drawing.Point(170, 219);
-            this.undo.Name = "undo";
-            this.undo.Size = new System.Drawing.Size(75, 23);
-            this.undo.TabIndex = 28;
-            this.undo.Text = "Undo";
-            this.undo.UseVisualStyleBackColor = true;
-            this.undo.Click += new System.EventHandler(this.undo_Click);
             // 
             // Form1
             // 
