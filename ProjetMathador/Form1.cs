@@ -202,4 +202,30 @@ namespace ProjetMathador
             this.welcomePanel.Visible = true;
         }
     }
+
+    public class Calcul
+    {
+        public int number1, number2, result, oper;
+
+        public Calcul(int n1, int n2, int res, int oper)
+        {
+            this.number1 = n1;
+            this.number2 = n2;
+            this.result = res;
+            this.oper = oper;
+        }
+    }
+
+    public class Log
+    {
+        public Calcul calcul;
+        public List<Button> numberPos = new List<Button>();
+
+        public Log(Calcul calcul, Button button1, Button button2)
+        {
+            this.calcul = calcul;
+            this.numberPos.Add(button1);
+            this.numberPos.Add(button2);
+        }
+    }
 }
