@@ -152,7 +152,7 @@ namespace ProjetMathador
                     {
                         if(plusUsed && minusUsed && timesUsed && divUsed)
                         {
-                            mathador = "Vous avez fait un coup mathador ! Vous voilà gratifier de 13 points pour cette manche !\n";
+                            mathador = "Vous avez fait un coup mathador ! Vous voilà gratifié de 13 points pour cette manche !\n";
                             score += 6;
                         }
                         second.Stop();
