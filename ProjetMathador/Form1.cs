@@ -23,6 +23,8 @@ namespace ProjetMathador
         public int timerMinutes = 3;
         private List<Button> numberPos = new List<Button>();
         private Stack<Log> logs = new Stack<Log>();
+        private Stack<int> scores = new Stack<int>();
+        private int score = 0;
         private int tryCount = 0;
         private Numbers numbers = new Numbers(-1, -1, -1, -1, -1, -1);
         numbers.n1 = 1;
@@ -49,6 +51,7 @@ namespace ProjetMathador
                     this.numberPos[1].Text = Convert.ToString(result);
                     this.tryCount += 1;
                     operatorStr = "+";
+                    this.scores.Push(1);
                     break;
                 case 2:
                     if ((Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text)) < 0)
@@ -72,6 +75,7 @@ namespace ProjetMathador
                         this.numberPos[1].Text = Convert.ToString(result);
                         this.tryCount += 1;
                         operatorStr = "-";
+                        this.scores.Push(2);
                     }
                     break;
                 case 3:
@@ -80,6 +84,7 @@ namespace ProjetMathador
                     this.numberPos[1].Text = Convert.ToString(result);
                     this.tryCount += 1;
                     operatorStr = "x";
+                    this.scores.Push(1);
                     break;
                 case 4:
                     if ((Convert.ToInt32(this.operationN1.Text) % Convert.ToInt32(this.operationN2.Text)) == 0)
@@ -89,6 +94,7 @@ namespace ProjetMathador
                         this.numberPos[1].Text = Convert.ToString(result);
                         this.tryCount += 1;
                         operatorStr = "÷";
+                        this.scores.Push(3);
                     }
                     else
                     {
@@ -126,11 +132,15 @@ namespace ProjetMathador
 
                 if (result == Convert.ToInt32(this.target.Text) || tryCount == 4)
                 {
+                    while (scores.Count() > 0)
+                    {
+                        this.score += scores.Pop();
+                    }
                     if (result == Convert.ToInt32(this.target.Text))
                     {
                         second.Stop();
                         DialogResult victory;
-                        victory = MessageBox.Show("Bravo !",
+                        victory = MessageBox.Show("Bravo !\nVoilà votre score : " + score,
                                 "Nombre trouvé !",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
@@ -323,6 +333,7 @@ namespace ProjetMathador
             saved.addNumber(this.n5.Text, 4);
 
             this.logs.Clear();
+            this.scores.Clear();
             tryCount = 0;
             ClearOperation();
 
@@ -475,7 +486,9 @@ namespace ProjetMathador
         private void undo_Click(object sender, EventArgs e)
         {
             Log backLog = logs.Pop();
+            this.scores.Pop();
 
+            ClearOperation();
             this.operationCase = backLog.calcul.oper;
             this.numberPos.Add(backLog.numberPos[0]);
             this.numberPos.Add(backLog.numberPos[1]);
