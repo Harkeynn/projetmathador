@@ -503,7 +503,6 @@ namespace ProjetMathador
                     this.mainPanel.Visible = false;
                 }
 
-<<<<<<< HEAD
                 int scoreText = this.score;
 
                 Leaderboard leaderboard = new Leaderboard(this.pseudo.Text, scoreText);
@@ -518,8 +517,6 @@ namespace ProjetMathador
                 order();
 
                 this.score = 0;
-=======
->>>>>>> da6d7602d0b5df205f2593d58b2a700b4dee2490
             }
         }
 
@@ -658,7 +655,6 @@ namespace ProjetMathador
             this.numberPos.Add(button2);
         }
     }
-<<<<<<< HEAD
 
     public class Leaderboard
     {
@@ -671,6 +667,4 @@ namespace ProjetMathador
             this.score = score;
         }
     }
-=======
->>>>>>> da6d7602d0b5df205f2593d58b2a700b4dee2490
 }
