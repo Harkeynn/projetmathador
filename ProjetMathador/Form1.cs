@@ -40,8 +40,10 @@ namespace ProjetMathador
             return numbersJson;
         }
 
+        //Nettoyage de la partie "Opération"
         public void ClearOperation()
         {
+            //Les boutons concernés et qui n'ont pas déjà été utilisés (qui ne sont pas vides) sont de nouveau cliquables
             foreach (Button btn in numberPos)
             {
                 btn.BackColor = Color.Transparent;
@@ -50,6 +52,7 @@ namespace ProjetMathador
                     btn.Enabled = true;
                 }
             }
+            //Remise à zéro des champs et du résultat
             this.operationN1.Text = "";
             this.operationN2.Text = "";
             result = -1;
@@ -59,6 +62,7 @@ namespace ProjetMathador
             this.operationCase = 0;
         }
 
+        //Nettoyage de l'opérateur sélectionné (remise à zéro du background)
         public void ClearOperator()
         {
             switch (operationCase)
@@ -80,16 +84,21 @@ namespace ProjetMathador
             }
         }
 
+        //Le bouton "GÉNÉRER" est cliquable
         public void EnableGenerate(object sender, EventArgs e)
         {
             this.generate.Enabled = true;
         }
 
+        //Remplissage des champs de la partie "Opération"
         public void FillOperationN(String num, Button button)
         {
-            button.Enabled = false;
+            button.Enabled = false;     //Impossibilité de cliquer 2 fois sur le même bouton
+
+            //Si les champs sont vides, ils prennent la valeur du bouton cliqué
             if (this.operationN1.Text == "" || this.operationN2.Text == "")
             {
+                //Si le bouton cliqué n'est pas vide, la couleur de son background change
                 if (button.Text.Length != 0)
                 {
                     button.BackColor = Color.LightBlue;
@@ -104,6 +113,7 @@ namespace ProjetMathador
                     this.numberPos.Add(button);
                     this.operationN2.Text = num;
                 }
+                //Si l'opérateur a déjà été sélectionné, on calcule le résultat et on rend les boutons concernés de nouveau cliquables
                 if (this.operationN2.Text != "" && operatorFirst == true)
                 {
                     Operation();
@@ -113,13 +123,15 @@ namespace ProjetMathador
 
         }
 
+        //Sélection de l'opérateur
         public void FillOperationO()
         {
+            //Si les nombres ont déjà été sélectionnés, on calcule le résultat
             if (this.operationN2.Text.Length != 0)
             {
                 Operation();
             }
-            else
+            else    //Sinon, on indique que l'on a déjà sélectionné l'opérateur et on indique lequel à l'utilisateur
             {
                 operatorFirst = true;
                 switch (operationCase)
@@ -143,36 +155,38 @@ namespace ProjetMathador
             }
         }
 
+        //Entrée des valeurs des nombres aléatoires sur les boutons
         public void generateNumbers()
         {
             String numbersJson = RandString();
+            //Désérialisation du JSON
             Numbers numbers = JsonConvert.DeserializeObject<Numbers>(numbersJson);
+
+            //Nettoyage de l'historique
             this.history1.Text = "";
             this.history2.Text = "";
             this.history3.Text = "";
             this.history4.Text = "";
 
+            //Association des nombres issus du JSON (conservés dans le Numbers numbers)
             this.target.Text = Convert.ToString(numbers.target);
-
             this.n1.Text = Convert.ToString(numbers.n1);
             this.n1.Enabled = true;
-
             this.n2.Text = Convert.ToString(numbers.n2);
             this.n2.Enabled = true;
-
             this.n3.Text = Convert.ToString(numbers.n3);
             this.n3.Enabled = true;
-
             this.n4.Text = Convert.ToString(numbers.n4);
             this.n4.Enabled = true;
-
             this.n5.Text = Convert.ToString(numbers.n5);
             this.n5.Enabled = true;
 
+            //Réinitialisation des compteurs d'opérateur pour le coup mathador
             this.plusUsed = false;
             this.minusUsed = false;
             this.timesUsed = false;
             this.divUsed = false;
+
             this.logs.Clear();
             tryCount = 0;
             ClearOperation();
@@ -182,18 +196,33 @@ namespace ProjetMathador
         {
             switch (operationCase)
             {
+                //Addition
                 case 1:
+                    //Calcul
                     result = Convert.ToInt32(this.operationN1.Text) + Convert.ToInt32(this.operationN2.Text);
+
+                    //Affichage du résultat dans le deuxième bouton tandis que le premier est effacé
                     this.numberPos[0].Text = "";
                     this.numberPos[1].Text = Convert.ToString(result);
+
+                    //On compte un coup en plus
                     this.tryCount += 1;
+
+                    //Définition de l'opérateur en String pour affichage interface
                     operatorStr = "+";
+
+                    //Push du score du calcul (ici addition donc 1 point) dans la stack scores pour calcul du score total en fin de manche
                     this.scores.Push(1);
+
+                    //Définition du compteur d'opérateur pour un eventuel coup mathador
                     this.plusUsed = true;
                     break;
+                //Soustraction
                 case 2:
+                    //Si le résultat du calcul est un négatif, on réinitialise la partie "Opération"
                     if ((Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text)) < 0)
                     {
+                        //Arrêt du chrono et affichage d'une fenêtre d'erreur
                         second.Stop();
                         DialogResult onlyPositive;
                         onlyPositive = MessageBox.Show("Merci de ne faire que des soustractions ayant pour résultat un nombre positif.",
@@ -210,40 +239,74 @@ namespace ProjetMathador
                             second.Start();
                         }
                     }
-                    else
+                    else    //Sinon, on calcule
                     {
                         result = Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text);
+
+                        //Affichage du résultat dans le deuxième bouton tandis que le premier est effacé
                         this.numberPos[0].Text = "";
                         this.numberPos[1].Text = Convert.ToString(result);
                         this.tryCount += 1;
+
+                        //Définition de l'opérateur en String pour affichage interface
                         operatorStr = "-";
+
+                        //Push du score du calcul (ici soustraction donc 2 points) dans la stack scores pour calcul du score total en fin de manche
                         this.scores.Push(2);
+
+                        //Passage du compteur d'opérateur à true pour éventuel coup mathador
                         this.minusUsed = true;
                     }
                     break;
+                //Multiplication
                 case 3:
+                    //Calcul
                     result = Convert.ToInt32(this.operationN1.Text) * Convert.ToInt32(this.operationN2.Text);
+
+                    //Affichage du résultat dans le deuxième bouton tandis que le premier est effacé
                     this.numberPos[0].Text = "";
                     this.numberPos[1].Text = Convert.ToString(result);
+
+                    //On compte un coup en plus
                     this.tryCount += 1;
+
+                    //Définition de l'opérateur en String pour affichage interface
                     operatorStr = "x";
+                    
+                    //Push du score du calcul (ici multiplication donc 1 point) dans la stack scores pour calcul du score total en fin de manche
                     this.scores.Push(1);
+
+                    //Passage du compteur d'opérateur à true pour éventuel coup mathador
                     this.timesUsed = true;
                     break;
+                //Division
                 case 4:
+                    //Si le modulo de l'opération est 0 (et donc que la division retourne un entier), on calcule
                     if ((Convert.ToInt32(this.operationN1.Text) % Convert.ToInt32(this.operationN2.Text)) == 0)
                     {
                         result = Convert.ToInt32(this.operationN1.Text) / Convert.ToInt32(this.operationN2.Text);
+
+                        //Affichage du résultat dans le deuxième bouton tandis que le premier est effacé
                         this.numberPos[0].Text = "";
                         this.numberPos[1].Text = Convert.ToString(result);
+
+                        //On avance d'un coup
                         this.tryCount += 1;
+
+                        ////Définition de l'opérateur en string pour affichage interface
                         operatorStr = "÷";
+
+                        //Push du score du calcul (ici division donc 3) pour calucl du score total en fin de manche
                         this.scores.Push(3);
+
+                        //Passage du compteur d'opérateur à true pour un éventuel coup mathador
                         this.divUsed = true;
                     }
                     else
                     {
+                        //Sinon, on stoppe le timer
                         second.Stop();
+                        //On affiche l'erreur dans une messageBox
                         DialogResult onlyInt;
                         onlyInt = MessageBox.Show("Merci de ne faire que des divisons ayant pour résultat un entier.",
                             "Attention !",
@@ -251,24 +314,31 @@ namespace ProjetMathador
                             MessageBoxIcon.Warning);
                         if (onlyInt == DialogResult.OK)
                         {
+                            //Puis on réinitialise les boutons sélectionnés et la partie "Opération" en général
                             foreach (Button number in numberPos)
                             {
                                 number.Enabled = true;
                             }
                             ClearOperation();
+                            //Enfin, on redémarre le timer
                             second.Start();
                         }
                     }
                     break;
                 default:
+                    //Si aucun des cas ne convient, on retourne un message d'erreur dans la console et on réinitialise la partie "Opération"
                     Console.WriteLine("ERROR - INVALID OPERATION");
                     ClearOperation();
                     break;
             }
 
+            //Si le switch case a retourné un résultat (donc que result n'est plus initialisé à -1)
             if (result != -1)
             {
+                //On rend la deuxième case utilisée de nouveau cliquable (celle dans laquelle le résultat va être affiché pour être réutilisé)
                 numberPos[1].Enabled = true;
+
+                //On initialise un Calcul calcul avec les paramètres du calcul effectué (les 2 opérants, le résultat et l'opérateur) avant de la sérialiser
                 Calcul calcul = new Calcul(Convert.ToInt32(this.operationN1.Text), Convert.ToInt32(this.operationN2.Text), result, this.operationCase);
                 Log log = new Log(calcul, this.numberPos[0], this.numberPos[1]);
 
@@ -277,6 +347,7 @@ namespace ProjetMathador
                 string json = JsonConvert.SerializeObject(calcul.number1 + " " + operatorStr + " " + calcul.number2 + " = " + calcul.result);
                 json = json.Replace("\"", "");
 
+                //On affiche le résultat de la sérialisation (donc la calcul sous forme "a + b = c") dans le premier label de l'historique vide
                 if (this.history1.Text == "")
                 {
                     this.history1.Text = json;
@@ -294,22 +365,28 @@ namespace ProjetMathador
                     this.history4.Text = json;
                 }
 
-                Console.WriteLine(json);
-
+                //Si on trouve le résultat ou si on a effectué nos 4 opérations, on arrête la manche
                 if (result == Convert.ToInt32(this.target.Text) || tryCount == 4)
                 {
+                    //Si on trouve le résultat...
                     if (result == Convert.ToInt32(this.target.Text))
                     {
+                        //... on destack scores pour ajouter chacune de ses valeurs dans l'int score qui déterminera le score total de la partie
                         while (scores.Count() > 0)
                         {
                             this.score += scores.Pop();
                         }
+
+                        //Si tous les compteurs d'opérateurs ont été passés à true durant cette manche, on compte un coup mathador et on ajoute donc 6 points au score de la manche pour arriver à un total de 13
                         if (plusUsed && minusUsed && timesUsed && divUsed)
                         {
                             mathador = "Vous avez fait un coup mathador ! Vous voilà gratifié de 13 points pour cette manche !\n";
                             score += 6;
                         }
+
+                        //On arrête le timer
                         second.Stop();
+                        //On affiche un message box qui indique son score à l'utilisateur
                         DialogResult victory;
                         victory = MessageBox.Show(mathador + "Bravo !\nVoilà votre score : " + score,
                                 "Nombre trouvé !",
@@ -317,14 +394,18 @@ namespace ProjetMathador
                                 MessageBoxIcon.Information);
                         if (victory == DialogResult.OK)
                         {
+                            //On re-génère tous les nombres, on redémarre le timer et on réinitialise le compteur de mathador pour commencer un nouvelle manche
                             generateNumbers();
                             mathador = "";
                             second.Start();
                         }
                     }
+                    //Si on a effectué nos 4 opérations
                     if (tryCount == 4)
                     {
+                        //On arrête le timer
                         second.Stop();
+                        //On affiche un message box qui indique à l'utilisateur qu'il n'a pas gagné cette manche
                         DialogResult loose;
                         loose = MessageBox.Show("Vous n'avez pas réussi à trouver le bon nombre",
                                 "Échec",
@@ -332,6 +413,7 @@ namespace ProjetMathador
                                 MessageBoxIcon.Information);
                         if (loose == DialogResult.OK)
                         {
+                            //On re-génère tous les nombres, on redémarre le timer, on efface les scores de cette manche pour commencer une nouvelle manche
                             generateNumbers();
                             this.scores.Clear();
                             second.Start();
@@ -339,15 +421,20 @@ namespace ProjetMathador
                     }
                 }
             }
+            //Quel que soit le cas, on réinitialise la partie "Opération"
             ClearOperation();
         }
 
         private void order()
         {
+            //On récupère aussi toutes les lignes du fichier contenant les HighScores, en stockant chaque ligne dans une case du tableau
             string[] lines = System.IO.File.ReadAllLines(@"..\..\LeaderBoard.txt");
 
+            /*On passe dans chaque case du tableau, donc dans chaque ligne, et on les Deserialize une par une en les stockant
+            * en tant qu'objet Leaderboard, dans une liste de Leaderboard.
+            * On vérifie que la ligne ne soit pas vide malgré tout.
+            */
             List<Leaderboard> leaderboards = new List<Leaderboard>();
-
             foreach (string line in lines)
             {
                 if (line != "" && line != " ")
@@ -357,14 +444,19 @@ namespace ProjetMathador
                 }
             }
 
+            //On crée la query qui va nous permettre de trier les objets par leur score décroissant, c'st à dire avoir un vrai classement
             IEnumerable<Leaderboard> sortedLeaderboard =
                 from lead in leaderboards
                 orderby lead.score descending
                 select lead;
 
+            //Cette ligne sert à effacer tout ce qui se trouve dans le fichier pour pouvoir réécrire tous les HighScores de façon "triés"
             System.IO.File.WriteAllText(@"..\..\LeaderBoard.txt", "");
+
+            //On parcourt la liste de LeaderBoard maintenant triée pour pouvoir écrire les HighScores dans le fichier pour avoir un classement.
             foreach (Leaderboard lead in sortedLeaderboard)
             {
+                //On reserialize donc l'objet pour pouvoir l'écrire dans le fichier.
                 string leadString = JsonConvert.SerializeObject(lead);
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"..\..\LeaderBoard.txt", true))
                 {
@@ -401,10 +493,13 @@ namespace ProjetMathador
             this.scoresPanel.Visible = true;
             this.welcomePanel.Visible = false;
 
-            //Lecture du fichier LeaderBoard.txt
+            //On récupère aussi toutes les lignes du fichier contenant les HighScores, en stockant chaque ligne dans une case du tableau
             string[] lines = System.IO.File.ReadAllLines(@"..\..\LeaderBoard.txt");
 
-            //Passage de chaque ligne dans une liste de Leaderboards
+            /*On passe dans chaque case du tableau, donc dans chaque ligne, et on les Deserialize une par une en les stockant
+            * en tant qu'objet Leaderboard, dans une liste de Leaderboard.
+            * On vérifie que la ligne ne soit pas vide malgré tout.
+            */
             List<Leaderboard> leaderboards = new List<Leaderboard>();
             foreach (string line in lines)
             {
@@ -422,14 +517,20 @@ namespace ProjetMathador
             {
                 i++;
 
+                //On affichera seulement les 10 meilleurs scores du fichier
                 if (i > 10)
                     break;
-
+                //Création du label
                 Label label = new Label();
+                //Nommage selon i (score1, score2, etc...)
                 label.Name = "score" + Convert.ToString(i);
+                //Remplissage avec le pseudo puis le score
                 label.Text = Convert.ToString(lead.pseudo) + " : " + Convert.ToString(lead.score) + " points.";
+                //Positionnement dans le panel sur les axes x et y avec un espacement de 20 en y
                 label.Location = new Point(1, (i * 20));
+                //Définition automatique de la taille du label
                 label.AutoSize = true;
+                //Ajout du label au panel
                 this.scoresDisplay.Controls.Add(label);
             }
 
@@ -438,11 +539,15 @@ namespace ProjetMathador
         //Retours au menu principal
         private void backMenu_Click(object sender, EventArgs e)
         {
+            //On autorise la modification du pseudo
             this.pseudo.Enabled = true;
+            //Réinitialisation de la partie "Opération"
             ClearOperation();
+            //Gestion des panels
             this.Game.Visible = false;
             this.mainPanel.Visible = false;
             this.welcomePanel.Visible = true;
+            //Réinitialisation et arrêt du timer
             this.graphicTimer.Value = 0;
             timerSeconds = 0;
             this.seconds.Text = "00";
@@ -450,6 +555,7 @@ namespace ProjetMathador
             this.minutes.Text = "3";
             second.Stop();
             second.Enabled = false;
+            //Fin de la partie
             started = false;
         }
 
@@ -607,14 +713,21 @@ namespace ProjetMathador
         //Timer
         private void second_Tick(object sender, EventArgs e)
         {
+            //Initialisaion de la base SQLite
             SQLiteConnection.CreateFile("DB.sqlite");
             SQLiteConnection m_dbConnection;
             m_dbConnection = new SQLiteConnection("Data Source=MyDatabase.sqlite;Version=3;");
             m_dbConnection.Open();
 
-            // 1
+            /* On considère que le fichier ".sqlite" est déjà créé.
+            * Je n'ai pas vraiment eu le temps de travailler sur la base de donnée. Je pense qu'elle marche,
+            * mais j'avoue l'avoir oublié pendant notre développement.
+            * Elle n'est pas très aboutie et quelque peu simpliste.
+            */
+
+            //À chaque tic, on incrémente la valeur de la progress bar de 1
             this.graphicTimer.Value++;
-            // 2
+            //Et on décrémente le compteur de secondes
             timerSeconds--;
             if (timerSeconds < 0)
             {
@@ -622,7 +735,7 @@ namespace ProjetMathador
                 timerMinutes--;
                 this.minutes.Text = Convert.ToString(timerMinutes);
             }
-            // 3
+            //Si le compteur des secondes descend en dessous de 10, on rajoute un 0 devant le chiffre restant (pour avoir "X:06" et non "X:6")
             if (timerSeconds < 10)
             {
                 this.seconds.Text = "0" + Convert.ToString(timerSeconds);
@@ -631,17 +744,19 @@ namespace ProjetMathador
             {
                 this.seconds.Text = Convert.ToString(timerSeconds);
             }
-            // 4
+            //Si le compteur de secondes et le compteur de minutes sont tous les deux à 0...
             if (timerSeconds == 0 && timerMinutes == 0)
             {
-                // 4.1
+                //... on arrête le timer
                 second.Stop();
-                // 4.2
+                //... et on indique à l'utilisateur que le temps est écoulé grâce à une message box
                 DialogResult timesUp;
+                //On indique son score à l'utilisateur
                 timesUp = MessageBox.Show("Temps écoulé ! Merci d'avoir joué, voici votre score : " + this.score + " points.",
                     "Fin du temps !",
                     MessageBoxButtons.RetryCancel,
                     MessageBoxIcon.Information);
+                //Si on clique sur "Réessayer" on recommence directement une nouvelle partie (avec le même pseudo)
                 if (timesUp == DialogResult.Retry)
                 {
                     started = false;
@@ -650,6 +765,7 @@ namespace ProjetMathador
                     timerSeconds = 0;
                     this.graphicTimer.Value = 0;
                 }
+                //Sinon on revient à la saisie du pseudo
                 else
                 {
                     started = false;
@@ -664,6 +780,7 @@ namespace ProjetMathador
                 //Création d'un objet pseudo + score pour la sérialisation
                 Leaderboard actualLeaderboard = new Leaderboard(this.pseudo.Text, scoreText);
 
+                //Insertion du pseudo et du score en base de données avec la fonction Parameters
                 SQLiteCommand comm = m_dbConnection.CreateCommand();
                 comm.CommandText = "INSERT into leaderboard (nickname, score) values (@nickname, @score)";
                 comm.Parameters.Add(new SQLiteParameter("@nickname", this.pseudo.Text));
@@ -705,7 +822,7 @@ namespace ProjetMathador
         }
     }
 
-    public class Calcul
+    public class Calcul         //Objet calcul stockant toutes les informations relatives à un calcul, à savoir les deux nombres, le résultat, et l'opérateur.
     {
         public int number1, number2, result, oper;
 
@@ -718,10 +835,10 @@ namespace ProjetMathador
         }
     }
 
-    public class Log
+    public class Log               //Objet Log qui stock un calcul ainsi que les boutons des nombres ayant permis de faire le calcul en question, pour pouvoir les réafficher à leur position en cas de retour au calcul précedent par l'utilisateur.
     {
         public Calcul calcul;
-        public List<Button> numberPos = new List<Button>();
+        public List<Button> numberPos = new List<Button>();                 //Liste des deux boutons des nombres du calcul.
 
         public Log(Calcul calcul, Button button1, Button button2)
         {
@@ -731,9 +848,9 @@ namespace ProjetMathador
         }
     }
 
-    public class Leaderboard
+    public class Leaderboard        //Objet Leaderboard permettant de stocker les scores et les pseudo afin de les réafficher dans le tableau des scores.
     {
-        public string pseudo;
+        public string pseudo;   
         public int score;
 
         public Leaderboard(string pseudo, int score)

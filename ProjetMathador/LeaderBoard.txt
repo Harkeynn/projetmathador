@@ -8,5 +8,7 @@
 
 {"pseudo":"Fantomas","score":12}
 
+{"pseudo":"test","score":11}
+
 {"pseudo":"Arthur","score":3}
 
