@@ -37,11 +37,43 @@ namespace ProjetMathador
             this.generate.Enabled = true;
         }
 
-        public static String RandString()
+        public String RandString()
         {
             Random rand = new Random();
             String numbersJson = @"{'n1' : '" + rand.Next(1, 13) + "','n2' : '" + rand.Next(1, 13) + "','n3' : '" + rand.Next(1, 13) + "','n4' : '" + rand.Next(1, 21) + "','n5' : '" + rand.Next(1, 21) + "','target' : '" + rand.Next(1, 101) + "'}";
             return numbersJson;
+        }
+
+        public void generateNumbers()
+        {
+            String numbersJson = RandString();
+            Numbers numbers = JsonConvert.DeserializeObject<Numbers>(numbersJson);
+            this.history1.Text = "";
+            this.history2.Text = "";
+            this.history3.Text = "";
+            this.history4.Text = "";
+
+            this.target.Text = Convert.ToString(numbers.target);
+
+            this.n1.Text = Convert.ToString(numbers.n1);
+            this.n1.Enabled = true;
+            saved.addNumber(this.n1.Text, 0);
+
+            this.n2.Text = Convert.ToString(numbers.n2);
+            this.n2.Enabled = true;
+            saved.addNumber(this.n2.Text, 1);
+
+            this.n3.Text = Convert.ToString(numbers.n3);
+            this.n3.Enabled = true;
+            saved.addNumber(this.n3.Text, 2);
+
+            this.n4.Text = Convert.ToString(numbers.n4);
+            this.n4.Enabled = true;
+            saved.addNumber(this.n4.Text, 3);
+
+            this.n5.Text = Convert.ToString(numbers.n5);
+            this.n5.Enabled = true;
+            saved.addNumber(this.n5.Text, 4);
         }
 
         public void Operation()
@@ -68,6 +100,10 @@ namespace ProjetMathador
                             MessageBoxIcon.Warning);
                         if (onlyPositive == DialogResult.OK)
                         {
+                            foreach (Button number in numberPos)
+                            {
+                                number.Enabled = true;
+                            }
                             ClearOperation();
                             second.Start();
                         }
@@ -113,6 +149,10 @@ namespace ProjetMathador
                             MessageBoxIcon.Warning);
                         if (onlyInt == DialogResult.OK)
                         {
+                            foreach (Button number in numberPos)
+                            {
+                                number.Enabled = true;
+                            }
                             ClearOperation();
                             second.Start();
                         }
@@ -126,6 +166,7 @@ namespace ProjetMathador
 
             if (result != -1)
             {
+                numberPos[1].Enabled = true;
                 Calcul calcul = new Calcul(Convert.ToInt32(this.operationN1.Text), Convert.ToInt32(this.operationN2.Text), result, this.operationCase);
                 Log log = new Log(calcul, this.numberPos[0], this.numberPos[1]);
 
@@ -171,30 +212,7 @@ namespace ProjetMathador
                                 MessageBoxIcon.Information);
                         if (victory == DialogResult.OK)
                         {
-                            String numbersJson = RandString();
-                            Numbers numbers = JsonConvert.DeserializeObject<Numbers>(numbersJson);
-                            this.history1.Text = "";
-                            this.history2.Text = "";
-                            this.history3.Text = "";
-                            this.history4.Text = "";
-
-                            this.target.Text = Convert.ToString(numbers.target);
-
-                            this.n1.Text = Convert.ToString(numbers.n1);
-                            saved.addNumber(this.n1.Text, 0);
-
-                            this.n2.Text = Convert.ToString(numbers.n2);
-                            saved.addNumber(this.n2.Text, 1);
-
-                            this.n3.Text = Convert.ToString(numbers.n3);
-                            saved.addNumber(this.n3.Text, 2);
-
-                            this.n4.Text = Convert.ToString(numbers.n4);
-                            saved.addNumber(this.n4.Text, 3);
-
-                            this.n5.Text = Convert.ToString(numbers.n5);
-                            saved.addNumber(this.n5.Text, 4);
-
+                            generateNumbers();
                             mathador = "";
                             this.logs.Clear();
                             tryCount = 0;
@@ -212,30 +230,7 @@ namespace ProjetMathador
                                 MessageBoxIcon.Information);
                         if (loose == DialogResult.OK)
                         {
-                            String numbersJson = RandString();
-                            Numbers numbers = JsonConvert.DeserializeObject<Numbers>(numbersJson);
-                            this.history1.Text = "";
-                            this.history2.Text = "";
-                            this.history3.Text = "";
-                            this.history4.Text = "";
-
-                            this.target.Text = Convert.ToString(numbers.target);
-
-                            this.n1.Text = Convert.ToString(numbers.n1);
-                            saved.addNumber(this.n1.Text, 0);
-
-                            this.n2.Text = Convert.ToString(numbers.n2);
-                            saved.addNumber(this.n2.Text, 1);
-
-                            this.n3.Text = Convert.ToString(numbers.n3);
-                            saved.addNumber(this.n3.Text, 2);
-
-                            this.n4.Text = Convert.ToString(numbers.n4);
-                            saved.addNumber(this.n4.Text, 3);
-
-                            this.n5.Text = Convert.ToString(numbers.n5);
-                            saved.addNumber(this.n5.Text, 4);
-
+                            generateNumbers();
                             this.logs.Clear();
                             tryCount = 0;
                             ClearOperation();
@@ -249,6 +244,7 @@ namespace ProjetMathador
         
         public void FillOperationN(String num, Button button)
         {
+            button.Enabled = false;
             if (this.operationN1.Text == "" || this.operationN2.Text == "")
             {
                 if (button.Text.Length != 0)
@@ -268,6 +264,7 @@ namespace ProjetMathador
                 if (this.operationN2.Text != "" && operatorFirst == true)
                 {
                     Operation();
+                    button.Enabled = true;
                 }
             }
 
@@ -355,31 +352,7 @@ namespace ProjetMathador
 
         private void generate_Click(object sender, EventArgs e)
         {
-            String numbersJson = RandString();
-            Numbers numbers = JsonConvert.DeserializeObject<Numbers>(numbersJson);
-
-            this.history1.Text = "";
-            this.history2.Text = "";
-            this.history3.Text = "";
-            this.history4.Text = "";
-
-            this.target.Text = Convert.ToString(numbers.target);
-
-            this.n1.Text = Convert.ToString(numbers.n1);
-            saved.addNumber(this.n1.Text, 0);
-
-            this.n2.Text = Convert.ToString(numbers.n2);
-            saved.addNumber(this.n2.Text, 1);
-
-            this.n3.Text = Convert.ToString(numbers.n3);
-            saved.addNumber(this.n3.Text, 2);
-
-            this.n4.Text = Convert.ToString(numbers.n4);
-            saved.addNumber(this.n4.Text, 3);
-
-            this.n5.Text = Convert.ToString(numbers.n5);
-            saved.addNumber(this.n5.Text, 4);
-
+            generateNumbers();
             this.logs.Clear();
             this.scores.Clear();
             tryCount = 0;
@@ -551,6 +524,10 @@ namespace ProjetMathador
             this.operationCase = backLog.calcul.oper;
             this.numberPos.Add(backLog.numberPos[0]);
             this.numberPos.Add(backLog.numberPos[1]);
+            foreach (Button number in numberPos)
+            {
+                number.Enabled = true;
+            }
             this.numberPos[0].Text = Convert.ToString(backLog.calcul.number1);
             this.numberPos[1].Text = Convert.ToString(backLog.calcul.number2);
             this.numberPos.Clear();
