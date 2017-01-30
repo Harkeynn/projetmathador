@@ -281,7 +281,7 @@
             // 
             // undo
             // 
-            this.undo.Location = new System.Drawing.Point(86, 316);
+            this.undo.Location = new System.Drawing.Point(69, 219);
             this.undo.Name = "undo";
             this.undo.Size = new System.Drawing.Size(114, 23);
             this.undo.TabIndex = 28;
