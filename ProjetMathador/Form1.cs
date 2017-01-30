@@ -23,15 +23,15 @@ namespace ProjetMathador
         private List<Button> numberPos = new List<Button>();
         private Stack<Log> logs = new Stack<Log>();
         private Stack<int> scores = new Stack<int>();
-        private int score;
-        private int tryCount;
-        private bool plusUsed;
-        private bool minusUsed;
-        private bool timesUsed;
-        private bool divUsed;
+        private int score = 0;
+        private int tryCount = 0;
+        private bool plusUsed = false;
+        private bool minusUsed = false;
+        private bool timesUsed = false;
+        private bool divUsed = false;
         private string mathador;
         Saved saved = new Saved();
-        
+
         public void EnableGenerate(object sender, EventArgs e)
         {
             this.generate.Enabled = true;
@@ -171,20 +171,23 @@ namespace ProjetMathador
                 Log log = new Log(calcul, this.numberPos[0], this.numberPos[1]);
 
                 this.logs.Push(log);
-                
+
                 string json = JsonConvert.SerializeObject(calcul.number1 + " " + operatorStr + " " + calcul.number2 + " = " + calcul.result);
                 json = json.Replace("\"", "");
-                
-                if(this.history1.Text == "")
+
+                if (this.history1.Text == "")
                 {
                     this.history1.Text = json;
-                }else if (this.history2.Text == "")
+                }
+                else if (this.history2.Text == "")
                 {
                     this.history2.Text = json;
-                }else if (this.history3.Text == "")
+                }
+                else if (this.history3.Text == "")
                 {
                     this.history3.Text = json;
-                }else if (this.history4.Text == "")
+                }
+                else if (this.history4.Text == "")
                 {
                     this.history4.Text = json;
                 }
@@ -193,20 +196,20 @@ namespace ProjetMathador
 
                 if (result == Convert.ToInt32(this.target.Text) || tryCount == 4)
                 {
+                    while (scores.Count() > 0)
+                    {
+                        this.score += scores.Pop();
+                    }
                     if (result == Convert.ToInt32(this.target.Text))
                     {
-                        while (scores.Count() > 0)
-                        {
-                            this.score += scores.Pop();
-                        }
                         if (plusUsed && minusUsed && timesUsed && divUsed)
                         {
                             mathador = "Vous avez fait un coup mathador ! Vous voilà gratifié de 13 points pour cette manche !\n";
-                            this.score += 6;
+                            score += 6;
                         }
                         second.Stop();
                         DialogResult victory;
-                        victory = MessageBox.Show(mathador + "Bravo !\nVoilà votre score : " + score + " points.",
+                        victory = MessageBox.Show(mathador + "Bravo !\nVoilà votre score : " + score,
                                 "Nombre trouvé !",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
@@ -215,12 +218,7 @@ namespace ProjetMathador
                             generateNumbers();
                             mathador = "";
                             this.logs.Clear();
-                            this.scores.Clear();
-                            this.tryCount = 0;
-                            this.plusUsed = false;
-                            this.minusUsed = false;
-                            this.timesUsed = false;
-                            this.divUsed = false;
+                            tryCount = 0;
                             ClearOperation();
                             second.Start();
                         }
@@ -237,12 +235,7 @@ namespace ProjetMathador
                         {
                             generateNumbers();
                             this.logs.Clear();
-                            this.scores.Clear();
-                            this.tryCount = 0;
-                            this.plusUsed = false;
-                            this.minusUsed = false;
-                            this.timesUsed = false;
-                            this.divUsed = false;
+                            tryCount = 0;
                             ClearOperation();
                             second.Start();
                         }
@@ -251,7 +244,7 @@ namespace ProjetMathador
             }
             ClearOperation();
         }
-        
+
         public void FillOperationN(String num, Button button)
         {
             button.Enabled = false;
@@ -337,7 +330,7 @@ namespace ProjetMathador
             foreach (Button btn in numberPos)
             {
                 btn.BackColor = Color.Transparent;
-                if(btn.Text != "")
+                if (btn.Text != "")
                 {
                     btn.Enabled = true;
                 }
@@ -358,7 +351,7 @@ namespace ProjetMathador
 
         public void pseudo_LostFocus(object sender, EventArgs e)
         {
-            if(this.pseudo.Text.Length != 0)
+            if (this.pseudo.Text.Length != 0)
             {
                 this.generate.Enabled = true;
             }
@@ -369,11 +362,7 @@ namespace ProjetMathador
             generateNumbers();
             this.logs.Clear();
             this.scores.Clear();
-            this.plusUsed = false;
-            this.minusUsed = false;
-            this.timesUsed = false;
-            this.divUsed = false;
-            this.tryCount = 0;
+            tryCount = 0;
             ClearOperation();
 
             if (started == false)
@@ -388,7 +377,7 @@ namespace ProjetMathador
                 this.graphicTimer.Value = 0;
             }
         }
-        
+
         private void n1_Click(object sender, EventArgs e)
         {
             FillOperationN(this.n1.Text, this.n1);
@@ -474,7 +463,7 @@ namespace ProjetMathador
         {
             this.graphicTimer.Value++;
             timerSeconds--;
-            if (timerSeconds<0)
+            if (timerSeconds < 0)
             {
                 timerSeconds = 59;
                 timerMinutes--;
@@ -490,13 +479,13 @@ namespace ProjetMathador
                 this.seconds.Text = Convert.ToString(timerSeconds);
             }
 
-            if(timerSeconds == 0 && timerMinutes == 0)
+            if (timerSeconds == 0 && timerMinutes == 0)
             {
                 second.Stop();
                 second.Enabled = false;
                 DialogResult timesUp;
-                timesUp = MessageBox.Show("Temps écoulé ! Merci d'avoir joué, voici votre score : " + this.score + " points.",
-                    "Fin du temps !",
+                timesUp = MessageBox.Show("Fin du temps !",
+                    "Perdu",
                     MessageBoxButtons.RetryCancel,
                     MessageBoxIcon.Information);
                 if (timesUp == DialogResult.Retry)
@@ -514,17 +503,6 @@ namespace ProjetMathador
                     this.mainPanel.Visible = false;
                 }
 
-                string scoreText = Convert.ToString(this.score) + " points";
-
-                Leaderboard leaderboard = new Leaderboard(this.pseudo.Text, scoreText);
-
-                string json = JsonConvert.SerializeObject(leaderboard);
-                //System.IO.File.WriteAllText(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", json);
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", true))
-                    {
-                        file.WriteLine(json + "\n");
-                    }
-                this.score = 0;
             }
         }
 
@@ -632,17 +610,6 @@ namespace ProjetMathador
             this.calcul = calcul;
             this.numberPos.Add(button1);
             this.numberPos.Add(button2);
-        }
-    }
-
-    public class Leaderboard
-    {
-        public String[] score = new string[2];
-
-        public Leaderboard(string pseudo, string score)
-        {
-            this.score[0] = pseudo;
-            this.score[1] = score;
         }
     }
 }
