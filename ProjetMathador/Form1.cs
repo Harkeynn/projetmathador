@@ -211,10 +211,10 @@ namespace ProjetMathador
                     //Définition de l'opérateur en String pour affichage interface
                     operatorStr = "+";
 
-                    //Push du score du calcul (ici addition donc 1 point) dans la stack scores pour calcul du score total en fin de manche
+                    //Push du score du calcul (ici addition donc 1 point) dans la stack scores pour le calcul du score total en fin de manche
                     this.scores.Push(1);
 
-                    //Définition du compteur d'opérateur pour un eventuel coup mathador
+                    //Définition du compteur d'opérateur pour un éventuel coup mathador
                     this.plusUsed = true;
                     break;
                 //Soustraction
