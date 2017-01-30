@@ -31,3 +31,11 @@ D:\Work\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.Properties.Res
 D:\Work\C#\projetmathador\ProjetMathador\obj\Debug\ProjetMathador.csproj.GenerateResource.Cache
 D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\Newtonsoft.Json.dll
 D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\Newtonsoft.Json.xml
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\EntityFramework.dll
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\EntityFramework.SqlServer.dll
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\System.Data.SQLite.dll
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\System.Data.SQLite.EF6.dll
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\System.Data.SQLite.Linq.dll
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\EntityFramework.xml
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\EntityFramework.SqlServer.xml
+D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\System.Data.SQLite.xml
