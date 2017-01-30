@@ -25,6 +25,11 @@ namespace ProjetMathador
         private Stack<int> scores = new Stack<int>();
         private int score = 0;
         private int tryCount = 0;
+        private bool plusUsed = false;
+        private bool minusUsed = false;
+        private bool timesUsed = false;
+        private bool divUsed = false;
+        private string mathador;
         Saved saved = new Saved();
         
         public void EnableGenerate(object sender, EventArgs e)
@@ -50,6 +55,7 @@ namespace ProjetMathador
                     this.tryCount += 1;
                     operatorStr = "+";
                     this.scores.Push(1);
+                    this.plusUsed = true;
                     break;
                 case 2:
                     if ((Convert.ToInt32(this.operationN1.Text) - Convert.ToInt32(this.operationN2.Text)) < 0)
@@ -74,6 +80,7 @@ namespace ProjetMathador
                         this.tryCount += 1;
                         operatorStr = "-";
                         this.scores.Push(2);
+                        this.minusUsed = true;
                     }
                     break;
                 case 3:
@@ -83,6 +90,7 @@ namespace ProjetMathador
                     this.tryCount += 1;
                     operatorStr = "x";
                     this.scores.Push(1);
+                    this.timesUsed = true;
                     break;
                 case 4:
                     if ((Convert.ToInt32(this.operationN1.Text) % Convert.ToInt32(this.operationN2.Text)) == 0)
@@ -93,6 +101,7 @@ namespace ProjetMathador
                         this.tryCount += 1;
                         operatorStr = "÷";
                         this.scores.Push(3);
+                        this.divUsed = true;
                     }
                     else
                     {
@@ -136,9 +145,14 @@ namespace ProjetMathador
                     }
                     if (result == Convert.ToInt32(this.target.Text))
                     {
+                        if (plusUsed && minusUsed && timesUsed && divUsed)
+                        {
+                            mathador = "Vous avez fait un coup mathador ! Vous voilà gratifié de 13 points pour cette manche !\n";
+                            score += 6;
+                        }
                         second.Stop();
                         DialogResult victory;
-                        victory = MessageBox.Show("Bravo !\nVoilà votre score : " + score,
+                        victory = MessageBox.Show(mathador + "Bravo !\nVoilà votre score : " + score,
                                 "Nombre trouvé !",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
@@ -164,6 +178,7 @@ namespace ProjetMathador
                             this.n5.Text = Convert.ToString(numbers.n5);
                             saved.addNumber(this.n5.Text, 4);
 
+                            mathador = "";
                             this.logs.Clear();
                             tryCount = 0;
                             ClearOperation();
