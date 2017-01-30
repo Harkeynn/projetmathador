@@ -23,12 +23,12 @@ namespace ProjetMathador
         private List<Button> numberPos = new List<Button>();
         private Stack<Log> logs = new Stack<Log>();
         private Stack<int> scores = new Stack<int>();
-        private int score = 0;
-        private int tryCount = 0;
-        private bool plusUsed = false;
-        private bool minusUsed = false;
-        private bool timesUsed = false;
-        private bool divUsed = false;
+        private int score;
+        private int tryCount;
+        private bool plusUsed;
+        private bool minusUsed;
+        private bool timesUsed;
+        private bool divUsed;
         private string mathador;
         Saved saved = new Saved();
         
@@ -139,20 +139,20 @@ namespace ProjetMathador
 
                 if (result == Convert.ToInt32(this.target.Text) || tryCount == 4)
                 {
-                    while (scores.Count() > 0)
-                    {
-                        this.score += scores.Pop();
-                    }
                     if (result == Convert.ToInt32(this.target.Text))
                     {
+                        while (scores.Count() > 0)
+                        {
+                            this.score += scores.Pop();
+                        }
                         if (plusUsed && minusUsed && timesUsed && divUsed)
                         {
                             mathador = "Vous avez fait un coup mathador ! Vous voilà gratifié de 13 points pour cette manche !\n";
-                            score += 6;
+                            this.score += 6;
                         }
                         second.Stop();
                         DialogResult victory;
-                        victory = MessageBox.Show(mathador + "Bravo !\nVoilà votre score : " + score,
+                        victory = MessageBox.Show(mathador + "Bravo !\nVoilà votre score : " + score + " points.",
                                 "Nombre trouvé !",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
@@ -180,7 +180,12 @@ namespace ProjetMathador
 
                             mathador = "";
                             this.logs.Clear();
-                            tryCount = 0;
+                            this.scores.Clear();
+                            this.tryCount = 0;
+                            this.plusUsed = false;
+                            this.minusUsed = false;
+                            this.timesUsed = false;
+                            this.divUsed = false;
                             ClearOperation();
                             second.Start();
                         }
@@ -216,7 +221,12 @@ namespace ProjetMathador
                             saved.addNumber(this.n5.Text, 4);
 
                             this.logs.Clear();
-                            tryCount = 0;
+                            this.scores.Clear();
+                            this.tryCount = 0;
+                            this.plusUsed = false;
+                            this.minusUsed = false;
+                            this.timesUsed = false;
+                            this.divUsed = false;
                             ClearOperation();
                             second.Start();
                         }
@@ -356,7 +366,11 @@ namespace ProjetMathador
 
             this.logs.Clear();
             this.scores.Clear();
-            tryCount = 0;
+            this.plusUsed = false;
+            this.minusUsed = false;
+            this.timesUsed = false;
+            this.divUsed = false;
+            this.tryCount = 0;
             ClearOperation();
 
             if (started == false)
@@ -478,8 +492,8 @@ namespace ProjetMathador
                 second.Stop();
                 second.Enabled = false;
                 DialogResult timesUp;
-                timesUp = MessageBox.Show("Fin du temps !",
-                    "Perdu",
+                timesUp = MessageBox.Show("Temps écoulé ! Merci d'avoir joué, voici votre score : " + this.score + " points.",
+                    "Fin du temps !",
                     MessageBoxButtons.RetryCancel,
                     MessageBoxIcon.Information);
                 if (timesUp == DialogResult.Retry)
@@ -496,7 +510,18 @@ namespace ProjetMathador
                     ClearOperation();
                     this.mainPanel.Visible = false;
                 }
-                
+
+                string scoreText = Convert.ToString(this.score) + " points";
+
+                Leaderboard leaderboard = new Leaderboard(this.pseudo.Text, scoreText);
+
+                string json = JsonConvert.SerializeObject(leaderboard);
+                //System.IO.File.WriteAllText(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", json);
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", true))
+                    {
+                        file.WriteLine(json + "\n");
+                    }
+                this.score = 0;
             }
         }
 
@@ -570,6 +595,17 @@ namespace ProjetMathador
             this.calcul = calcul;
             this.numberPos.Add(button1);
             this.numberPos.Add(button2);
+        }
+    }
+
+    public class Leaderboard
+    {
+        public String[] score = new string[2];
+
+        public Leaderboard(string pseudo, string score)
+        {
+            this.score[0] = pseudo;
+            this.score[1] = score;
         }
     }
 }

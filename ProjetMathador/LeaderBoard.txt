@@ -1,0 +1,24 @@
+{"score":["Nereyde","28 points"]}
+
+{"score":["TTT","14 points"]}
+
+{"score":["Fantomas","8 points"]}
+
+{"score":["Fantomas","50 points"]}
+
+{"score":["TTTTTT","0 points"]}
+
+{"score":["TTTTTT","51 points"]}
+
+{"score":["wesh","13 points"]}
+
+{"score":["test1","0 points"]}
+
+{"score":["test1","7 points"]}
+
+{"score":["COUCOULETEST","39 points"]}
+
+{"score":["nouveauTest","31 points"]}
+
+{"score":["nouveauTest","8 points"]}
+
