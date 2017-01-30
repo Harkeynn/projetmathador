@@ -130,10 +130,23 @@ namespace ProjetMathador
                 Log log = new Log(calcul, this.numberPos[0], this.numberPos[1]);
 
                 this.logs.Push(log);
-
-
-
+                
                 string json = JsonConvert.SerializeObject(calcul.number1 + " " + operatorStr + " " + calcul.number2 + " = " + calcul.result);
+                json = json.Replace("\"", "");
+                
+                if(this.history1.Text == "")
+                {
+                    this.history1.Text = json;
+                }else if (this.history2.Text == "")
+                {
+                    this.history2.Text = json;
+                }else if (this.history3.Text == "")
+                {
+                    this.history3.Text = json;
+                }else if (this.history4.Text == "")
+                {
+                    this.history4.Text = json;
+                }
 
                 Console.WriteLine(json);
 
@@ -160,6 +173,10 @@ namespace ProjetMathador
                         {
                             String numbersJson = RandString();
                             Numbers numbers = JsonConvert.DeserializeObject<Numbers>(numbersJson);
+                            this.history1.Text = "";
+                            this.history2.Text = "";
+                            this.history3.Text = "";
+                            this.history4.Text = "";
 
                             this.target.Text = Convert.ToString(numbers.target);
 
@@ -197,6 +214,10 @@ namespace ProjetMathador
                         {
                             String numbersJson = RandString();
                             Numbers numbers = JsonConvert.DeserializeObject<Numbers>(numbersJson);
+                            this.history1.Text = "";
+                            this.history2.Text = "";
+                            this.history3.Text = "";
+                            this.history4.Text = "";
 
                             this.target.Text = Convert.ToString(numbers.target);
 
@@ -336,6 +357,11 @@ namespace ProjetMathador
         {
             String numbersJson = RandString();
             Numbers numbers = JsonConvert.DeserializeObject<Numbers>(numbersJson);
+
+            this.history1.Text = "";
+            this.history2.Text = "";
+            this.history3.Text = "";
+            this.history4.Text = "";
 
             this.target.Text = Convert.ToString(numbers.target);
 
@@ -509,6 +535,17 @@ namespace ProjetMathador
         {
             Log backLog = logs.Pop();
             this.scores.Pop();
+
+            if(this.history2.Text == "")
+            {
+                this.history1.Text = "";
+            }else if (this.history3.Text == "")
+            {
+                this.history2.Text = "";
+            }else if (this.history4.Text == "")
+            {
+                this.history3.Text = "";
+            }
 
             ClearOperation();
             this.operationCase = backLog.calcul.oper;

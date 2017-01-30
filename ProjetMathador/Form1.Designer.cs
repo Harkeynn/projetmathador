@@ -51,10 +51,15 @@
             this.numbersPanel = new System.Windows.Forms.Panel();
             this.clear = new System.Windows.Forms.Button();
             this.undo = new System.Windows.Forms.Button();
-            this.seconds = new System.Windows.Forms.Label();
+            this.timerlbl = new System.Windows.Forms.Label();
             this.minutes = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.timerpoints = new System.Windows.Forms.Label();
+            this.seconds = new System.Windows.Forms.Label();
+            this.graphicTimer = new System.Windows.Forms.ProgressBar();
+            this.history4 = new System.Windows.Forms.Label();
+            this.history3 = new System.Windows.Forms.Label();
+            this.history2 = new System.Windows.Forms.Label();
+            this.history1 = new System.Windows.Forms.Label();
             this.Game = new System.Windows.Forms.Panel();
             this.pseudo = new System.Windows.Forms.TextBox();
             this.pseudolbl = new System.Windows.Forms.Label();
@@ -65,7 +70,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.Jouer = new System.Windows.Forms.Button();
             this.second = new System.Windows.Forms.Timer(this.components);
-            this.graphicTimer = new System.Windows.Forms.ProgressBar();
             this.mainPanel.SuspendLayout();
             this.operatorsPanel.SuspendLayout();
             this.Game.SuspendLayout();
@@ -244,9 +248,18 @@
             this.mainPanel.Controls.Add(this.label1);
             this.mainPanel.Controls.Add(this.target);
             this.mainPanel.Controls.Add(this.undo);
+            this.mainPanel.Controls.Add(this.timerlbl);
+            this.mainPanel.Controls.Add(this.minutes);
+            this.mainPanel.Controls.Add(this.timerpoints);
+            this.mainPanel.Controls.Add(this.seconds);
+            this.mainPanel.Controls.Add(this.graphicTimer);
+            this.mainPanel.Controls.Add(this.history4);
+            this.mainPanel.Controls.Add(this.history3);
+            this.mainPanel.Controls.Add(this.history2);
+            this.mainPanel.Controls.Add(this.history1);
             this.mainPanel.Location = new System.Drawing.Point(2, 87);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(262, 266);
+            this.mainPanel.Size = new System.Drawing.Size(404, 302);
             this.mainPanel.TabIndex = 22;
             this.mainPanel.Visible = false;
             // 
@@ -289,41 +302,85 @@
             this.undo.UseVisualStyleBackColor = true;
             this.undo.Click += new System.EventHandler(this.undo_Click);
             // 
-            // seconds
+            // timerlbl
             // 
-            this.seconds.AutoSize = true;
-            this.seconds.Location = new System.Drawing.Point(304, 364);
-            this.seconds.Name = "seconds";
-            this.seconds.Size = new System.Drawing.Size(19, 13);
-            this.seconds.TabIndex = 25;
-            this.seconds.Text = "00";
+            this.timerlbl.AutoSize = true;
+            this.timerlbl.Location = new System.Drawing.Point(8, 258);
+            this.timerlbl.Name = "timerlbl";
+            this.timerlbl.Size = new System.Drawing.Size(74, 13);
+            this.timerlbl.TabIndex = 22;
+            this.timerlbl.Text = "Temps restant";
             // 
             // minutes
             // 
             this.minutes.AutoSize = true;
-            this.minutes.Location = new System.Drawing.Point(290, 364);
+            this.minutes.Location = new System.Drawing.Point(186, 257);
             this.minutes.Name = "minutes";
             this.minutes.Size = new System.Drawing.Size(13, 13);
             this.minutes.TabIndex = 24;
             this.minutes.Text = "3";
             // 
-            // label7
+            // timerpoints
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(299, 364);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(10, 13);
-            this.label7.TabIndex = 23;
-            this.label7.Text = ":";
+            this.timerpoints.AutoSize = true;
+            this.timerpoints.Location = new System.Drawing.Point(195, 256);
+            this.timerpoints.Name = "timerpoints";
+            this.timerpoints.Size = new System.Drawing.Size(10, 13);
+            this.timerpoints.TabIndex = 23;
+            this.timerpoints.Text = ":";
             // 
-            // label6
+            // seconds
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 362);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(74, 13);
-            this.label6.TabIndex = 22;
-            this.label6.Text = "Temps restant";
+            this.seconds.AutoSize = true;
+            this.seconds.Location = new System.Drawing.Point(202, 257);
+            this.seconds.Name = "seconds";
+            this.seconds.Size = new System.Drawing.Size(19, 13);
+            this.seconds.TabIndex = 25;
+            this.seconds.Text = "00";
+            // 
+            // graphicTimer
+            // 
+            this.graphicTimer.Location = new System.Drawing.Point(2, 274);
+            this.graphicTimer.Maximum = 180;
+            this.graphicTimer.Name = "graphicTimer";
+            this.graphicTimer.Size = new System.Drawing.Size(392, 23);
+            this.graphicTimer.TabIndex = 27;
+            // 
+            // history4
+            // 
+            this.history4.AutoSize = true;
+            this.history4.Location = new System.Drawing.Point(278, 217);
+            this.history4.Name = "history4";
+            this.history4.Size = new System.Drawing.Size(43, 13);
+            this.history4.TabIndex = 29;
+            this.history4.Text = "history4";
+            // 
+            // history3
+            // 
+            this.history3.AutoSize = true;
+            this.history3.Location = new System.Drawing.Point(278, 184);
+            this.history3.Name = "history3";
+            this.history3.Size = new System.Drawing.Size(43, 13);
+            this.history3.TabIndex = 28;
+            this.history3.Text = "history3";
+            // 
+            // history2
+            // 
+            this.history2.AutoSize = true;
+            this.history2.Location = new System.Drawing.Point(278, 151);
+            this.history2.Name = "history2";
+            this.history2.Size = new System.Drawing.Size(43, 13);
+            this.history2.TabIndex = 27;
+            this.history2.Text = "history2";
+            // 
+            // history1
+            // 
+            this.history1.AutoSize = true;
+            this.history1.Location = new System.Drawing.Point(278, 118);
+            this.history1.Name = "history1";
+            this.history1.Size = new System.Drawing.Size(43, 13);
+            this.history1.TabIndex = 26;
+            this.history1.Text = "history1";
             // 
             // Game
             // 
@@ -335,7 +392,7 @@
             this.Game.Controls.Add(this.mainPanel);
             this.Game.Location = new System.Drawing.Point(12, 12);
             this.Game.Name = "Game";
-            this.Game.Size = new System.Drawing.Size(267, 347);
+            this.Game.Size = new System.Drawing.Size(411, 395);
             this.Game.TabIndex = 23;
             this.Game.Visible = false;
             // 
@@ -374,7 +431,7 @@
             this.welcomePanel.Controls.Add(this.label5);
             this.welcomePanel.Controls.Add(this.button1);
             this.welcomePanel.Controls.Add(this.Jouer);
-            this.welcomePanel.Location = new System.Drawing.Point(317, 12);
+            this.welcomePanel.Location = new System.Drawing.Point(575, 12);
             this.welcomePanel.Name = "welcomePanel";
             this.welcomePanel.Size = new System.Drawing.Size(274, 338);
             this.welcomePanel.TabIndex = 24;
@@ -442,28 +499,15 @@
             this.second.Interval = 1000;
             this.second.Tick += new System.EventHandler(this.second_Tick);
             // 
-            // graphicTimer
-            // 
-            this.graphicTimer.Location = new System.Drawing.Point(17, 378);
-            this.graphicTimer.Maximum = 180;
-            this.graphicTimer.Name = "graphicTimer";
-            this.graphicTimer.Size = new System.Drawing.Size(574, 23);
-            this.graphicTimer.TabIndex = 27;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(603, 413);
-            this.Controls.Add(this.graphicTimer);
+            this.ClientSize = new System.Drawing.Size(918, 413);
             this.Controls.Add(this.welcomePanel);
-            this.Controls.Add(this.seconds);
             this.Controls.Add(this.Game);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.minutes);
-            this.Controls.Add(this.label7);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Mathador";
@@ -475,7 +519,6 @@
             this.welcomePanel.ResumeLayout(false);
             this.welcomePanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -505,9 +548,9 @@
         private System.Windows.Forms.Button exit;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label timerlbl;
         private System.Windows.Forms.Label minutes;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label timerpoints;
         private System.Windows.Forms.Timer second;
         private System.Windows.Forms.Label seconds;
         private System.Windows.Forms.Button clear;
@@ -517,6 +560,10 @@
         private System.Windows.Forms.Button undo;
         private System.Windows.Forms.Label pseudolbl;
         private System.Windows.Forms.TextBox pseudo;
+        private System.Windows.Forms.Label history4;
+        private System.Windows.Forms.Label history3;
+        private System.Windows.Forms.Label history2;
+        private System.Windows.Forms.Label history1;
     }
 }
 
