@@ -12,3 +12,5 @@
 
 {"pseudo":"Arthur","score":3}
 
+{"pseudo":"jtfrjhxthd","score":0}
+

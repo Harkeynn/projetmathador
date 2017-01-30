@@ -68,7 +68,7 @@
             this.scoreBoard = new System.Windows.Forms.Button();
             this.exit = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.help = new System.Windows.Forms.Button();
+            this.toHelp = new System.Windows.Forms.Button();
             this.Jouer = new System.Windows.Forms.Button();
             this.second = new System.Windows.Forms.Timer(this.components);
             this.helpPanel = new System.Windows.Forms.Panel();
@@ -449,9 +449,9 @@
             this.welcomePanel.Controls.Add(this.scoreBoard);
             this.welcomePanel.Controls.Add(this.exit);
             this.welcomePanel.Controls.Add(this.label5);
-            this.welcomePanel.Controls.Add(this.help);
+            this.welcomePanel.Controls.Add(this.toHelp);
             this.welcomePanel.Controls.Add(this.Jouer);
-            this.welcomePanel.Location = new System.Drawing.Point(75, 3);
+            this.welcomePanel.Location = new System.Drawing.Point(487, 12);
             this.welcomePanel.Name = "welcomePanel";
             this.welcomePanel.Size = new System.Drawing.Size(274, 395);
             this.welcomePanel.TabIndex = 24;
@@ -499,21 +499,21 @@
             this.label5.TabIndex = 2;
             this.label5.Text = "Mathador";
             // 
-            // help
+            // toHelp
             // 
-            this.help.BackgroundImage = global::ProjetMathador.Properties.Resources.buttonbackground;
-            this.help.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.help.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.help.FlatAppearance.BorderSize = 0;
-            this.help.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.help.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.help.Location = new System.Drawing.Point(62, 129);
-            this.help.Name = "help";
-            this.help.Size = new System.Drawing.Size(146, 41);
-            this.help.TabIndex = 1;
-            this.help.Text = "Aide";
-            this.help.UseVisualStyleBackColor = true;
-            this.help.Click += new System.EventHandler(this.help_Click);
+            this.toHelp.BackgroundImage = global::ProjetMathador.Properties.Resources.buttonbackground;
+            this.toHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.toHelp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.toHelp.FlatAppearance.BorderSize = 0;
+            this.toHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.toHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toHelp.Location = new System.Drawing.Point(62, 129);
+            this.toHelp.Name = "toHelp";
+            this.toHelp.Size = new System.Drawing.Size(146, 41);
+            this.toHelp.TabIndex = 1;
+            this.toHelp.Text = "Aide";
+            this.toHelp.UseVisualStyleBackColor = true;
+            this.toHelp.Click += new System.EventHandler(this.toHelp_Click);
             // 
             // Jouer
             // 
@@ -614,7 +614,7 @@
             this.scoresPanel.Controls.Add(this.label7);
             this.scoresPanel.Controls.Add(this.scoreBoardBack);
             this.scoresPanel.Controls.Add(this.label8);
-            this.scoresPanel.Location = new System.Drawing.Point(14, 9);
+            this.scoresPanel.Location = new System.Drawing.Point(823, 12);
             this.scoresPanel.Name = "scoresPanel";
             this.scoresPanel.Size = new System.Drawing.Size(411, 395);
             this.scoresPanel.TabIndex = 26;
@@ -641,9 +641,9 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(182, 35);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(65, 20);
+            this.label7.Size = new System.Drawing.Size(45, 20);
             this.label7.TabIndex = 4;
-            this.label7.Text = "Scores";
+            this.label7.Text = "Aide";
             // 
             // scoreBoardBack
             // 
@@ -678,7 +678,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(445, 422);
+            this.ClientSize = new System.Drawing.Size(1270, 422);
             this.Controls.Add(this.scoresPanel);
             this.Controls.Add(this.helpPanel);
             this.Controls.Add(this.Game);
@@ -724,7 +724,7 @@
         private System.Windows.Forms.Button BackMenu;
         private System.Windows.Forms.Button exit;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button help;
+        private System.Windows.Forms.Button toHelp;
         private System.Windows.Forms.Label timerlbl;
         private System.Windows.Forms.Label minutes;
         private System.Windows.Forms.Label timerpoints;

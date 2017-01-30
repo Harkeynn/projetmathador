@@ -272,7 +272,7 @@ namespace ProjetMathador
 
                     //Définition de l'opérateur en String pour affichage interface
                     operatorStr = "x";
-                    
+
                     //Push du score du calcul (ici multiplication donc 1 point) dans la stack scores pour calcul du score total en fin de manche
                     this.scores.Push(1);
 
@@ -850,7 +850,7 @@ namespace ProjetMathador
 
     public class Leaderboard        //Objet Leaderboard permettant de stocker les scores et les pseudo afin de les réafficher dans le tableau des scores.
     {
-        public string pseudo;   
+        public string pseudo;
         public int score;
 
         public Leaderboard(string pseudo, int score)
