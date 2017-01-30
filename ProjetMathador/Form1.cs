@@ -503,6 +503,49 @@ namespace ProjetMathador
                     this.mainPanel.Visible = false;
                 }
 
+                int scoreText = this.score;
+
+                Leaderboard leaderboard = new Leaderboard(this.pseudo.Text, scoreText);
+
+                string json = JsonConvert.SerializeObject(leaderboard);
+                //System.IO.File.WriteAllText(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", json);
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", true))
+                    {
+                        file.WriteLine(json + "\n");
+                    }
+
+                order();
+
+                this.score = 0;
+            }
+        }
+
+        private void order()
+        {
+            string[] lines = System.IO.File.ReadAllLines(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt");
+
+
+
+            IEnumerable<string> sortAscendingQuery =
+                from line in lines
+                orderby line //"ascending" is default
+                select line;
+
+            System.IO.File.WriteAllText(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", "");
+            foreach (string s in sortAscendingQuery)
+            {
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", true))
+                {
+                    file.WriteLine(s + "\n");
+                }
+            }
+
+            // Display the file contents by using a foreach loop.
+            System.Console.WriteLine("Contents of WriteLines2.txt = ");
+            foreach (string line in lines)
+            {
+                // Use a tab to indent each line of the file.
+                Console.WriteLine("\t" + line);
             }
         }
 
@@ -610,6 +653,18 @@ namespace ProjetMathador
             this.calcul = calcul;
             this.numberPos.Add(button1);
             this.numberPos.Add(button2);
+        }
+    }
+
+    public class Leaderboard
+    {
+        public string pseudo;
+        public int score;
+
+        public Leaderboard(string pseudo, int score)
+        {
+            this.pseudo = pseudo;
+            this.score = score;
         }
     }
 }
