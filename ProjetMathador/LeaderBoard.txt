@@ -22,3 +22,7 @@
 
 {"score":["nouveauTest","8 points"]}
 
+{"score":["Test","34 points"]}
+
+{"score":["Test","13 points"]}
+
