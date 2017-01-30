@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\helpText.png" />
     <None Include="Resources\buttonbackground.png" />
     <None Include="Resources\background.jpg" />
   </ItemGroup>
