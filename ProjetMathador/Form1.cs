@@ -24,7 +24,6 @@ namespace ProjetMathador
         private List<Button> numberPos = new List<Button>();
         private Stack<Log> logs = new Stack<Log>();
         private Stack<int> scores = new Stack<int>();
-        private List<int> operationDif = new List<int>();
         private int score = 0;
         private int tryCount = 0;
         private bool plusUsed = false;
