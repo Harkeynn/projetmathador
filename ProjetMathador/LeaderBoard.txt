@@ -22,3 +22,5 @@
 
 {"pseudo":"testOoOOooooOOO","score":0}
 
+{"pseudo":"jtfrjhxthd","score":0}
+

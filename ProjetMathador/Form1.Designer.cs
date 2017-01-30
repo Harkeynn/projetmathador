@@ -68,7 +68,7 @@
             this.scoreBoard = new System.Windows.Forms.Button();
             this.exit = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.toHelp = new System.Windows.Forms.Button();
             this.Jouer = new System.Windows.Forms.Button();
             this.second = new System.Windows.Forms.Timer(this.components);
             this.helpPanel = new System.Windows.Forms.Panel();
@@ -449,7 +449,7 @@
             this.welcomePanel.Controls.Add(this.scoreBoard);
             this.welcomePanel.Controls.Add(this.exit);
             this.welcomePanel.Controls.Add(this.label5);
-            this.welcomePanel.Controls.Add(this.button1);
+            this.welcomePanel.Controls.Add(this.toHelp);
             this.welcomePanel.Controls.Add(this.Jouer);
             this.welcomePanel.Location = new System.Drawing.Point(487, 12);
             this.welcomePanel.Name = "welcomePanel";
@@ -486,7 +486,7 @@
             this.exit.TabIndex = 3;
             this.exit.Text = "Quitter";
             this.exit.UseVisualStyleBackColor = true;
-            this.exit.Click += new System.EventHandler(this.button2_Click);
+            this.exit.Click += new System.EventHandler(this.exit_Click);
             // 
             // label5
             // 
@@ -499,21 +499,21 @@
             this.label5.TabIndex = 2;
             this.label5.Text = "Mathador";
             // 
-            // button1
+            // toHelp
             // 
-            this.button1.BackgroundImage = global::ProjetMathador.Properties.Resources.buttonbackground;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(62, 129);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(146, 41);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Aide";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.toHelp.BackgroundImage = global::ProjetMathador.Properties.Resources.buttonbackground;
+            this.toHelp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.toHelp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.toHelp.FlatAppearance.BorderSize = 0;
+            this.toHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.toHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toHelp.Location = new System.Drawing.Point(62, 129);
+            this.toHelp.Name = "toHelp";
+            this.toHelp.Size = new System.Drawing.Size(146, 41);
+            this.toHelp.TabIndex = 1;
+            this.toHelp.Text = "Aide";
+            this.toHelp.UseVisualStyleBackColor = true;
+            this.toHelp.Click += new System.EventHandler(this.toHelp_Click);
             // 
             // Jouer
             // 
@@ -724,7 +724,7 @@
         private System.Windows.Forms.Button BackMenu;
         private System.Windows.Forms.Button exit;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button toHelp;
         private System.Windows.Forms.Label timerlbl;
         private System.Windows.Forms.Label minutes;
         private System.Windows.Forms.Label timerpoints;
