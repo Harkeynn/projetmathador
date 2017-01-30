@@ -18,7 +18,6 @@ namespace ProjetMathador
         private int operationCase = 0;
         private String operatorStr = null;
         private bool operatorFirst = false;
-        private Random rand = new Random();
         public int timerSeconds = 0;
         public int timerMinutes = 3;
         private List<Button> numberPos = new List<Button>();
@@ -26,8 +25,6 @@ namespace ProjetMathador
         private Stack<int> scores = new Stack<int>();
         private int score = 0;
         private int tryCount = 0;
-        private Numbers numbers = new Numbers(-1, -1, -1, -1, -1, -1);
-        numbers.n1 = 1;
         Saved saved = new Saved();
         
         public void EnableGenerate(object sender, EventArgs e)
@@ -35,10 +32,11 @@ namespace ProjetMathador
             this.generate.Enabled = true;
         }
 
-        public String RandString(int from, int to)
+        public static String RandString()
         {
-            String value = Convert.ToString(rand.Next(from, to));
-            return value;
+            Random rand = new Random();
+            String numbersJson = @"{'n1' : '" + rand.Next(1, 13) + "','n2' : '" + rand.Next(1, 13) + "','n3' : '" + rand.Next(1, 13) + "','n4' : '" + rand.Next(1, 21) + "','n5' : '" + rand.Next(1, 21) + "','target' : '" + rand.Next(1, 101) + "'}";
+            return numbersJson;
         }
 
         public void Operation()
@@ -146,21 +144,24 @@ namespace ProjetMathador
                                 MessageBoxIcon.Information);
                         if (victory == DialogResult.OK)
                         {
-                            this.target.Text = RandString(1, 101);
+                            String numbersJson = RandString();
+                            Numbers numbers = JsonConvert.DeserializeObject<Numbers>(numbersJson);
 
-                            this.n1.Text = RandString(1, 13);
+                            this.target.Text = Convert.ToString(numbers.target);
+
+                            this.n1.Text = Convert.ToString(numbers.n1);
                             saved.addNumber(this.n1.Text, 0);
 
-                            this.n2.Text = RandString(1, 13);
+                            this.n2.Text = Convert.ToString(numbers.n2);
                             saved.addNumber(this.n2.Text, 1);
 
-                            this.n3.Text = RandString(1, 13);
+                            this.n3.Text = Convert.ToString(numbers.n3);
                             saved.addNumber(this.n3.Text, 2);
 
-                            this.n4.Text = RandString(1, 21);
+                            this.n4.Text = Convert.ToString(numbers.n4);
                             saved.addNumber(this.n4.Text, 3);
 
-                            this.n5.Text = RandString(1, 21);
+                            this.n5.Text = Convert.ToString(numbers.n5);
                             saved.addNumber(this.n5.Text, 4);
 
                             this.logs.Clear();
@@ -179,21 +180,24 @@ namespace ProjetMathador
                                 MessageBoxIcon.Information);
                         if (loose == DialogResult.OK)
                         {
-                            this.target.Text = RandString(1, 101);
+                            String numbersJson = RandString();
+                            Numbers numbers = JsonConvert.DeserializeObject<Numbers>(numbersJson);
 
-                            this.n1.Text = RandString(1, 13);
+                            this.target.Text = Convert.ToString(numbers.target);
+
+                            this.n1.Text = Convert.ToString(numbers.n1);
                             saved.addNumber(this.n1.Text, 0);
 
-                            this.n2.Text = RandString(1, 13);
+                            this.n2.Text = Convert.ToString(numbers.n2);
                             saved.addNumber(this.n2.Text, 1);
 
-                            this.n3.Text = RandString(1, 13);
+                            this.n3.Text = Convert.ToString(numbers.n3);
                             saved.addNumber(this.n3.Text, 2);
 
-                            this.n4.Text = RandString(1, 21);
+                            this.n4.Text = Convert.ToString(numbers.n4);
                             saved.addNumber(this.n4.Text, 3);
 
-                            this.n5.Text = RandString(1, 21);
+                            this.n5.Text = Convert.ToString(numbers.n5);
                             saved.addNumber(this.n5.Text, 4);
 
                             this.logs.Clear();
@@ -315,21 +319,24 @@ namespace ProjetMathador
 
         private void generate_Click(object sender, EventArgs e)
         {
-            this.target.Text = RandString(1, 101);
-            
-            this.n1.Text = RandString(1, 13);
+            String numbersJson = RandString();
+            Numbers numbers = JsonConvert.DeserializeObject<Numbers>(numbersJson);
+
+            this.target.Text = Convert.ToString(numbers.target);
+
+            this.n1.Text = Convert.ToString(numbers.n1);
             saved.addNumber(this.n1.Text, 0);
 
-            this.n2.Text = RandString(1, 13);
+            this.n2.Text = Convert.ToString(numbers.n2);
             saved.addNumber(this.n2.Text, 1);
 
-            this.n3.Text = RandString(1, 13);
+            this.n3.Text = Convert.ToString(numbers.n3);
             saved.addNumber(this.n3.Text, 2);
 
-            this.n4.Text = RandString(1, 21);
+            this.n4.Text = Convert.ToString(numbers.n4);
             saved.addNumber(this.n4.Text, 3);
 
-            this.n5.Text = RandString(1, 21);
+            this.n5.Text = Convert.ToString(numbers.n5);
             saved.addNumber(this.n5.Text, 4);
 
             this.logs.Clear();
