@@ -1,24 +1,12 @@
-{"pseudo":"Pierrichou","score":78}
+{"pseudo":"Léa","score":39}
 
-{"pseudo":"Nereyde","score":40}
+{"pseudo":"Nereyde","score":35}
 
-{"pseudo":"Fantomas","score":23}
+{"pseudo":"Poisson","score":24}
 
-{"pseudo":"Nereyde2","score":19}
+{"pseudo":"Fantomas","score":17}
 
-{"pseudo":"FantomasIsBack","score":18}
+{"pseudo":"Fantomas","score":12}
 
-{"pseudo":"Jpp","score":13}
-
-{"pseudo":"testtttttt","score":13}
-
-{"pseudo":"testOoOOooooOOO","score":12}
-
-{"pseudo":"testOoOOooooOOO","score":9}
-
-{"pseudo":"testOoOO","score":7}
-
-{"pseudo":"TestOo","score":5}
-
-{"pseudo":"testOoOOooooOOO","score":0}
+{"pseudo":"Arthur","score":3}
 
