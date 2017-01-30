@@ -510,7 +510,7 @@ namespace ProjetMathador
                     this.mainPanel.Visible = false;
                 }
 
-                string scoreText = Convert.ToString(this.score) + " points";
+                int scoreText = this.score;
 
                 Leaderboard leaderboard = new Leaderboard(this.pseudo.Text, scoreText);
 
@@ -520,7 +520,39 @@ namespace ProjetMathador
                     {
                         file.WriteLine(json + "\n");
                     }
+
+                order();
+
                 this.score = 0;
+            }
+        }
+
+        private void order()
+        {
+            string[] lines = System.IO.File.ReadAllLines(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt");
+
+
+
+            IEnumerable<string> sortAscendingQuery =
+                from line in lines
+                orderby line //"ascending" is default
+                select line;
+
+            System.IO.File.WriteAllText(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", "");
+            foreach (string s in sortAscendingQuery)
+            {
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", true))
+                {
+                    file.WriteLine(s + "\n");
+                }
+            }
+
+            // Display the file contents by using a foreach loop.
+            System.Console.WriteLine("Contents of WriteLines2.txt = ");
+            foreach (string line in lines)
+            {
+                // Use a tab to indent each line of the file.
+                Console.WriteLine("\t" + line);
             }
         }
 
@@ -614,12 +646,13 @@ namespace ProjetMathador
 
     public class Leaderboard
     {
-        public String[] score = new string[2];
+        public string pseudo;
+        public int score;
 
-        public Leaderboard(string pseudo, string score)
+        public Leaderboard(string pseudo, int score)
         {
-            this.score[0] = pseudo;
-            this.score[1] = score;
+            this.pseudo = pseudo;
+            this.score = score;
         }
     }
 }
