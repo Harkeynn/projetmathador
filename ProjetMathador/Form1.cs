@@ -327,6 +327,10 @@ namespace ProjetMathador
             foreach (Button btn in numberPos)
             {
                 btn.BackColor = Color.Transparent;
+                if(btn.Text != "")
+                {
+                    btn.Enabled = true;
+                }
             }
             this.operationN1.Text = "";
             this.operationN2.Text = "";
@@ -506,34 +510,53 @@ namespace ProjetMathador
 
         private void undo_Click(object sender, EventArgs e)
         {
-            Log backLog = logs.Pop();
-            this.scores.Pop();
+            if (tryCount > 0)
+            {
+                Log backLog = logs.Pop();
+                this.scores.Pop();
 
-            if(this.history2.Text == "")
-            {
-                this.history1.Text = "";
-            }else if (this.history3.Text == "")
-            {
-                this.history2.Text = "";
-            }else if (this.history4.Text == "")
-            {
-                this.history3.Text = "";
-            }
+                if (this.history2.Text == "")
+                {
+                    this.history1.Text = "";
+                }
+                else if (this.history3.Text == "")
+                {
+                    this.history2.Text = "";
+                }
+                else if (this.history4.Text == "")
+                {
+                    this.history3.Text = "";
+                }
 
-            ClearOperation();
-            this.operationCase = backLog.calcul.oper;
-            this.numberPos.Add(backLog.numberPos[0]);
-            this.numberPos.Add(backLog.numberPos[1]);
-            foreach (Button number in numberPos)
-            {
-                number.Enabled = true;
+                ClearOperation();
+                this.operationCase = backLog.calcul.oper;
+                this.numberPos.Add(backLog.numberPos[0]);
+                this.numberPos.Add(backLog.numberPos[1]);
+                foreach (Button number in numberPos)
+                {
+                    number.Enabled = true;
+                }
+                this.numberPos[0].Text = Convert.ToString(backLog.calcul.number1);
+                this.numberPos[1].Text = Convert.ToString(backLog.calcul.number2);
+                this.numberPos.Clear();
+                this.tryCount -= 1;
             }
-            this.numberPos[0].Text = Convert.ToString(backLog.calcul.number1);
-            this.numberPos[1].Text = Convert.ToString(backLog.calcul.number2);
-            this.numberPos.Clear();
-            this.tryCount -= 1;
+        }
+
+        private void helpBack_Click(object sender, EventArgs e)
+        {
+            this.helpPanel.Visible = false;
+            this.welcomePanel.Visible = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.helpPanel.Visible = true;
+            this.welcomePanel.Visible = false;
         }
     }
+
+
 
     public class Numbers
     {

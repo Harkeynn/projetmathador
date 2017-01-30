@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.target = new System.Windows.Forms.TextBox();
+            this.target = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.n1 = new System.Windows.Forms.Button();
@@ -43,10 +43,10 @@
             this.btnMult = new System.Windows.Forms.Button();
             this.btnDiv = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.operationN1 = new System.Windows.Forms.TextBox();
-            this.operationN2 = new System.Windows.Forms.TextBox();
             this.generate = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.operationN2 = new System.Windows.Forms.Label();
+            this.operationN1 = new System.Windows.Forms.Label();
             this.operatorsPanel = new System.Windows.Forms.Panel();
             this.numbersPanel = new System.Windows.Forms.Panel();
             this.clear = new System.Windows.Forms.Button();
@@ -70,17 +70,22 @@
             this.button1 = new System.Windows.Forms.Button();
             this.Jouer = new System.Windows.Forms.Button();
             this.second = new System.Windows.Forms.Timer(this.components);
+            this.helpPanel = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.helpText = new System.Windows.Forms.Label();
+            this.helpTitle = new System.Windows.Forms.Label();
+            this.helpBack = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.operatorsPanel.SuspendLayout();
             this.Game.SuspendLayout();
             this.welcomePanel.SuspendLayout();
+            this.helpPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // target
             // 
             this.target.BackColor = System.Drawing.SystemColors.Control;
-            this.target.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.target.Enabled = false;
             this.target.Location = new System.Drawing.Point(3, 18);
             this.target.Name = "target";
             this.target.Size = new System.Drawing.Size(99, 13);
@@ -156,9 +161,10 @@
             // 
             // btnPlus
             // 
-            this.btnPlus.Location = new System.Drawing.Point(8, 5);
+            this.btnPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPlus.Location = new System.Drawing.Point(5, 1);
             this.btnPlus.Name = "btnPlus";
-            this.btnPlus.Size = new System.Drawing.Size(30, 23);
+            this.btnPlus.Size = new System.Drawing.Size(33, 27);
             this.btnPlus.TabIndex = 9;
             this.btnPlus.Text = "+";
             this.btnPlus.UseVisualStyleBackColor = true;
@@ -166,9 +172,10 @@
             // 
             // btnMinus
             // 
-            this.btnMinus.Location = new System.Drawing.Point(44, 5);
+            this.btnMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinus.Location = new System.Drawing.Point(44, 1);
             this.btnMinus.Name = "btnMinus";
-            this.btnMinus.Size = new System.Drawing.Size(30, 23);
+            this.btnMinus.Size = new System.Drawing.Size(33, 27);
             this.btnMinus.TabIndex = 10;
             this.btnMinus.Text = "-";
             this.btnMinus.UseVisualStyleBackColor = true;
@@ -176,9 +183,10 @@
             // 
             // btnMult
             // 
-            this.btnMult.Location = new System.Drawing.Point(8, 34);
+            this.btnMult.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMult.Location = new System.Drawing.Point(5, 34);
             this.btnMult.Name = "btnMult";
-            this.btnMult.Size = new System.Drawing.Size(30, 23);
+            this.btnMult.Size = new System.Drawing.Size(33, 26);
             this.btnMult.TabIndex = 11;
             this.btnMult.Text = "x";
             this.btnMult.UseVisualStyleBackColor = true;
@@ -186,9 +194,10 @@
             // 
             // btnDiv
             // 
+            this.btnDiv.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDiv.Location = new System.Drawing.Point(44, 34);
             this.btnDiv.Name = "btnDiv";
-            this.btnDiv.Size = new System.Drawing.Size(30, 23);
+            this.btnDiv.Size = new System.Drawing.Size(33, 26);
             this.btnDiv.TabIndex = 12;
             this.btnDiv.Text = "÷";
             this.btnDiv.UseVisualStyleBackColor = true;
@@ -203,27 +212,10 @@
             this.label4.TabIndex = 14;
             this.label4.Text = "Opération";
             // 
-            // operationN1
-            // 
-            this.operationN1.BackColor = System.Drawing.SystemColors.Control;
-            this.operationN1.Enabled = false;
-            this.operationN1.Location = new System.Drawing.Point(27, 149);
-            this.operationN1.Name = "operationN1";
-            this.operationN1.Size = new System.Drawing.Size(51, 20);
-            this.operationN1.TabIndex = 15;
-            // 
-            // operationN2
-            // 
-            this.operationN2.BackColor = System.Drawing.SystemColors.Control;
-            this.operationN2.Enabled = false;
-            this.operationN2.Location = new System.Drawing.Point(180, 149);
-            this.operationN2.Name = "operationN2";
-            this.operationN2.Size = new System.Drawing.Size(51, 20);
-            this.operationN2.TabIndex = 17;
-            // 
             // generate
             // 
             this.generate.Enabled = false;
+            this.generate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.generate.Location = new System.Drawing.Point(3, 50);
             this.generate.Name = "generate";
             this.generate.Size = new System.Drawing.Size(260, 36);
@@ -234,10 +226,10 @@
             // 
             // mainPanel
             // 
-            this.mainPanel.Controls.Add(this.operatorsPanel);
-            this.mainPanel.Controls.Add(this.clear);
             this.mainPanel.Controls.Add(this.operationN2);
             this.mainPanel.Controls.Add(this.operationN1);
+            this.mainPanel.Controls.Add(this.operatorsPanel);
+            this.mainPanel.Controls.Add(this.clear);
             this.mainPanel.Controls.Add(this.label4);
             this.mainPanel.Controls.Add(this.n5);
             this.mainPanel.Controls.Add(this.n4);
@@ -262,6 +254,25 @@
             this.mainPanel.Size = new System.Drawing.Size(404, 302);
             this.mainPanel.TabIndex = 22;
             this.mainPanel.Visible = false;
+            // 
+            // operationN2
+            // 
+            this.operationN2.AutoSize = true;
+            this.operationN2.Location = new System.Drawing.Point(176, 156);
+            this.operationN2.Name = "operationN2";
+            this.operationN2.Size = new System.Drawing.Size(0, 13);
+            this.operationN2.TabIndex = 31;
+            this.operationN2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // operationN1
+            // 
+            this.operationN1.AutoSize = true;
+            this.operationN1.Location = new System.Drawing.Point(65, 156);
+            this.operationN1.Name = "operationN1";
+            this.operationN1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.operationN1.Size = new System.Drawing.Size(0, 13);
+            this.operationN1.TabIndex = 30;
+            this.operationN1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // operatorsPanel
             // 
@@ -294,7 +305,7 @@
             // 
             // undo
             // 
-            this.undo.Location = new System.Drawing.Point(69, 219);
+            this.undo.Location = new System.Drawing.Point(72, 219);
             this.undo.Name = "undo";
             this.undo.Size = new System.Drawing.Size(114, 23);
             this.undo.TabIndex = 28;
@@ -431,9 +442,9 @@
             this.welcomePanel.Controls.Add(this.label5);
             this.welcomePanel.Controls.Add(this.button1);
             this.welcomePanel.Controls.Add(this.Jouer);
-            this.welcomePanel.Location = new System.Drawing.Point(575, 12);
+            this.welcomePanel.Location = new System.Drawing.Point(487, 12);
             this.welcomePanel.Name = "welcomePanel";
-            this.welcomePanel.Size = new System.Drawing.Size(274, 338);
+            this.welcomePanel.Size = new System.Drawing.Size(274, 395);
             this.welcomePanel.TabIndex = 24;
             // 
             // exit
@@ -477,6 +488,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "Aide";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Jouer
             // 
@@ -499,15 +511,85 @@
             this.second.Interval = 1000;
             this.second.Tick += new System.EventHandler(this.second_Tick);
             // 
+            // helpPanel
+            // 
+            this.helpPanel.BackColor = System.Drawing.Color.Transparent;
+            this.helpPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.helpPanel.Controls.Add(this.panel2);
+            this.helpPanel.Controls.Add(this.helpText);
+            this.helpPanel.Controls.Add(this.helpTitle);
+            this.helpPanel.Controls.Add(this.helpBack);
+            this.helpPanel.Controls.Add(this.label3);
+            this.helpPanel.Location = new System.Drawing.Point(12, 12);
+            this.helpPanel.Name = "helpPanel";
+            this.helpPanel.Size = new System.Drawing.Size(411, 395);
+            this.helpPanel.TabIndex = 25;
+            this.helpPanel.Visible = false;
+            // 
+            // panel2
+            // 
+            this.panel2.BackgroundImage = global::ProjetMathador.Properties.Resources.helpText;
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel2.Location = new System.Drawing.Point(0, 58);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(411, 296);
+            this.panel2.TabIndex = 6;
+            // 
+            // helpText
+            // 
+            this.helpText.AutoSize = true;
+            this.helpText.Location = new System.Drawing.Point(69, 89);
+            this.helpText.Name = "helpText";
+            this.helpText.Size = new System.Drawing.Size(0, 13);
+            this.helpText.TabIndex = 5;
+            // 
+            // helpTitle
+            // 
+            this.helpTitle.AutoSize = true;
+            this.helpTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpTitle.Location = new System.Drawing.Point(182, 35);
+            this.helpTitle.Name = "helpTitle";
+            this.helpTitle.Size = new System.Drawing.Size(45, 20);
+            this.helpTitle.TabIndex = 4;
+            this.helpTitle.Text = "Aide";
+            // 
+            // helpBack
+            // 
+            this.helpBack.BackgroundImage = global::ProjetMathador.Properties.Resources.buttonbackground;
+            this.helpBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.helpBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.helpBack.FlatAppearance.BorderSize = 0;
+            this.helpBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpBack.Location = new System.Drawing.Point(134, 360);
+            this.helpBack.Name = "helpBack";
+            this.helpBack.Size = new System.Drawing.Size(146, 29);
+            this.helpBack.TabIndex = 3;
+            this.helpBack.Text = "Retour";
+            this.helpBack.UseVisualStyleBackColor = true;
+            this.helpBack.Click += new System.EventHandler(this.helpBack_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(137, 4);
+            this.label3.Name = "label3";
+            this.label3.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label3.Size = new System.Drawing.Size(136, 31);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Mathador";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(918, 413);
-            this.Controls.Add(this.welcomePanel);
+            this.ClientSize = new System.Drawing.Size(1112, 413);
+            this.Controls.Add(this.helpPanel);
             this.Controls.Add(this.Game);
+            this.Controls.Add(this.welcomePanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Mathador";
@@ -518,13 +600,15 @@
             this.Game.PerformLayout();
             this.welcomePanel.ResumeLayout(false);
             this.welcomePanel.PerformLayout();
+            this.helpPanel.ResumeLayout(false);
+            this.helpPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox target;
+        private System.Windows.Forms.Label target;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button n1;
@@ -537,8 +621,6 @@
         private System.Windows.Forms.Button btnMult;
         private System.Windows.Forms.Button btnDiv;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox operationN1;
-        private System.Windows.Forms.TextBox operationN2;
         private System.Windows.Forms.Button generate;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.Panel Game;
@@ -564,6 +646,14 @@
         private System.Windows.Forms.Label history3;
         private System.Windows.Forms.Label history2;
         private System.Windows.Forms.Label history1;
+        private System.Windows.Forms.Label operationN1;
+        private System.Windows.Forms.Label operationN2;
+        private System.Windows.Forms.Panel helpPanel;
+        private System.Windows.Forms.Button helpBack;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label helpTitle;
+        private System.Windows.Forms.Label helpText;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
