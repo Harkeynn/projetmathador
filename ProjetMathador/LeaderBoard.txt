@@ -1,90 +1,24 @@
-{"score":["Nereyde","28 points"]}
+{"pseudo":"Pierrichou","score":78}
 
-{"score":["TTT","14 points"]}
+{"pseudo":"Nereyde","score":40}
 
-{"score":["Fantomas","8 points"]}
+{"pseudo":"Fantomas","score":23}
 
-{"score":["Fantomas","50 points"]}
+{"pseudo":"Nereyde2","score":19}
 
-{"score":["TTTTTT","0 points"]}
+{"pseudo":"FantomasIsBack","score":18}
 
-{"score":["TTTTTT","51 points"]}
+{"pseudo":"Jpp","score":13}
 
-{"score":["wesh","13 points"]}
+{"pseudo":"testtttttt","score":13}
 
-{"score":["test1","0 points"]}
+{"pseudo":"testOoOOooooOOO","score":12}
 
-{"score":["test1","7 points"]}
+{"pseudo":"testOoOOooooOOO","score":9}
 
-{"score":["COUCOULETEST","39 points"]}
+{"pseudo":"testOoOO","score":7}
 
-{"score":["nouveauTest","31 points"]}
+{"pseudo":"TestOo","score":5}
 
-{"score":["nouveauTest","8 points"]}
-
-{"score":["Test","34 points"]}
-
-{"score":["Test","13 points"]}
-
-{"score":["HopeAndPray","3 points"]}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{"score":["COUCOULETEST","39 points"]}
-
-{"score":["Fantomas","50 points"]}
-
-{"score":["Fantomas","8 points"]}
-
-{"score":["HopeAndPray","3 points"]}
-
-{"score":["Nereyde","28 points"]}
-
-{"score":["nouveauTest","31 points"]}
-
-{"score":["nouveauTest","8 points"]}
-
-{"score":["Test","13 points"]}
-
-{"score":["Test","34 points"]}
-
-{"score":["test1","0 points"]}
-
-{"score":["test1","7 points"]}
-
-{"score":["TTT","14 points"]}
-
-{"score":["TTTTTT","0 points"]}
-
-{"score":["TTTTTT","51 points"]}
-
-{"score":["wesh","13 points"]}
+{"pseudo":"testOoOOooooOOO","score":0}
 

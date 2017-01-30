@@ -196,12 +196,12 @@ namespace ProjetMathador
 
                 if (result == Convert.ToInt32(this.target.Text) || tryCount == 4)
                 {
-                    while (scores.Count() > 0)
-                    {
-                        this.score += scores.Pop();
-                    }
                     if (result == Convert.ToInt32(this.target.Text))
                     {
+                        while (scores.Count() > 0)
+                        {
+                            this.score += scores.Pop();
+                        }
                         if (plusUsed && minusUsed && timesUsed && divUsed)
                         {
                             mathador = "Vous avez fait un coup mathador ! Vous voilà gratifié de 13 points pour cette manche !\n";
@@ -235,6 +235,7 @@ namespace ProjetMathador
                         {
                             generateNumbers();
                             this.logs.Clear();
+                            this.scores.Clear();
                             tryCount = 0;
                             ClearOperation();
                             second.Start();
@@ -505,9 +506,9 @@ namespace ProjetMathador
 
                 int scoreText = this.score;
 
-                Leaderboard leaderboard = new Leaderboard(this.pseudo.Text, scoreText);
+                Leaderboard actualLeaderboard = new Leaderboard(this.pseudo.Text, scoreText);
 
-                string json = JsonConvert.SerializeObject(leaderboard);
+                string json = JsonConvert.SerializeObject(actualLeaderboard);
                 //System.IO.File.WriteAllText(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", json);
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", true))
                     {
@@ -524,28 +525,32 @@ namespace ProjetMathador
         {
             string[] lines = System.IO.File.ReadAllLines(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt");
 
+            List<Leaderboard> leaderboards = new List<Leaderboard>();
 
-
-            IEnumerable<string> sortAscendingQuery =
-                from line in lines
-                orderby line //"ascending" is default
-                select line;
-
-            System.IO.File.WriteAllText(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", "");
-            foreach (string s in sortAscendingQuery)
+            foreach (string line in lines)
             {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", true))
+                if(line != "" && line != " ")
                 {
-                    file.WriteLine(s + "\n");
+                    Leaderboard leaderboard = JsonConvert.DeserializeObject<Leaderboard>(line);
+                    Console.WriteLine("Score du LeaderBoard : ");
+                    Console.WriteLine(leaderboard.score);
+                    leaderboards.Add(leaderboard);
                 }
             }
 
-            // Display the file contents by using a foreach loop.
-            System.Console.WriteLine("Contents of WriteLines2.txt = ");
-            foreach (string line in lines)
+            IEnumerable<Leaderboard> sortedLeaderboard =
+                from lead in leaderboards
+                orderby lead.score descending
+                select lead;
+
+            System.IO.File.WriteAllText(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", "");
+            foreach (Leaderboard lead in sortedLeaderboard)
             {
-                // Use a tab to indent each line of the file.
-                Console.WriteLine("\t" + line);
+                string leadString = JsonConvert.SerializeObject(lead);
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", true))
+                {
+                    file.WriteLine(leadString + "\n");
+                }
             }
         }
 
@@ -599,6 +604,50 @@ namespace ProjetMathador
         {
             this.helpPanel.Visible = true;
             this.welcomePanel.Visible = false;
+        }
+
+        private void scoreBoard_Click(object sender, EventArgs e)
+        {
+            this.scoresPanel.Visible = true;
+            this.welcomePanel.Visible = false;
+
+            string[] lines = System.IO.File.ReadAllLines(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt");
+
+            List<Leaderboard> leaderboards = new List<Leaderboard>();
+
+            foreach (string line in lines)
+            {
+                if (line != "" && line != " ")
+                {
+                    Leaderboard leaderboard = JsonConvert.DeserializeObject<Leaderboard>(line);
+                    leaderboards.Add(leaderboard);
+                }
+            }
+
+            int i = 0;
+
+            foreach (Leaderboard lead in leaderboards)
+            {
+                i++;
+
+                if (i > 10)
+                    break;
+
+                Label label = new Label();
+                label.Name = "score" + Convert.ToString(i);
+                label.Text = Convert.ToString(lead.pseudo) + " : " + Convert.ToString(lead.score) + " points.";
+                label.Location = new Point(1, (i*20));
+                label.AutoSize = true;
+                this.scoresDisplay.Controls.Add(label);
+            }
+            
+        }
+
+        private void scoreBoardBack_Click(object sender, EventArgs e)
+        {
+            this.scoresDisplay.Controls.Clear();
+            this.scoresPanel.Visible = false;
+            this.welcomePanel.Visible = true;
         }
     }
 

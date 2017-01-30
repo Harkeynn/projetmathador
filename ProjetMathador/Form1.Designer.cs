@@ -65,6 +65,7 @@
             this.pseudolbl = new System.Windows.Forms.Label();
             this.BackMenu = new System.Windows.Forms.Button();
             this.welcomePanel = new System.Windows.Forms.Panel();
+            this.scoreBoard = new System.Windows.Forms.Button();
             this.exit = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -76,11 +77,18 @@
             this.helpTitle = new System.Windows.Forms.Label();
             this.helpBack = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.scoresPanel = new System.Windows.Forms.Panel();
+            this.scoresDisplay = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.scoreBoardBack = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.mainPanel.SuspendLayout();
             this.operatorsPanel.SuspendLayout();
             this.Game.SuspendLayout();
             this.welcomePanel.SuspendLayout();
             this.helpPanel.SuspendLayout();
+            this.scoresPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // target
@@ -438,6 +446,7 @@
             // 
             this.welcomePanel.BackColor = System.Drawing.Color.Transparent;
             this.welcomePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.welcomePanel.Controls.Add(this.scoreBoard);
             this.welcomePanel.Controls.Add(this.exit);
             this.welcomePanel.Controls.Add(this.label5);
             this.welcomePanel.Controls.Add(this.button1);
@@ -446,6 +455,22 @@
             this.welcomePanel.Name = "welcomePanel";
             this.welcomePanel.Size = new System.Drawing.Size(274, 395);
             this.welcomePanel.TabIndex = 24;
+            // 
+            // scoreBoard
+            // 
+            this.scoreBoard.BackgroundImage = global::ProjetMathador.Properties.Resources.buttonbackground;
+            this.scoreBoard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.scoreBoard.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.scoreBoard.FlatAppearance.BorderSize = 0;
+            this.scoreBoard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.scoreBoard.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scoreBoard.Location = new System.Drawing.Point(64, 177);
+            this.scoreBoard.Name = "scoreBoard";
+            this.scoreBoard.Size = new System.Drawing.Size(146, 41);
+            this.scoreBoard.TabIndex = 4;
+            this.scoreBoard.Text = "Tableau des scores";
+            this.scoreBoard.UseVisualStyleBackColor = true;
+            this.scoreBoard.Click += new System.EventHandler(this.scoreBoard_Click);
             // 
             // exit
             // 
@@ -580,13 +605,81 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Mathador";
             // 
+            // scoresPanel
+            // 
+            this.scoresPanel.BackColor = System.Drawing.Color.Transparent;
+            this.scoresPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.scoresPanel.Controls.Add(this.scoresDisplay);
+            this.scoresPanel.Controls.Add(this.label6);
+            this.scoresPanel.Controls.Add(this.label7);
+            this.scoresPanel.Controls.Add(this.scoreBoardBack);
+            this.scoresPanel.Controls.Add(this.label8);
+            this.scoresPanel.Location = new System.Drawing.Point(823, 12);
+            this.scoresPanel.Name = "scoresPanel";
+            this.scoresPanel.Size = new System.Drawing.Size(411, 395);
+            this.scoresPanel.TabIndex = 26;
+            this.scoresPanel.Visible = false;
+            // 
+            // scoresDisplay
+            // 
+            this.scoresDisplay.Location = new System.Drawing.Point(32, 58);
+            this.scoresDisplay.Name = "scoresDisplay";
+            this.scoresDisplay.Size = new System.Drawing.Size(351, 286);
+            this.scoresDisplay.TabIndex = 6;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(69, 89);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(0, 13);
+            this.label6.TabIndex = 5;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(182, 35);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(45, 20);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Aide";
+            // 
+            // scoreBoardBack
+            // 
+            this.scoreBoardBack.BackgroundImage = global::ProjetMathador.Properties.Resources.buttonbackground;
+            this.scoreBoardBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.scoreBoardBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.scoreBoardBack.FlatAppearance.BorderSize = 0;
+            this.scoreBoardBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.scoreBoardBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.scoreBoardBack.Location = new System.Drawing.Point(134, 360);
+            this.scoreBoardBack.Name = "scoreBoardBack";
+            this.scoreBoardBack.Size = new System.Drawing.Size(146, 29);
+            this.scoreBoardBack.TabIndex = 3;
+            this.scoreBoardBack.Text = "Retour";
+            this.scoreBoardBack.UseVisualStyleBackColor = true;
+            this.scoreBoardBack.Click += new System.EventHandler(this.scoreBoardBack_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(137, 4);
+            this.label8.Name = "label8";
+            this.label8.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label8.Size = new System.Drawing.Size(136, 31);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Mathador";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1112, 413);
+            this.ClientSize = new System.Drawing.Size(1270, 422);
+            this.Controls.Add(this.scoresPanel);
             this.Controls.Add(this.helpPanel);
             this.Controls.Add(this.Game);
             this.Controls.Add(this.welcomePanel);
@@ -602,6 +695,8 @@
             this.welcomePanel.PerformLayout();
             this.helpPanel.ResumeLayout(false);
             this.helpPanel.PerformLayout();
+            this.scoresPanel.ResumeLayout(false);
+            this.scoresPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -654,6 +749,13 @@
         private System.Windows.Forms.Label helpTitle;
         private System.Windows.Forms.Label helpText;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button scoreBoard;
+        private System.Windows.Forms.Panel scoresPanel;
+        private System.Windows.Forms.Panel scoresDisplay;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button scoreBoardBack;
+        private System.Windows.Forms.Label label8;
     }
 }
 
