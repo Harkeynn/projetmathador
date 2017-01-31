@@ -39,3 +39,11 @@ D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\System.Data.SQL
 D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\EntityFramework.xml
 D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\EntityFramework.SqlServer.xml
 D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\bin\Debug\System.Data.SQLite.xml
+C:\Users\harkey\Ingesup\B3\dotNet\projetmathador\ProjetMathador\bin\Debug\EntityFramework.dll
+C:\Users\harkey\Ingesup\B3\dotNet\projetmathador\ProjetMathador\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\harkey\Ingesup\B3\dotNet\projetmathador\ProjetMathador\bin\Debug\System.Data.SQLite.dll
+C:\Users\harkey\Ingesup\B3\dotNet\projetmathador\ProjetMathador\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\harkey\Ingesup\B3\dotNet\projetmathador\ProjetMathador\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\harkey\Ingesup\B3\dotNet\projetmathador\ProjetMathador\bin\Debug\EntityFramework.xml
+C:\Users\harkey\Ingesup\B3\dotNet\projetmathador\ProjetMathador\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\harkey\Ingesup\B3\dotNet\projetmathador\ProjetMathador\bin\Debug\System.Data.SQLite.xml

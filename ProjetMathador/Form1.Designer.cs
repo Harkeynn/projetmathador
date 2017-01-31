@@ -451,7 +451,7 @@
             this.welcomePanel.Controls.Add(this.label5);
             this.welcomePanel.Controls.Add(this.toHelp);
             this.welcomePanel.Controls.Add(this.Jouer);
-            this.welcomePanel.Location = new System.Drawing.Point(487, 12);
+            this.welcomePanel.Location = new System.Drawing.Point(65, 12);
             this.welcomePanel.Name = "welcomePanel";
             this.welcomePanel.Size = new System.Drawing.Size(274, 395);
             this.welcomePanel.TabIndex = 24;
@@ -614,7 +614,7 @@
             this.scoresPanel.Controls.Add(this.label7);
             this.scoresPanel.Controls.Add(this.scoreBoardBack);
             this.scoresPanel.Controls.Add(this.label8);
-            this.scoresPanel.Location = new System.Drawing.Point(823, 12);
+            this.scoresPanel.Location = new System.Drawing.Point(12, 12);
             this.scoresPanel.Name = "scoresPanel";
             this.scoresPanel.Size = new System.Drawing.Size(411, 395);
             this.scoresPanel.TabIndex = 26;
@@ -639,11 +639,11 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(182, 35);
+            this.label7.Location = new System.Drawing.Point(172, 35);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(45, 20);
+            this.label7.Size = new System.Drawing.Size(65, 20);
             this.label7.TabIndex = 4;
-            this.label7.Text = "Aide";
+            this.label7.Text = "Scores";
             // 
             // scoreBoardBack
             // 
@@ -678,7 +678,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1270, 422);
+            this.ClientSize = new System.Drawing.Size(440, 422);
             this.Controls.Add(this.scoresPanel);
             this.Controls.Add(this.helpPanel);
             this.Controls.Add(this.Game);

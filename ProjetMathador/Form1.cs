@@ -480,7 +480,7 @@ namespace ProjetMathador
         }
 
         //Panel d'aide
-        private void help_Click(object sender, EventArgs e)
+        private void toHelp_Click(object sender, EventArgs e)
         {
             this.helpPanel.Visible = true;
             this.welcomePanel.Visible = false;
@@ -792,7 +792,7 @@ namespace ProjetMathador
                 string json = JsonConvert.SerializeObject(actualLeaderboard);
 
                 //Écriture dans le fichier LeaderBoard à la suite du contenu existant
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\Ingesup\Cours_3eme\C#\projetmathador\ProjetMathador\LeaderBoard.txt", true))
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"..\..\LeaderBoard.txt", true))
                 {
                     file.WriteLine(json + "\n");
                 }
